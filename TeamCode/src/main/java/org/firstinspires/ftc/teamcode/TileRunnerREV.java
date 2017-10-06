@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -34,7 +35,7 @@ public class TileRunnerREV {
 
 
     // Servo objects
-    public Servo jewelServo = null;
+    public CRServo jewelServo = null;
 
 
 
@@ -55,7 +56,7 @@ public class TileRunnerREV {
         lifter2     = hwMap.dcMotor.get("lifter2");
 
         // Get the servos
-        jewelServo  = hwMap.servo.get("jewel_servo");
+        jewelServo  = hwMap.crservo.get("jewel_servo");
 
         // Set the motor directions
         leftDrive1.setDirection (DcMotorSimple.Direction.REVERSE);
