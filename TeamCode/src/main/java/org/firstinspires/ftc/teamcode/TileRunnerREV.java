@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 /**
  * Created by kawaiiPlat on 9/30/2017.
@@ -28,7 +29,10 @@ public class TileRunnerREV {
     public DcMotor rightDrive1  = null;
     public DcMotor rightDrive2  = null;
 
-    public DcMotor lifter = null;
+    public DcMotor lifter       = null;
+
+    // Servo objects
+    public Servo jewelServo = null;
 
 
 
@@ -45,7 +49,10 @@ public class TileRunnerREV {
         rightDrive1 = hwMap.dcMotor.get("right_drive_1");
         rightDrive2 = hwMap.dcMotor.get("right_drive_2");
 
-        lifter = hwMap.dcMotor.get("lifter");
+        lifter      = hwMap.dcMotor.get("lifter");
+
+        // Get the servos
+        jewelServo  = hwMap.servo.get("jewel_servo");
 
         // Set the motor directions
         leftDrive1.setDirection (DcMotorSimple.Direction.REVERSE);
@@ -66,7 +73,7 @@ public class TileRunnerREV {
 
         lifter.setPower(0);
 
-        // Set the behavior of the motors when the power is set to zero.
+        // Set the behavior of the motors when the power is set to zero
         leftDrive1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         leftDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
@@ -75,7 +82,7 @@ public class TileRunnerREV {
 
         lifter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
-        // Set the motors to not use encoders
+        // Set the motors' encoder usage
         leftDrive1.setMode  (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         leftDrive2.setMode  (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
