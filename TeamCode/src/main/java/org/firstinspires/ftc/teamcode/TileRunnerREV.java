@@ -65,7 +65,7 @@ public class TileRunnerREV {
         rightDrive1.setDirection(DcMotorSimple.Direction.FORWARD);
         rightDrive2.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        lifter1.setDirection(DcMotorSimple.Direction.REVERSE);
+        lifter1.setDirection(DcMotorSimple.Direction.FORWARD);
         lifter2.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
