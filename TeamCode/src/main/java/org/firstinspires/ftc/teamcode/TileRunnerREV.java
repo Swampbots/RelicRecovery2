@@ -29,7 +29,9 @@ public class TileRunnerREV {
     public DcMotor rightDrive1  = null;
     public DcMotor rightDrive2  = null;
 
-    public DcMotor lifter       = null;
+    public DcMotor lifter1      = null;
+    public DcMotor lifter2      = null;
+
 
     // Servo objects
     public Servo jewelServo = null;
@@ -49,7 +51,8 @@ public class TileRunnerREV {
         rightDrive1 = hwMap.dcMotor.get("right_drive_1");
         rightDrive2 = hwMap.dcMotor.get("right_drive_2");
 
-        lifter      = hwMap.dcMotor.get("lifter");
+        lifter1     = hwMap.dcMotor.get("lifter1");
+        lifter2     = hwMap.dcMotor.get("lifter2");
 
         // Get the servos
         jewelServo  = hwMap.servo.get("jewel_servo");
@@ -61,7 +64,8 @@ public class TileRunnerREV {
         rightDrive1.setDirection(DcMotorSimple.Direction.FORWARD);
         rightDrive2.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        lifter.setDirection(DcMotorSimple.Direction.REVERSE);
+        lifter1.setDirection(DcMotorSimple.Direction.REVERSE);
+        lifter2.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
         // Set the motor powers to zero
@@ -71,7 +75,9 @@ public class TileRunnerREV {
         rightDrive1.setPower(0);
         rightDrive2.setPower(0);
 
-        lifter.setPower(0);
+        lifter1.setPower(0);
+        lifter2.setPower(0);
+
 
         // Set the behavior of the motors when the power is set to zero
         leftDrive1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
@@ -80,7 +86,8 @@ public class TileRunnerREV {
         rightDrive1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         rightDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
-        lifter.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        lifter1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        lifter2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
         // Set the motors' encoder usage
         leftDrive1.setMode  (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -89,7 +96,9 @@ public class TileRunnerREV {
         rightDrive1.setMode (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightDrive2.setMode (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        lifter.setMode (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        lifter1.setMode (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        lifter2.setMode (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
     }
 
     /////////////////////////////////////
