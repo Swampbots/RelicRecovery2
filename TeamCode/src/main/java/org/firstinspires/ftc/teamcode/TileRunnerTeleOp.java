@@ -47,6 +47,9 @@ public class TileRunnerTeleOp extends OpMode {
         hardware.lifter1.setPower(gamepad2.left_stick_y * hardware.utilitySpeedMod);
         hardware.lifter2.setPower(gamepad2.left_stick_y * hardware.utilitySpeedMod);
 
+        hardware.wheelIntake1.setPower(gamepad2.right_stick_y * hardware.utilitySpeedMod);
+        hardware.wheelIntake2.setPower(gamepad2.right_stick_y * hardware.utilitySpeedMod);
+
         // Handle servos
         if(gamepad2.x) hardware.jewelServo.setPower(-1.0);
         else if(gamepad2.y) hardware.jewelServo.setPower(1.0);
