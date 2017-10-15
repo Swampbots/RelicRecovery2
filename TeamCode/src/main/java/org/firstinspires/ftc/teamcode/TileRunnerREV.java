@@ -1,11 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
 
 /**
  * Created by kawaiiPlat on 9/30/2017.
@@ -37,7 +35,8 @@ public class TileRunnerREV {
     public DcMotor wheelIntake2  = null;
 
     // Servo objects
-    public CRServo jewelServo = null;
+    public CRServo flipper  = null;
+    public CRServo kicker   = null;
 
 
 
@@ -61,7 +60,9 @@ public class TileRunnerREV {
         wheelIntake2    = hwMap.dcMotor.get("wheel2");
 
         // Get the servos
-        jewelServo  = hwMap.crservo.get("jewel_servo");
+        flipper = hwMap.crservo.get("jewel_servo");
+        kicker  = hwMap.crservo.get("jewel_servo");
+
 
         // Set the motor directions
         leftDrive1.setDirection (DcMotorSimple.Direction.REVERSE);
@@ -104,6 +105,7 @@ public class TileRunnerREV {
         wheelIntake1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         wheelIntake2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
+
         // Set the motors' encoder usage
         leftDrive1.setMode  (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         leftDrive2.setMode  (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -116,7 +118,6 @@ public class TileRunnerREV {
 
         wheelIntake1.setMode (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         wheelIntake2.setMode (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
     }
 
     /////////////////////////////////////
