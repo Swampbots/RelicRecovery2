@@ -60,8 +60,8 @@ public class TileRunnerREV {
         wheelIntake2    = hwMap.dcMotor.get("wheel2");
 
         // Get the servos
-        flipper = hwMap.crservo.get("jewel_servo");
-        kicker  = hwMap.crservo.get("jewel_servo");
+        flipper = hwMap.crservo.get("flipper");
+        kicker  = hwMap.crservo.get("kicker");
 
 
         // Set the motor directions
