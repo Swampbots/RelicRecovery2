@@ -7,25 +7,30 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  * Created by kawaiiPlat on 6/10/2017.
  */
 
-@Autonomous(name = "Test Autonomous", group = "Autonomous")
+@Autonomous(name = "Test Autonomous", group = "Test Autonomous")
 public class TestAutonomous extends LinearOpMode {
+
+    private TileRunnerREV hardware = new TileRunnerREV();
+
     @Override
-    public void runOpMode() throws InterruptedException {
-        telemetry.addLine("Press the play button when ready.");
-        telemetry.addLine("les go boyos.");
+    public void runOpMode() {
+        telemetry.addLine("Initializing hardware... do not press play!");
         telemetry.update();
 
-        // Wait for the driver to press the play button.
+        hardware.init(hardwareMap);
+
+        telemetry.addLine("Hardware initialized.");
+        telemetry.update();
+
         waitForStart();
 
-        telemetry.addLine("Finished.");
-        telemetry.update();
-
-        // 1000 millisecond wait
-        Thread.sleep(1000);
+        boolean leftIsBlue = (hardware.colorSensor.blue() > hardware.colorSensor.red());
 
         while(opModeIsActive()) {
             telemetry.addLine("In end loop.");
+            telemetry.addData("Red", hardware.colorSensor.red());
+            telemetry.addData("Blue", hardware.colorSensor.blue());
+            telemetry.addData("leftIsBlue", leftIsBlue);
             telemetry.update();
         }
     }

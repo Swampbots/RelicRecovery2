@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -38,6 +39,9 @@ public class TileRunnerREV {
     public CRServo flipper  = null;
     public CRServo kicker   = null;
 
+    // Sensor objects
+    public ColorSensor colorSensor = null;
+
 
 
     public TileRunnerREV() {
@@ -62,6 +66,9 @@ public class TileRunnerREV {
         // Get the servos
         flipper = hwMap.crservo.get("flipper");
         kicker  = hwMap.crservo.get("kicker");
+
+        // Get the sensors
+        colorSensor = hwMap.colorSensor.get("color_sensor");
 
 
         // Set the motor directions
