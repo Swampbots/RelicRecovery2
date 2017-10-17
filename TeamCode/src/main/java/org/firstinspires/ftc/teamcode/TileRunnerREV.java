@@ -32,9 +32,6 @@ public class TileRunnerREV {
     public DcMotor lifter1      = null;
     public DcMotor lifter2      = null;
 
-    public DcMotor wheelIntake1  = null;
-    public DcMotor wheelIntake2  = null;
-
     // Servo objects
     public CRServo flipper  = null;
     public CRServo kicker   = null;
@@ -60,8 +57,6 @@ public class TileRunnerREV {
         lifter1     = hwMap.dcMotor.get("lifter1");
         lifter2     = hwMap.dcMotor.get("lifter2");
 
-        wheelIntake1    = hwMap.dcMotor.get("wheel1");
-        wheelIntake2    = hwMap.dcMotor.get("wheel2");
 
         // Get the servos
         flipper = hwMap.crservo.get("flipper");
@@ -81,9 +76,6 @@ public class TileRunnerREV {
         lifter1.setDirection(DcMotorSimple.Direction.FORWARD);
         lifter2.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        wheelIntake1.setDirection(DcMotorSimple.Direction.FORWARD);
-        wheelIntake2.setDirection(DcMotorSimple.Direction.REVERSE);
-
 
         // Set the motor powers to zero
         leftDrive1.setPower(0);
@@ -94,9 +86,6 @@ public class TileRunnerREV {
 
         lifter1.setPower(0);
         lifter2.setPower(0);
-
-        wheelIntake1.setPower(0);
-        wheelIntake2.setPower(0);
 
 
         // Set the behavior of the motors when the power is set to zero
@@ -109,9 +98,6 @@ public class TileRunnerREV {
         lifter1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         lifter2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
-        wheelIntake1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        wheelIntake2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-
 
         // Set the motors' encoder usage
         leftDrive1.setMode  (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -122,9 +108,6 @@ public class TileRunnerREV {
 
         lifter1.setMode     (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         lifter2.setMode     (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        wheelIntake1.setMode (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        wheelIntake2.setMode (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     /////////////////////////////////////
