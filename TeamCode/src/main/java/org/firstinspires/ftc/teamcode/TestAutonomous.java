@@ -24,13 +24,11 @@ public class TestAutonomous extends LinearOpMode {
 
         waitForStart();
 
-        boolean leftIsBlue = (hardware.colorSensor.blue() > hardware.colorSensor.red());
-
         while(opModeIsActive()) {
             telemetry.addLine("In end loop.");
             telemetry.addData("Red", hardware.colorSensor.red());
             telemetry.addData("Blue", hardware.colorSensor.blue());
-            telemetry.addData("leftIsBlue", leftIsBlue);
+            telemetry.addData("leftIsBlue", hardware.colorSensor.blue() > hardware.colorSensor.red());
             telemetry.update();
         }
     }
