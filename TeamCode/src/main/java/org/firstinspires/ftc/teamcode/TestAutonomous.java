@@ -52,31 +52,16 @@ public class TestAutonomous extends LinearOpMode {
 
     public void driveEncoderCounts(double power, int counts) {
         // Set target positions
-        hardware.leftDrive1.setTargetPosition(hardware.leftDrive1.getCurrentPosition() - counts);
-        hardware.leftDrive2.setTargetPosition(hardware.leftDrive2.getCurrentPosition() - counts);
-
-        hardware.rightDrive1.setTargetPosition(hardware.rightDrive1.getCurrentPosition() - counts);
-        hardware.rightDrive2.setTargetPosition(hardware.rightDrive2.getCurrentPosition() - counts);
-
+        hardware.setDriveTargetPosition(counts);
 
         // Set run mode to RUN_TO_POSITION
-        hardware.leftDrive1.setMode (DcMotor.RunMode.RUN_TO_POSITION);
-        hardware.leftDrive2.setMode (DcMotor.RunMode.RUN_TO_POSITION);
-
-        hardware.rightDrive1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        hardware.rightDrive2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
+        hardware.setDriveRunMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         // Set motor powers to the specified amount
         hardware.linearDrive((float)power);
 
-
         // Run while op mode is active and motors are busy
-        while(opModeIsActive() &&
-                hardware.leftDrive1.isBusy() &&
-                hardware.leftDrive2.isBusy() &&
-                hardware.rightDrive1.isBusy() &&
-                hardware.rightDrive2.isBusy()) {
+        while(opModeIsActive() && hardware.driveMotorsBusy()) {
             telemetry.addLine(String.format("Moving %s encoder counts...", counts));
             telemetry.update();
         }
@@ -84,12 +69,8 @@ public class TestAutonomous extends LinearOpMode {
         // Stop motors
         hardware.linearDrive((float)0.0);
 
-        // Set run mode to RUN_WITHOUT_ENCODERS
-        hardware.leftDrive1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        hardware.leftDrive2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        hardware.rightDrive1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        hardware.rightDrive2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        // Set run mode to RUN_WITHOUT_ENCODER
+        hardware.setDriveRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     public void driveInches(float power, float inches) {

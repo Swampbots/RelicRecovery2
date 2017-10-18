@@ -162,4 +162,25 @@ public class TileRunnerREV {
         rightDrive1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightDrive2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
+
+    public void setDriveTargetPosition(int counts) {
+        leftDrive1.setTargetPosition(leftDrive1.getTargetPosition() - counts);
+        leftDrive2.setTargetPosition(leftDrive1.getTargetPosition() - counts);
+        rightDrive1.setTargetPosition(leftDrive1.getTargetPosition() - counts);
+        rightDrive2.setTargetPosition(leftDrive1.getTargetPosition() - counts);
+    }
+
+    public void setDriveRunMode(DcMotor.RunMode runMode) {
+        leftDrive1.setMode(runMode);
+        leftDrive2.setMode(runMode);
+        rightDrive1.setMode(runMode);
+        rightDrive2.setMode(runMode);
+    }
+
+    public boolean driveMotorsBusy() {
+        return  leftDrive1.isBusy() &&
+                    leftDrive2.isBusy() &&
+                    rightDrive1.isBusy() &&
+                    rightDrive2.isBusy();
+    }
 }
