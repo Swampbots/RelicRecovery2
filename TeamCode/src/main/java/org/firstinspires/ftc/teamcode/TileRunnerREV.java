@@ -123,7 +123,7 @@ public class TileRunnerREV {
 
 
     /////////////////////////////////////
-    // TeleOp methods
+    // OpMode Methods
     /////////////////////////////////////
 
     public void linearDrive(float power) {
@@ -135,19 +135,30 @@ public class TileRunnerREV {
         setRightPower(rightPower);
     }
 
-    public void setLeftPower(float leftStickY) {
-        leftDrive1.setPower(leftStickY * driverSpeedMod);
-        leftDrive2.setPower(leftStickY * driverSpeedMod);
+    public void setLeftPower(float leftPower) {
+        leftDrive1.setPower(leftPower * driverSpeedMod);
+        leftDrive2.setPower(leftPower * driverSpeedMod);
     }
 
-    public void setRightPower(float rightStickY) {
-        rightDrive1.setPower(rightStickY * driverSpeedMod);
-        rightDrive2.setPower(rightStickY * driverSpeedMod);
+    public void setRightPower(float rightPower) {
+        rightDrive1.setPower(rightPower * driverSpeedMod);
+        rightDrive2.setPower(rightPower * driverSpeedMod);
     }
 
+    public void rampDrive(float leftPower, float rightPower) {
+        setLeftPower((float) (leftPower * leftPower * leftPower * driverSpeedMod));
+        setRightPower((float) (rightPower * rightPower * rightPower * driverSpeedMod));
+    }
 
-    public void rampDrive(float leftStickY, float rightStickY) {
-        setLeftPower((float) (leftStickY * leftStickY * leftStickY * driverSpeedMod));
-        setRightPower((float) (rightStickY * rightStickY * rightStickY * driverSpeedMod));
+    public void resetDriveEncoders() {
+        leftDrive1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftDrive2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightDrive1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightDrive2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        leftDrive1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftDrive2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightDrive1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightDrive2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 }
