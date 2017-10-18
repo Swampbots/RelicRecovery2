@@ -44,31 +44,30 @@ public class TestAutonomous extends LinearOpMode {
             telemetry.update();
 
             // Perform testing commands
-            if      (gamepad2.a) driveEncoderCounts(0.5, 200);
-            else if (gamepad2.b) driveEncoderCounts(0.5, 500);
-            else if (gamepad2.x) driveEncoderCounts(0.5, 1000);
+            if      (gamepad2.x) driveEncoderCounts(0.5, 1000);
             else if (gamepad2.y) driveEncoderCounts(0.5, 2000);
+            else if (gamepad2.dpad_up) hardware.resetDriveEncoders();
         }
     }
 
     public void driveEncoderCounts(double power, int counts) {
         // Set target positions
-        hardware.leftDrive1.setTargetPosition(hardware.leftDrive1.getCurrentPosition() + counts);
-        hardware.leftDrive2.setTargetPosition(hardware.leftDrive2.getCurrentPosition() + counts);
+        hardware.leftDrive1.setTargetPosition(hardware.leftDrive1.getCurrentPosition() - counts);
+        hardware.leftDrive2.setTargetPosition(hardware.leftDrive2.getCurrentPosition() - counts);
 
-        hardware.rightDrive1.setTargetPosition(hardware.rightDrive1.getCurrentPosition() + counts);
-        hardware.rightDrive2.setTargetPosition(hardware.rightDrive2.getCurrentPosition() + counts);
+        hardware.rightDrive1.setTargetPosition(hardware.rightDrive1.getCurrentPosition() - counts);
+        hardware.rightDrive2.setTargetPosition(hardware.rightDrive2.getCurrentPosition() - counts);
 
 
         // Set run mode to RUN_TO_POSITION
-        hardware.leftDrive1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        hardware.leftDrive2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.leftDrive1.setMode (DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.leftDrive2.setMode (DcMotor.RunMode.RUN_TO_POSITION);
 
         hardware.rightDrive1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         hardware.rightDrive2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
 
-        // Set motor power
+        // Set motor powers to the specified amount
         hardware.linearDrive((float)power);
 
 
@@ -82,13 +81,15 @@ public class TestAutonomous extends LinearOpMode {
             telemetry.update();
         }
 
+        // Stop motors
+        hardware.linearDrive((float)0.0);
 
-            // Set run mode to RUN_WITHOUT_ENCODERS
-            hardware.leftDrive1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            hardware.leftDrive2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        // Set run mode to RUN_WITHOUT_ENCODERS
+        hardware.leftDrive1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        hardware.leftDrive2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-            hardware.rightDrive1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            hardware.rightDrive2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        hardware.rightDrive1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        hardware.rightDrive2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     public void driveInches(float power, float inches) {
