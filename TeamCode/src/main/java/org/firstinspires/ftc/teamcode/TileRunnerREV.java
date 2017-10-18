@@ -12,6 +12,14 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class TileRunnerREV {
 
+    // Encoder variables
+    public final double COUNTS_PER_REV              = 280.0;    // For a NeveRest 40 (7 cpr with a 40:1 gear ratio)
+    public final double DRIVE_GEAR_REDUCTION        = 1.0;      // No gear reduction (would be < 1.0 if geared up)
+    public final double WHEEL_DIAMETER_INCHES       = 4.0;      // For figuring circumference
+    public final double WHEEL_CIRCUMFERENCE_INCHES  = WHEEL_DIAMETER_INCHES * 3.1415;
+    public final double COUNTS_PER_INCH             = (COUNTS_PER_REV * DRIVE_GEAR_REDUCTION) / WHEEL_CIRCUMFERENCE_INCHES;
+
+
     // Speed control variables
     public final double SLOW = 0.25;
     public final double NORMAL = 0.4;
@@ -20,7 +28,10 @@ public class TileRunnerREV {
     public double driverSpeedMod = NORMAL;
     public double utilitySpeedMod = NORMAL;
 
+
+    // Hardware map
     HardwareMap hwMap = null;
+
 
     // Motor objects
     public DcMotor leftDrive1   = null;
@@ -37,8 +48,7 @@ public class TileRunnerREV {
     public CRServo kicker   = null;
 
     // Sensor objects
-    public ColorSensor colorSensor = null;
-
+    public ColorSensor colorSensor  = null;
 
 
     public TileRunnerREV() {
@@ -62,6 +72,7 @@ public class TileRunnerREV {
         flipper = hwMap.crservo.get("flipper");
         kicker  = hwMap.crservo.get("kicker");
 
+
         // Get the sensors
         colorSensor = hwMap.colorSensor.get("color_sensor");
 
@@ -73,33 +84,33 @@ public class TileRunnerREV {
         rightDrive1.setDirection(DcMotorSimple.Direction.FORWARD);
         rightDrive2.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        lifter1.setDirection(DcMotorSimple.Direction.FORWARD);
-        lifter2.setDirection(DcMotorSimple.Direction.REVERSE);
+        lifter1.setDirection    (DcMotorSimple.Direction.FORWARD);
+        lifter2.setDirection    (DcMotorSimple.Direction.REVERSE);
 
 
         // Set the motor powers to zero
-        leftDrive1.setPower(0);
-        leftDrive2.setPower(0);
+        leftDrive1  .setPower(0);
+        leftDrive2  .setPower(0);
 
-        rightDrive1.setPower(0);
-        rightDrive2.setPower(0);
+        rightDrive1 .setPower(0);
+        rightDrive2 .setPower(0);
 
-        lifter1.setPower(0);
-        lifter2.setPower(0);
+        lifter1     .setPower(0);
+        lifter2     .setPower(0);
 
 
         // Set the behavior of the motors when the power is set to zero
-        leftDrive1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        leftDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        leftDrive1.setZeroPowerBehavior (DcMotor.ZeroPowerBehavior.FLOAT);
+        leftDrive2.setZeroPowerBehavior (DcMotor.ZeroPowerBehavior.FLOAT);
 
         rightDrive1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         rightDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
-        lifter1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        lifter2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        lifter1.setZeroPowerBehavior    (DcMotor.ZeroPowerBehavior.FLOAT);
+        lifter2.setZeroPowerBehavior    (DcMotor.ZeroPowerBehavior.FLOAT);
 
 
-        // Set the motors' encoder usage
+        // Set the motors' run mode
         leftDrive1.setMode  (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         leftDrive2.setMode  (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
@@ -110,13 +121,18 @@ public class TileRunnerREV {
         lifter2.setMode     (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
+
     /////////////////////////////////////
     // TeleOp methods
     /////////////////////////////////////
 
-    public void linearDrive(float leftStickY, float rightStickY) {
-        setLeftPower(leftStickY);
-        setRightPower(rightStickY);
+    public void linearDrive(float power) {
+        linearDrive(power, power);
+    }
+
+    public void linearDrive(float leftPower, float rightPower) {
+        setLeftPower(leftPower);
+        setRightPower(rightPower);
     }
 
     public void setLeftPower(float leftStickY) {
@@ -131,11 +147,7 @@ public class TileRunnerREV {
 
 
     public void rampDrive(float leftStickY, float rightStickY) {
-        leftDrive1.setPower(leftStickY * leftStickY * leftStickY * driverSpeedMod);
-        leftDrive2.setPower(leftStickY * leftStickY * leftStickY * driverSpeedMod);
-
-        rightDrive1.setPower(rightStickY * rightStickY * rightStickY * driverSpeedMod);
-        rightDrive2.setPower(rightStickY * rightStickY * rightStickY * driverSpeedMod);
-
+        setLeftPower((float) (leftStickY * leftStickY * leftStickY * driverSpeedMod));
+        setRightPower((float) (rightStickY * rightStickY * rightStickY * driverSpeedMod));
     }
 }
