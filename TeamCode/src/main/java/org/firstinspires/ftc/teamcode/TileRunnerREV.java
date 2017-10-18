@@ -43,7 +43,6 @@ public class TileRunnerREV {
     public DcMotor lifter1      = null;
     public DcMotor lifter2      = null;
 
-    public DcMotor emptyMotor = null;
 
     // Servo objects
     public CRServo flipper  = null;
