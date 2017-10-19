@@ -13,6 +13,9 @@ public class TestAutonomous extends LinearOpMode {
 
     private TileRunnerREV hardware = new TileRunnerREV();
 
+    private final float SPEED   = (float)0.7;
+    private final float COUNTS  = (float)2.0;
+
     @Override
     public void runOpMode() {
         telemetry.addLine("Initializing hardware... do not press play!");
@@ -51,15 +54,23 @@ public class TestAutonomous extends LinearOpMode {
             else if (gamepad2.a) hardware.jewelServo.setPosition(0.5);
 
             if      (gamepad2.dpad_up)      hardware.resetDriveEncoders();
-            else if (gamepad2.dpad_left)    driveInches((float)0.7, (float)2.0);
-            else if (gamepad2.dpad_right)   driveInches((float)0.7, (float)-2.0);
-
-//            telemetry.addLine(String.format("Moving %1$s encoder counts (%2$s inches)...", counts, counts * hardware.COUNTS_PER_INCH));
-//            telemetry.update();
+            else if (gamepad2.dpad_left) {
+                telemetry.addLine(String.format("Moving %1$s encoder counts (%2$s inches)...", COUNTS, COUNTS * hardware.COUNTS_PER_INCH));
+                telemetry.update();
+                driveInches(SPEED, COUNTS);
+            } else if (gamepad2.dpad_right) {
+                telemetry.addLine(String.format("Moving %1$s encoder counts (%2$s inches)...", -COUNTS, -COUNTS * hardware.COUNTS_PER_INCH));
+                telemetry.update();
+                driveInches(SPEED, -COUNTS);
+            }
         }
     }
 
     public void driveEncoderCounts(double power, int counts) {
+
+        // Set the drive encoders to 0
+        hardware.resetDriveEncoders();
+
         // Set target positions
         hardware.setDriveTargetPosition(counts);
 
@@ -77,6 +88,9 @@ public class TestAutonomous extends LinearOpMode {
 
         // Set run mode to RUN_WITHOUT_ENCODER
         hardware.setDriveRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        // Set the drive encoders to 0
+        hardware.resetDriveEncoders();
     }
 
     public void driveInches(float power, float inches) {
