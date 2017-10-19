@@ -19,9 +19,15 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 @Autonomous(name = "Blue Corner", group = "Blue Autonomous")
 public class TRAutoBlueCorner extends LinearOpMode {
 
+    // Hardware class instance
     private TileRunnerREV hardware = new TileRunnerREV();
 
+    // Vuforia instance
     private VuforiaLocalizer vuforia;
+
+    // Jewel color enum
+    JewelColor jewelColor;
+
 
     @Override
     public void runOpMode() {
@@ -65,45 +71,49 @@ public class TRAutoBlueCorner extends LinearOpMode {
         // Start looking for the vision targets
         relicTrackables.activate();
 
+        // Try to find the vuMark
+        RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
+
+        while(vuMark == RelicRecoveryVuMark.UNKNOWN) {
+            vuMark = RelicRecoveryVuMark.from(relicTemplate);
+        }
+
         //////////////////////
         // JEWEL LOGIC
 
-//        hardware.jewelServo.setPosition(hardware.ARM_DOWN);
-//        telemetry.addData("Blue", hardware.colorSensor.blue());
-//        telemetry.addData("Red", hardware.colorSensor.red());
-//        telemetry.update();
-//        sleep(2000);
-//
-//        if(hardware.colorSensor.blue() > hardware.colorSensor.red()) {
-//            telemetry.addData("Blue", hardware.colorSensor.blue());
-//            telemetry.addData("Red", hardware.colorSensor.red());
-//            telemetry.addLine("Left jewel was blue. Driving forwards...");
-//            telemetry.update();
-//            sleep(2000);
-//
-//            driveInches((float)0.7, (float)3.0);
-//        }
-//        else {
-//            telemetry.addData("Blue", hardware.colorSensor.blue());
-//            telemetry.addData("Red", hardware.colorSensor.red());
-//            telemetry.addLine("Left jewel was red. Driving backwards...");
-//            telemetry.update();
-//            sleep(2000);
-//
-//            driveInches((float)0.7, (float)-3.0);
-//        }
-//
-//        sleep(3000);
-//        hardware.jewelServo.setPosition(hardware.ARM_UP);
+        hardware.jewelServo.setPosition(hardware.ARM_DOWN);
+        telemetry.addData("Blue", hardware.colorSensor.blue());
+        telemetry.addData("Red", hardware.colorSensor.red());
+        telemetry.update();
+        sleep(2000);
+
+        if(hardware.colorSensor.blue() > hardware.colorSensor.red()) {
+            jewelColor = JewelColor.BLUE;
+            telemetry.addData("Blue", hardware.colorSensor.blue());
+            telemetry.addData("Red", hardware.colorSensor.red());
+            telemetry.addLine("Left jewel was blue. Driving forwards...");
+            telemetry.update();
+            sleep(2000);
+
+            driveInches((float)0.7, (float)3.0);
+        }
+        else {
+            telemetry.addData("Blue", hardware.colorSensor.blue());
+            telemetry.addData("Red", hardware.colorSensor.red());
+            telemetry.addLine("Left jewel was red. Driving backwards...");
+            telemetry.update();
+            sleep(2000);
+
+            driveInches((float)0.7, (float)-3.0);
+        }
+
+        sleep(3000);
+        hardware.jewelServo.setPosition(hardware.ARM_UP);
 
         // JEWEL LOGIC END
         //////////////////////
 
         while(opModeIsActive()) {
-
-            // Try to find the vuMark
-            RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
-
             telemetry.addLine("Visible vision target:");
             telemetry.addLine(vuMarkTelemetry(vuMark));
             telemetry.addLine();
