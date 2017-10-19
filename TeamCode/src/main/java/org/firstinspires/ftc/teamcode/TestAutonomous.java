@@ -14,7 +14,7 @@ public class TestAutonomous extends LinearOpMode {
     private TileRunnerREV hardware = new TileRunnerREV();
 
     private final float SPEED   = (float)0.7;
-    private final float COUNTS  = (float)2.0;
+    private final float INCHES  = (float)2.0;
 
     @Override
     public void runOpMode() {
@@ -53,15 +53,16 @@ public class TestAutonomous extends LinearOpMode {
             else if (gamepad2.y) hardware.jewelServo.setPosition(hardware.jewelServo.getPosition() + 0.015);
             else if (gamepad2.a) hardware.jewelServo.setPosition(0.5);
 
-            if      (gamepad2.dpad_up)      hardware.resetDriveEncoders();
-            else if (gamepad2.dpad_left) {
-                telemetry.addLine(String.format("Moving %1$s encoder counts (%2$s inches)...", COUNTS, COUNTS * hardware.COUNTS_PER_INCH));
+            if (gamepad2.dpad_up) {
+                hardware.resetDriveEncoders();
+            } else if (gamepad2.dpad_left) {
+                telemetry.addLine(String.format("Moving %1$s encoder counts (%2$s inches)...", (int) (INCHES / hardware.COUNTS_PER_INCH), INCHES));
                 telemetry.update();
-                driveInches(SPEED, COUNTS);
+                driveInches(SPEED, INCHES);
             } else if (gamepad2.dpad_right) {
-                telemetry.addLine(String.format("Moving %1$s encoder counts (%2$s inches)...", -COUNTS, -COUNTS * hardware.COUNTS_PER_INCH));
+                telemetry.addLine(String.format("Moving %1$s encoder counts (%2$s inches)...", (int) (-INCHES / hardware.COUNTS_PER_INCH), -INCHES));
                 telemetry.update();
-                driveInches(SPEED, -COUNTS);
+                driveInches(SPEED, -INCHES);
             }
         }
     }
