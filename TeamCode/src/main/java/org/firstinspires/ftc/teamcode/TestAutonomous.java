@@ -49,7 +49,13 @@ public class TestAutonomous extends LinearOpMode {
             if      (gamepad2.x) hardware.jewelServo.setPosition(hardware.jewelServo.getPosition() - 0.015);
             else if (gamepad2.y) hardware.jewelServo.setPosition(hardware.jewelServo.getPosition() + 0.015);
             else if (gamepad2.a) hardware.jewelServo.setPosition(0.5);
-            else if (gamepad2.dpad_up) hardware.resetDriveEncoders();
+
+            if      (gamepad2.dpad_up)      hardware.resetDriveEncoders();
+            else if (gamepad2.dpad_left)    driveInches((float)0.7, (float)2.0);
+            else if (gamepad2.dpad_right)   driveInches((float)0.7, (float)-2.0);
+
+//            telemetry.addLine(String.format("Moving %1$s encoder counts (%2$s inches)...", counts, counts * hardware.COUNTS_PER_INCH));
+//            telemetry.update();
         }
     }
 
@@ -64,10 +70,7 @@ public class TestAutonomous extends LinearOpMode {
         hardware.linearDrive((float)power);
 
         // Run while op mode is active and motors are busy
-        while(opModeIsActive() && hardware.driveMotorsBusy()) {
-            telemetry.addLine(String.format("Moving %s encoder counts...", counts));
-            telemetry.update();
-        }
+        while(opModeIsActive() && hardware.driveMotorsBusy());
 
         // Stop motors
         hardware.linearDrive((float)0.0);
