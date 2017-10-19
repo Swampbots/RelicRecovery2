@@ -40,7 +40,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
             telemetry.update();
             sleep(2000);
 
-            driveInches((float)0.7, (float)4.0);
+            driveInches((float)0.7, (float)3.0);
         }
         else {
             telemetry.addData("Blue", hardware.colorSensor.blue());
@@ -49,7 +49,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
             telemetry.update();
             sleep(2000);
 
-            driveInches((float)0.7, (float)-4.0);
+            driveInches((float)0.7, (float)-3.0);
         }
 
         sleep(3000);
