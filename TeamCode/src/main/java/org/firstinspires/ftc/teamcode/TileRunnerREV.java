@@ -14,11 +14,11 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class TileRunnerREV {
 
     // Encoder variables
-    public final double COUNTS_PER_REV              = 280.0;    // For a NeveRest 40 (7 cpr with a 40:1 gear ratio)
-    public final double DRIVE_GEAR_REDUCTION        = 1.0;      // No gear reduction (would be < 1.0 if geared up)
-    public final double WHEEL_DIAMETER_INCHES       = 4.0;      // For figuring circumference
-    public final double WHEEL_CIRCUMFERENCE_INCHES  = WHEEL_DIAMETER_INCHES * 3.1415;
-    public final double COUNTS_PER_INCH             = (COUNTS_PER_REV * DRIVE_GEAR_REDUCTION) / WHEEL_CIRCUMFERENCE_INCHES;
+    private final double COUNTS_PER_REV              = 1120.0;    // For a NeveRest 40 (7 cpr with a 40:1 gear ratio)
+    private final double DRIVE_GEAR_REDUCTION        = 1.0;      // No gear reduction (would be < 1.0 if geared up)
+    private final double WHEEL_DIAMETER_INCHES       = 4.0;      // For figuring circumference
+    private final double WHEEL_CIRCUMFERENCE_INCHES  = WHEEL_DIAMETER_INCHES * 3.1415;
+    public final double COUNTS_PER_INCH             = (COUNTS_PER_REV * DRIVE_GEAR_REDUCTION) / WHEEL_CIRCUMFERENCE_INCHES; // About 89 counts per inch
 
     public final double ARM_DOWN    = 0.65;
     public final double ARM_UP      = 0.0;
