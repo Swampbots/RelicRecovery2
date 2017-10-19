@@ -46,8 +46,9 @@ public class TestAutonomous extends LinearOpMode {
             telemetry.update();
 
             // Perform testing commands
-            if      (gamepad2.x) hardware.jewelServo.setPosition(hardware.jewelServo.getPosition() - 0.15);
-            else if (gamepad2.y) hardware.jewelServo.setPosition(hardware.jewelServo.getPosition() - 0.15);
+            if      (gamepad2.x) hardware.jewelServo.setPosition(hardware.jewelServo.getPosition() - 0.015);
+            else if (gamepad2.y) hardware.jewelServo.setPosition(hardware.jewelServo.getPosition() + 0.015);
+            else if (gamepad2.a) hardware.jewelServo.setPosition(0.5);
             else if (gamepad2.dpad_up) hardware.resetDriveEncoders();
         }
     }
