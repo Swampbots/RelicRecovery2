@@ -36,6 +36,8 @@ public class TestAutonomous extends LinearOpMode {
 //            telemetry.addData("leftIsBlue", hardware.colorSensor.blue() > hardware.colorSensor.red());
 //            telemetry.addLine();
 //            telemetry.addLine();
+            telemetry.addData("Jewel Servo Position", hardware.jewelServo.getPosition());
+            telemetry.addLine();
             telemetry.addData("Left Encoder 1", hardware.leftDrive1.getCurrentPosition());
             telemetry.addData("Left Encoder 2", hardware.leftDrive2.getCurrentPosition());
             telemetry.addLine();
@@ -44,8 +46,8 @@ public class TestAutonomous extends LinearOpMode {
             telemetry.update();
 
             // Perform testing commands
-            if      (gamepad2.x) driveEncoderCounts(0.5, 1000);
-            else if (gamepad2.y) driveEncoderCounts(0.5, 2000);
+            if      (gamepad2.x) hardware.jewelServo.setPosition(hardware.jewelServo.getPosition() - 0.15);
+            else if (gamepad2.y) hardware.jewelServo.setPosition(hardware.jewelServo.getPosition() - 0.15);
             else if (gamepad2.dpad_up) hardware.resetDriveEncoders();
         }
     }

@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 /**
  * Created by kawaiiPlat on 9/30/2017.
@@ -48,6 +49,8 @@ public class TileRunnerREV {
     public CRServo flipper  = null;
     public CRServo kicker   = null;
 
+    public Servo jewelServo = null;
+
     // Sensor objects
     public ColorSensor colorSensor  = null;
 
@@ -72,6 +75,8 @@ public class TileRunnerREV {
         // Get the servos
         flipper = hwMap.crservo.get("flipper");
         kicker  = hwMap.crservo.get("kicker");
+
+        jewelServo = hwMap.servo.get("jewel_servo");
 
 
         // Get the sensors

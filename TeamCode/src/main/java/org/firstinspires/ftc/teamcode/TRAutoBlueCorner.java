@@ -28,6 +28,8 @@ public class TRAutoBlueCorner extends LinearOpMode {
 
         waitForStart();
 
+
+
         while(opModeIsActive()) {
             telemetry.addLine("Color Sensor Values:");
             telemetry.addData("Red", hardware.colorSensor.red());
