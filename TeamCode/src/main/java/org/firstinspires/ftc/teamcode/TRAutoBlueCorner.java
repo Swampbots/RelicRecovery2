@@ -9,7 +9,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
  * Created by swamp on 10/17/2017.
  */
 
-@Disabled
 @Autonomous(name = "Blue Corner", group = "Blue Autonomous")
 public class TRAutoBlueCorner extends LinearOpMode {
 
@@ -29,13 +28,19 @@ public class TRAutoBlueCorner extends LinearOpMode {
         waitForStart();
 
         hardware.jewelServo.setPosition(hardware.ARM_DOWN);
+        telemetry.addData("Blue", hardware.colorSensor.blue());
+        telemetry.addData("Red", hardware.colorSensor.red());
+        telemetry.update();
+        sleep(2000);
 
         if(hardware.colorSensor.blue() > hardware.colorSensor.red()) {
-            driveInches((float)0.5, (float)2.0);
             telemetry.addData("Blue", hardware.colorSensor.blue());
             telemetry.addData("Red", hardware.colorSensor.red());
             telemetry.addLine("Left jewel was blue. Driving forwards...");
             telemetry.update();
+            sleep(2000);
+
+            driveInches((float)0.5, (float)2.0);
         }
         else {
             driveInches((float)0.5, (float)-2.0);
@@ -45,6 +50,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
             telemetry.update();
         }
 
+        sleep(2000);
         hardware.jewelServo.setPosition(hardware.ARM_UP);
 
 
