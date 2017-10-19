@@ -76,15 +76,12 @@ public class TRAutoBlueCorner extends LinearOpMode {
         hardware.linearDrive((float)power);
 
         // Run while op mode is active and motors are busy
-        while(opModeIsActive() && hardware.driveMotorsBusy()) {
-            telemetry.addLine(String.format("Moving %s encoder counts...", counts));
-            telemetry.update();
-        }
+        while(opModeIsActive() && hardware.driveMotorsBusy());
 
         // Stop motors
         hardware.linearDrive((float)0.0);
 
-        // Set run mode to RUN_WITHOUT_ENCODERS
+        // Set run mode to RUN_WITHOUT_ENCODER
         hardware.setDriveRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
