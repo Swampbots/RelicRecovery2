@@ -23,6 +23,16 @@ public class TileRunnerREV {
     public final double ARM_DOWN    = 0.65;
     public final double ARM_UP      = 0.0;
 
+    // Autonomous distance variables from corner stones
+    public final float DIST_LEFT_CORNER    = (float) 17.0;
+    public final float DIST_CENTER_CORNER  = (float) 25.0;
+    public final float DIST_RIGHT_CORNER   = (float) 33.0;
+
+    // Autonomous distance variables from center stones
+    public final float DIST_LEFT_CENTER    = (float) -1.0; // Not yet measured
+    public final float DIST_CENTER_CENTER  = (float) -1.0; // Not yet measured
+    public final float DIST_RIGHT_CENTER   = (float) -1.0; // Not yet measured
+
 
     // Speed control variables
     public final double SLOW = 0.25;
@@ -134,6 +144,8 @@ public class TileRunnerREV {
     }
 
 
+
+
     /////////////////////////////////////
     // OpMode Methods
     /////////////////////////////////////
@@ -157,10 +169,30 @@ public class TileRunnerREV {
         rightDrive2.setPower(rightPower * driverSpeedMod);
     }
 
-    public void rampDrive(float leftPower, float rightPower) {
-        setLeftPower((float) (leftPower * leftPower * leftPower * driverSpeedMod));
-        setRightPower((float) (rightPower * rightPower * rightPower * driverSpeedMod));
+//    public void rampDrive(float leftPower, float rightPower) {
+//        setLeftPower((float) (leftPower * leftPower * leftPower * driverSpeedMod));
+//        setRightPower((float) (rightPower * rightPower * rightPower * driverSpeedMod));
+//    }
+
+
+
+
+    ////////////////////////////////////////////////
+    // Drive Motor Atrribute Modification Methods
+    ////////////////////////////////////////////////
+
+    public void setDriveRunMode(DcMotor.RunMode runMode) {
+        leftDrive1.setMode(runMode);
+        leftDrive2.setMode(runMode);
+        rightDrive1.setMode(runMode);
+        rightDrive2.setMode(runMode);
     }
+
+
+
+    /////////////////////////////////////
+    // Encoder-Specific Methods
+    /////////////////////////////////////
 
     public void resetDriveEncoders() {
         leftDrive1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -181,17 +213,18 @@ public class TileRunnerREV {
         rightDrive2.setTargetPosition(leftDrive1.getTargetPosition() - counts);
     }
 
-    public void setDriveRunMode(DcMotor.RunMode runMode) {
-        leftDrive1.setMode(runMode);
-        leftDrive2.setMode(runMode);
-        rightDrive1.setMode(runMode);
-        rightDrive2.setMode(runMode);
-    }
-
     public boolean driveMotorsBusy() {
         return  leftDrive1.isBusy() &&
                     leftDrive2.isBusy() &&
                     rightDrive1.isBusy() &&
                     rightDrive2.isBusy();
     }
+
+
+
+
+    /////////////////////////////////////
+    // Autonomous-Specific Methods
+    /////////////////////////////////////
+
 }
