@@ -125,6 +125,9 @@ public class TileRunnerREV {
 
         lifter1.setMode     (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         lifter2.setMode     (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+
+        colorSensor.enableLed(false);
     }
 
 
