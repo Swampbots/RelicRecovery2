@@ -59,19 +59,17 @@ public class TestAutonomous extends LinearOpMode {
                 telemetry.addLine(String.format("Moving %1$s encoder counts (%2$s inches)...", (int) (INCHES * hardware.COUNTS_PER_INCH), INCHES));
                 telemetry.update();
                 driveInches(SPEED, INCHES);
+                sleep(1000);
             } else if (gamepad2.dpad_right) {
                 telemetry.addLine(String.format("Moving %1$s encoder counts (%2$s inches)...", (int) (-INCHES * hardware.COUNTS_PER_INCH), -INCHES));
                 telemetry.update();
                 driveInches(SPEED, -INCHES);
+                sleep(1000);
             }
         }
     }
 
     public void driveEncoderCounts(double power, int counts) {
-
-        // Set the drive encoders to 0
-        hardware.resetDriveEncoders();
-
         // Set target positions
         hardware.setDriveTargetPosition(counts);
 
@@ -89,9 +87,6 @@ public class TestAutonomous extends LinearOpMode {
 
         // Set run mode to RUN_WITHOUT_ENCODER
         hardware.setDriveRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        // Set the drive encoders to 0
-        hardware.resetDriveEncoders();
     }
 
     public void driveInches(float power, float inches) {
