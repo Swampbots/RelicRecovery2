@@ -75,6 +75,7 @@ import java.util.List;
  * is explained in {@link ConceptVuforiaNavigation}.
  */
 
+@Disabled
 @Autonomous(name="Concept: VuMark Id", group ="Concept")
 public class ConceptVuMarkIdentification extends LinearOpMode {
 
