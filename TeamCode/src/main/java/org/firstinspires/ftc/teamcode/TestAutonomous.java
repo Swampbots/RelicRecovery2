@@ -56,11 +56,11 @@ public class TestAutonomous extends LinearOpMode {
             if (gamepad2.dpad_up) {
                 hardware.resetDriveEncoders();
             } else if (gamepad2.dpad_left) {
-                telemetry.addLine(String.format("Moving %1$s encoder counts (%2$s inches)...", (int) (INCHES / hardware.COUNTS_PER_INCH), INCHES));
+                telemetry.addLine(String.format("Moving %1$s encoder counts (%2$s inches)...", (int) (INCHES * hardware.COUNTS_PER_INCH), INCHES));
                 telemetry.update();
                 driveInches(SPEED, INCHES);
             } else if (gamepad2.dpad_right) {
-                telemetry.addLine(String.format("Moving %1$s encoder counts (%2$s inches)...", (int) (-INCHES / hardware.COUNTS_PER_INCH), -INCHES));
+                telemetry.addLine(String.format("Moving %1$s encoder counts (%2$s inches)...", (int) (-INCHES * hardware.COUNTS_PER_INCH), -INCHES));
                 telemetry.update();
                 driveInches(SPEED, -INCHES);
             }
