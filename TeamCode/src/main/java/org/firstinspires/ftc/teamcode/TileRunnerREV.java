@@ -20,6 +20,9 @@ public class TileRunnerREV {
     public final double WHEEL_CIRCUMFERENCE_INCHES  = WHEEL_DIAMETER_INCHES * 3.1415;
     public final double COUNTS_PER_INCH             = (COUNTS_PER_REV * DRIVE_GEAR_REDUCTION) / WHEEL_CIRCUMFERENCE_INCHES;
 
+    public final double ARM_DOWN    = 0.65;
+    public final double ARM_UP      = 0.0;
+
 
     // Speed control variables
     public final double SLOW = 0.25;

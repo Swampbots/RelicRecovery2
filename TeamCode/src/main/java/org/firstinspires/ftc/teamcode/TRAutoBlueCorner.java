@@ -28,6 +28,25 @@ public class TRAutoBlueCorner extends LinearOpMode {
 
         waitForStart();
 
+        hardware.jewelServo.setPosition(hardware.ARM_DOWN);
+
+        if(hardware.colorSensor.blue() > hardware.colorSensor.red()) {
+            driveInches((float)0.5, (float)2.0);
+            telemetry.addData("Blue", hardware.colorSensor.blue());
+            telemetry.addData("Red", hardware.colorSensor.red());
+            telemetry.addLine("Left jewel was blue. Driving forwards...");
+            telemetry.update();
+        }
+        else {
+            driveInches((float)0.5, (float)-2.0);
+            telemetry.addData("Blue", hardware.colorSensor.blue());
+            telemetry.addData("Red", hardware.colorSensor.red());
+            telemetry.addLine("Left jewel was red. Driving backwards...");
+            telemetry.update();
+        }
+
+        hardware.jewelServo.setPosition(hardware.ARM_UP);
+
 
 
         while(opModeIsActive()) {
