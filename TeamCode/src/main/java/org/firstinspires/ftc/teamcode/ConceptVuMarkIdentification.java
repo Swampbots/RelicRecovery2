@@ -112,18 +112,18 @@ public class ConceptVuMarkIdentification extends LinearOpMode {
          * Once you've obtained a license key, copy the string from the Vuforia web site
          * and paste it in to your code onthe next line, between the double quotes.
          */
-        parameters.vuforiaLicenseKey = "Ab2oeOT/////AAAAGXFggsJAHUX2iftxwvRSWmYZSti0YZ9bgNOpfVnPMoZ2tdbnL8X3CJp4B07R6DyiEKTB4O5q/snxiWhowyvEGktEb6QYe0NVoPh9kQb5iFpDZgg2MZr6nwnSTRJ8FSVVNvbnDolq+K/9xsqw2t6UfPLLJveNkijRPi/AwyzHPPs5BPFjeHaPOQAYgvfY6butNotEm3c5a/YQkuoZTxEo71oUcwmkbpQK/nI1mwzlhspoHtuYcfdScHdjtOCv5+old0F2jFOcm+O13aTxPLX1DVkfdksLGQrLTIM/SQOk6YLtUGHYdmfJs3NK+f/nndNMuqi3oBrqtEU+QExQOMjm4YgcdVHGNkzQasbqaJqQE1jp";
+        parameters.vuforiaLicenseKey = "AQEp+gX/////AAAAGabZ3yaKT0WLtofdjrrGznRKhqhzUCjAtaxsfr96aQv7kVlGcd6NUnv2Ic89/rJ/yPFvXrDDIWqGfpXvAhqVO94fs5EYBWUzB8qCBfTJ6U1Lmo15bBZ5/tz0iMkFc3ZX27xBTdIJ6C3zTIna1hErBvkeKpRI8nMwygPulWQej4jCaomF600Z9t9ZZZtQCH54bgqLmzMRIwZYOxCzcwh+nfP7teg9JtwI3NSUHmL2zkIiRYzwo53vv3+kv3CdzLnfiK/6ReAW6S/p9hO0ENCIcWJDUGgM4KDBW1aewp6OTpFt34D2ZIzop63/+ediGz8PJw3pcrRAuKEDQ/p1h7GAVHw8vbWgW1iTOkevHSv4bcp8\n";
 
         /*
          * We also indicate which camera on the RC that we wish to use.
          * Here we chose the back (HiRes) camera (for greater range), but
          * for a competition robot, the front camera might be more convenient.
          */
-        parameters.cameraDirection = VuforiaLocalizer.CameraDirection.FRONT;
+        parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
         this.vuforia = ClassFactory.createVuforiaLocalizer(parameters);
-        vuforia.setFrameQueueCapacity(1);
-        Vuforia.setFrameFormat(PIXEL_FORMAT.RGB565, true);
-        OpenCV.cvManagerInit(hardwareMap.appContext);
+//        vuforia.setFrameQueueCapacity(1);
+//        Vuforia.setFrameFormat(PIXEL_FORMAT.RGB565, true);
+//        OpenCV.cvManagerInit(hardwareMap.appContext);
 
         /**
          * Load the data set containing the VuMarks for Relic Recovery. There's only one trackable
@@ -185,7 +185,7 @@ public class ConceptVuMarkIdentification extends LinearOpMode {
             }
 
 
-            telemetry.addData("Jewel", blueIsLeft() ? "Left" : "Right");
+//            telemetry.addData("Jewel", blueIsLeft() ? "Left" : "Right");
 
 
             telemetry.update();
@@ -198,34 +198,39 @@ public class ConceptVuMarkIdentification extends LinearOpMode {
 
 
 
-    boolean blueIsLeft() {
-        Mat image = OpenCV.matFromVuforia(vuforia);
-        Mat filtered = OpenCV.performHSVThreshold(image, new Mat(), 84, 115, 200, 255, 52, 255);
-        List<MatOfPoint> contours = OpenCV.performFindContours(filtered, new ArrayList<MatOfPoint>(), true);
-        List<MatOfPoint> convex = OpenCV.performConvexHulls(contours, new ArrayList<MatOfPoint>());
-        List<MatOfPoint> filteredContours = OpenCV.performFilterContours(convex, new ArrayList<MatOfPoint>(), 1000, 0, 0, 1000, 0, 1000, 0, 100, 1000000, 30, 0, 1000);
+    /////////////////////////////////////
+    // Experimental OpenCV methods
+    /////////////////////////////////////
 
-        double ballX = getX(filteredContours.get(0));
-        return ballX < whiteLine();
-    }
 
-    double whiteLine() {
-        Mat image = OpenCV.matFromVuforia(vuforia);
-        Mat filtered = OpenCV.performHSVThreshold(image, new Mat(), 0, 180, 0, 11, 211, 255);
-        List<MatOfPoint> contours = OpenCV.performFindContours(filtered, new ArrayList<MatOfPoint>(), true);
-        List<MatOfPoint> convex = OpenCV.performConvexHulls(contours, new ArrayList<MatOfPoint>());
-        List<MatOfPoint> filteredContours = OpenCV.performFilterContours(convex, new ArrayList<MatOfPoint>(), 100, 0, 0, 1000, 0, 1000, 0, 100, 1000000, 0, 0, 1000);
-
-        return getX(filteredContours.get(0));
-    }
-
-    double getX(MatOfPoint contour) {
-        Moments moments = Imgproc.moments(contour);
-        return moments.get_m10() / moments.get_m00();
-    }
-
-    double getY(MatOfPoint contour) {
-        Moments moments = Imgproc.moments(contour);
-        return moments.get_m01() / moments.get_m00();
-    }
+//    boolean blueIsLeft() {
+//        Mat image = OpenCV.matFromVuforia(vuforia);
+//        Mat filtered = OpenCV.performHSVThreshold(image, new Mat(), 84, 115, 200, 255, 52, 255);
+//        List<MatOfPoint> contours = OpenCV.performFindContours(filtered, new ArrayList<MatOfPoint>(), true);
+//        List<MatOfPoint> convex = OpenCV.performConvexHulls(contours, new ArrayList<MatOfPoint>());
+//        List<MatOfPoint> filteredContours = OpenCV.performFilterContours(convex, new ArrayList<MatOfPoint>(), 1000, 0, 0, 1000, 0, 1000, 0, 100, 1000000, 30, 0, 1000);
+//
+//        double ballX = getX(filteredContours.get(0));
+//        return ballX < whiteLine();
+//    }
+//
+//    double whiteLine() {
+//        Mat image = OpenCV.matFromVuforia(vuforia);
+//        Mat filtered = OpenCV.performHSVThreshold(image, new Mat(), 0, 180, 0, 11, 211, 255);
+//        List<MatOfPoint> contours = OpenCV.performFindContours(filtered, new ArrayList<MatOfPoint>(), true);
+//        List<MatOfPoint> convex = OpenCV.performConvexHulls(contours, new ArrayList<MatOfPoint>());
+//        List<MatOfPoint> filteredContours = OpenCV.performFilterContours(convex, new ArrayList<MatOfPoint>(), 100, 0, 0, 1000, 0, 1000, 0, 100, 1000000, 0, 0, 1000);
+//
+//        return getX(filteredContours.get(0));
+//    }
+//
+//    double getX(MatOfPoint contour) {
+//        Moments moments = Imgproc.moments(contour);
+//        return moments.get_m10() / moments.get_m00();
+//    }
+//
+//    double getY(MatOfPoint contour) {
+//        Moments moments = Imgproc.moments(contour);
+//        return moments.get_m01() / moments.get_m00();
+//    }
 }
