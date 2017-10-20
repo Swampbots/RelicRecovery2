@@ -97,7 +97,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
             telemetry.update();
             sleep(1500);
 
-            driveInches((float)0.7, (float)3.0);
+            driveInches((float)0.75, (float)3.0);
         }
         else {
             jewelColor = JewelColor.RED;
@@ -107,7 +107,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
             telemetry.update();
             sleep(1500);
 
-            driveInches((float)0.7, (float)-3.0);
+            driveInches((float)0.75, (float)-3.0);
         }
 
         hardware.jewelServo.setPosition(hardware.ARM_UP);
@@ -115,7 +115,8 @@ public class TRAutoBlueCorner extends LinearOpMode {
         // JEWEL LOGIC END
         //////////////////////
 
-        // Figure out which cryptobox key you found
+        // Figure out how far to drive depending on
+        // the cryptobox key and jewel knocked off
         float inches = (float)0.0;
 
         switch(vuMark) {
@@ -135,6 +136,9 @@ public class TRAutoBlueCorner extends LinearOpMode {
         }
 
 
+        driveInches((float)0.75, inches);
+
+
 
         while(opModeIsActive()) {
             telemetry.addLine("Visible vision target:");
@@ -142,7 +146,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
             telemetry.addLine();
             telemetry.addData("Jewel Color", jewelColor.toString());
             telemetry.addLine();
-            telemetry.addData("Distance to drive", inches);
+            telemetry.addLine(String.format("Distance to drive: %s inches", inches));
             telemetry.update();
         }
     }
