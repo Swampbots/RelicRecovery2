@@ -181,13 +181,13 @@ public class TileRunnerREV {
     }
 
     public void setLeftPower(float leftPower) {
-        leftDrive1.setPower(leftPower * driverSpeedMod);
-        leftDrive2.setPower(leftPower * driverSpeedMod);
+        leftDrive1.setPower(leftPower);
+        leftDrive2.setPower(leftPower);
     }
 
     public void setRightPower(float rightPower) {
-        rightDrive1.setPower(rightPower * driverSpeedMod);
-        rightDrive2.setPower(rightPower * driverSpeedMod);
+        rightDrive1.setPower(rightPower);
+        rightDrive2.setPower(rightPower);
     }
 
 //    public void rampDrive(float leftPower, float rightPower) {
