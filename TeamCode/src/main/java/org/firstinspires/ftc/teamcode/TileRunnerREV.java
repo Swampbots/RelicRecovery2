@@ -20,6 +20,10 @@ public class TileRunnerREV {
     private final double WHEEL_CIRCUMFERENCE_INCHES = WHEEL_DIAMETER_INCHES * 3.1415;
     public final double COUNTS_PER_INCH             = (COUNTS_PER_REV * DRIVE_GEAR_REDUCTION) / WHEEL_CIRCUMFERENCE_INCHES; // About 89 counts per inch
 
+    private final double ROBOT_DIAMETER_INCHES      = 14.0;
+    private final double ROBOT_CIRCUMFERENCE_INCHES = ROBOT_DIAMETER_INCHES * 3.1415;
+    private final double INCHES_PER_DEGREE          = ROBOT_CIRCUMFERENCE_INCHES / 360;
+
     public final double ARM_DOWN    = 0.65;
     public final double ARM_UP      = 0.0;
 
@@ -206,11 +210,19 @@ public class TileRunnerREV {
         rightDrive2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
-    public void setDriveTargetPosition(int counts) {
-        leftDrive1.setTargetPosition(leftDrive1.getTargetPosition() - counts);
-        leftDrive2.setTargetPosition(leftDrive1.getTargetPosition() - counts);
-        rightDrive1.setTargetPosition(leftDrive1.getTargetPosition() - counts);
-        rightDrive2.setTargetPosition(leftDrive1.getTargetPosition() - counts);
+    public void setDriveTargetPosition(int counts, boolean turning) {
+        if(!turning) {
+            leftDrive1.setTargetPosition(leftDrive1.getTargetPosition() - counts);
+            leftDrive2.setTargetPosition(leftDrive1.getTargetPosition() - counts);
+            rightDrive1.setTargetPosition(leftDrive1.getTargetPosition() - counts);
+            rightDrive2.setTargetPosition(leftDrive1.getTargetPosition() - counts);
+        } else {
+            leftDrive1.setTargetPosition(leftDrive1.getTargetPosition() - counts);
+            leftDrive2.setTargetPosition(leftDrive1.getTargetPosition() - counts);
+            rightDrive1.setTargetPosition(leftDrive1.getTargetPosition() + counts);
+            rightDrive2.setTargetPosition(leftDrive1.getTargetPosition() + counts);
+        }
+
     }
 
     public boolean driveMotorsBusy() {

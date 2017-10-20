@@ -14,7 +14,9 @@ public class TestAutonomous extends LinearOpMode {
     private TileRunnerREV hardware = new TileRunnerREV();
 
     private final float SPEED   = (float)0.7;
-    private final float INCHES  = (float)2.0;
+    //private final float INCHES  = (float)2.0;
+    private final int COUNTS    = 979;
+
 
     @Override
     public void runOpMode() {
@@ -56,28 +58,55 @@ public class TestAutonomous extends LinearOpMode {
             if (gamepad2.dpad_up) {
                 hardware.resetDriveEncoders();
             } else if (gamepad2.dpad_left) {
-                telemetry.addLine(String.format("Moving %1$s encoder counts (%2$s inches)...", (int) (INCHES * hardware.COUNTS_PER_INCH), INCHES));
+//                telemetry.addLine(String.format("Moving %1$s encoder counts (%2$s inches)...", (int) (INCHES * hardware.COUNTS_PER_INCH), INCHES));
+//                telemetry.update();
+//                driveInches(SPEED, INCHES);
+                telemetry.addLine(String.format("Turning %s encoder counts...",-COUNTS));
                 telemetry.update();
-                driveInches(SPEED, INCHES);
+                turnEncoderCounts((float)1.0, -COUNTS);
                 sleep(1000);
             } else if (gamepad2.dpad_right) {
-                telemetry.addLine(String.format("Moving %1$s encoder counts (%2$s inches)...", (int) (-INCHES * hardware.COUNTS_PER_INCH), -INCHES));
+//                telemetry.addLine(String.format("Moving %1$s encoder counts (%2$s inches)...", (int) (-INCHES * hardware.COUNTS_PER_INCH), -INCHES));
+//                telemetry.update();
+//                driveInches(SPEED, -INCHES);
+                telemetry.addLine(String.format("Turning %s encoder counts...",COUNTS));
                 telemetry.update();
-                driveInches(SPEED, -INCHES);
+                turnEncoderCounts((float)1.0, COUNTS);
                 sleep(1000);
             }
         }
     }
 
-    public void driveEncoderCounts(double power, int counts) {
+    public void turnEncoderCounts(float power, int counts) {
         // Set target positions
-        hardware.setDriveTargetPosition(counts);
+        hardware.setDriveTargetPosition(counts, true);
 
         // Set run mode to RUN_TO_POSITION
         hardware.setDriveRunMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         // Set motor powers to the specified amount
-        hardware.linearDrive((float)power);
+        hardware.linearDrive(power);
+
+        // Run while op mode is active and motors are busy
+        while(opModeIsActive() && hardware.driveMotorsBusy());
+
+        // Stop motors
+        hardware.linearDrive((float)0.0);
+
+        // Set run mode to RUN_WITHOUT_ENCODER
+        hardware.setDriveRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    }
+
+
+    public void driveEncoderCounts(float power, int counts) {
+        // Set target positions
+        hardware.setDriveTargetPosition(counts, false);
+
+        // Set run mode to RUN_TO_POSITION
+        hardware.setDriveRunMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        // Set motor powers to the specified amount
+        hardware.linearDrive(power);
 
         // Run while op mode is active and motors are busy
         while(opModeIsActive() && hardware.driveMotorsBusy());

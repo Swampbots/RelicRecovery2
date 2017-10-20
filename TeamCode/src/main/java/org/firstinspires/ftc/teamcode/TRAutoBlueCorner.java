@@ -153,7 +153,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
 
     public void driveEncoderCounts(double power, int counts) {
         // Set target positions
-        hardware.setDriveTargetPosition(counts);
+        hardware.setDriveTargetPosition(counts, false);
 
         // Set run mode to RUN_TO_POSITION
         hardware.setDriveRunMode(DcMotor.RunMode.RUN_TO_POSITION);
