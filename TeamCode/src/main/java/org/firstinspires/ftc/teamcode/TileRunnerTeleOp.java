@@ -45,7 +45,7 @@ public class TileRunnerTeleOp extends OpMode {
         // Handle motors
         hardware.linearDrive(
                 (float)(gamepad1.left_stick_y * hardware.driverSpeedMod),
-                (float)(gamepad2.right_stick_y * hardware.driverSpeedMod));
+                (float)(gamepad1.right_stick_y * hardware.driverSpeedMod));
 
         hardware.lifter1.setPower(gamepad2.left_stick_y * hardware.utilitySpeedMod);
         hardware.lifter2.setPower(gamepad2.left_stick_y * hardware.utilitySpeedMod);
