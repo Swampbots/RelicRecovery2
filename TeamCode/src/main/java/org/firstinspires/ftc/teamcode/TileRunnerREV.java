@@ -26,7 +26,7 @@ public class TileRunnerREV {
     private final double ROBOT_CIRCUMFERENCE_INCHES = ROBOT_DIAMETER_INCHES * 3.1415;
     private final double INCHES_PER_DEGREE          = ROBOT_CIRCUMFERENCE_INCHES / 360;
 
-    public final double ARM_DOWN    = 0.65;
+    public final double ARM_DOWN    = 0.75;
     public final double ARM_UP      = 0.0;
 
     // Autonomous distance variables from corner stones
