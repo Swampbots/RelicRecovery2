@@ -24,9 +24,9 @@ public class TileRunnerREV {
     public final double ARM_UP      = 0.0;
 
     // Autonomous distance variables from corner stones
-    public final float DIST_LEFT_CORNER    = (float) 17.0;
-    public final float DIST_CENTER_CORNER  = (float) 25.0;
-    public final float DIST_RIGHT_CORNER   = (float) 33.0;
+    public final float DIST_LEFT_CORNER    = (float) 26.0;
+    public final float DIST_CENTER_CORNER  = (float) 34.0;
+    public final float DIST_RIGHT_CORNER   = (float) 42.0;
 
     // Autonomous distance variables from center stones
 //    public final float DIST_LEFT_CENTER    = (float) -1.0; // Not yet measured
