@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -71,11 +73,23 @@ public class TileRunnerREV {
     // Sensor objects
     public ColorSensor colorSensor  = null;
 
+    public BNO055IMU imu = null;
+
 
     public TileRunnerREV() {
     }
 
     public void init(HardwareMap ahwMap) {
+        // IMU parameters
+        BNO055IMU.Parameters IMUParameters = new BNO055IMU.Parameters();
+        IMUParameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
+        IMUParameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        IMUParameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+        IMUParameters.loggingEnabled      = true;
+        IMUParameters.loggingTag          = "IMU";
+        IMUParameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+
+
         hwMap = ahwMap;
 
         // Get the motors
@@ -98,6 +112,9 @@ public class TileRunnerREV {
 
         // Get the sensors
         colorSensor = hwMap.colorSensor.get("color_sensor");
+
+        imu         = hwMap.get(BNO055IMU.class, "imu");
+        imu.initialize(IMUParameters);
 
 
         // Set the motor directions
@@ -216,7 +233,7 @@ public class TileRunnerREV {
             leftDrive2.setTargetPosition(leftDrive1.getTargetPosition() - counts);
             rightDrive1.setTargetPosition(leftDrive1.getTargetPosition() - counts);
             rightDrive2.setTargetPosition(leftDrive1.getTargetPosition() - counts);
-        } else {
+        } else { // Turns clockwise when given a positive value.
             leftDrive1.setTargetPosition(leftDrive1.getTargetPosition() - counts);
             leftDrive2.setTargetPosition(leftDrive1.getTargetPosition() - counts);
             rightDrive1.setTargetPosition(leftDrive1.getTargetPosition() + counts);
