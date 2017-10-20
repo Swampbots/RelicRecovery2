@@ -111,6 +111,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
         }
 
         hardware.jewelServo.setPosition(hardware.ARM_UP);
+        sleep(500);
 
         // JEWEL LOGIC END
         //////////////////////
@@ -135,9 +136,15 @@ public class TRAutoBlueCorner extends LinearOpMode {
                 sleep(1500);
         }
 
-
+        telemetry.addLine(String.format("Driving to %s column...", vuMark));
+        telemetry.update();
         driveInches((float)0.75, inches);
+        sleep(1000);
 
+        telemetry.addLine("Turning 90 degrees...");
+        telemetry.update();
+        turnEncoderCounts((float)1.0, 979);
+        sleep(1000);
 
 
         while(opModeIsActive()) {
@@ -149,6 +156,31 @@ public class TRAutoBlueCorner extends LinearOpMode {
             telemetry.addLine(String.format("Distance to drive: %s inches", inches));
             telemetry.update();
         }
+    }
+
+    public void turnEncoderCounts(float power, int counts) {
+        // Set target positions
+        hardware.setDriveTargetPosition(counts, true);
+
+        // Set run mode to RUN_TO_POSITION
+        hardware.setDriveRunMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        // Set motor powers to the specified amount
+        hardware.linearDrive(power);
+
+        // Run while op mode is active and motors are busy
+        while(opModeIsActive() && hardware.driveMotorsBusy()) {
+            telemetry.addData("Left motor 1", hardware.leftDrive1.getCurrentPosition());
+            telemetry.addData("Left motor 2", hardware.leftDrive2.getCurrentPosition());
+            telemetry.addData("Right motor 1", hardware.rightDrive1.getCurrentPosition());
+            telemetry.addData("Right motor 2", hardware.rightDrive2.getCurrentPosition());
+        }
+
+        // Stop motors
+        hardware.linearDrive((float)0.0);
+
+        // Set run mode to RUN_WITHOUT_ENCODER
+        hardware.setDriveRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     public void driveEncoderCounts(double power, int counts) {
