@@ -14,10 +14,10 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class TileRunnerREV {
 
     // Encoder variables
-    private final double COUNTS_PER_REV              = 1120.0;    // For a NeveRest 40 (7 cpr with a 40:1 gear ratio)
-    private final double DRIVE_GEAR_REDUCTION        = 1.0;      // No gear reduction (would be < 1.0 if geared up)
-    private final double WHEEL_DIAMETER_INCHES       = 4.0;      // For figuring circumference
-    private final double WHEEL_CIRCUMFERENCE_INCHES  = WHEEL_DIAMETER_INCHES * 3.1415;
+    private final double COUNTS_PER_REV             = 1120.0;    // For a NeveRest 40 (7 cpr with a 40:1 gear ratio)
+    private final double DRIVE_GEAR_REDUCTION       = 1.0;      // No gear reduction (would be < 1.0 if geared up)
+    private final double WHEEL_DIAMETER_INCHES      = 4.0;      // For figuring circumference
+    private final double WHEEL_CIRCUMFERENCE_INCHES = WHEEL_DIAMETER_INCHES * 3.1415;
     public final double COUNTS_PER_INCH             = (COUNTS_PER_REV * DRIVE_GEAR_REDUCTION) / WHEEL_CIRCUMFERENCE_INCHES; // About 89 counts per inch
 
     public final double ARM_DOWN    = 0.65;
@@ -29,9 +29,9 @@ public class TileRunnerREV {
     public final float DIST_RIGHT_CORNER   = (float) 33.0;
 
     // Autonomous distance variables from center stones
-    public final float DIST_LEFT_CENTER    = (float) -1.0; // Not yet measured
-    public final float DIST_CENTER_CENTER  = (float) -1.0; // Not yet measured
-    public final float DIST_RIGHT_CENTER   = (float) -1.0; // Not yet measured
+//    public final float DIST_LEFT_CENTER    = (float) -1.0; // Not yet measured
+//    public final float DIST_CENTER_CENTER  = (float) -1.0; // Not yet measured
+//    public final float DIST_RIGHT_CENTER   = (float) -1.0; // Not yet measured
 
 
     // Speed control variables
