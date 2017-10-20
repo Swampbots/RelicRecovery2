@@ -31,6 +31,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
 
     @Override
     public void runOpMode() {
+
         telemetry.addLine("Initializing hardware and Vuforia... do not press play.");
         telemetry.update();
 
@@ -65,6 +66,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
         telemetry.addLine("Press the play button to start.");
         telemetry.update();
 
+
         waitForStart();
 
 
@@ -85,7 +87,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
         telemetry.addData("Blue", hardware.colorSensor.blue());
         telemetry.addData("Red", hardware.colorSensor.red());
         telemetry.update();
-        sleep(2000);
+        sleep(1000);
 
         if(hardware.colorSensor.blue() > hardware.colorSensor.red()) {
             jewelColor = JewelColor.BLUE;
@@ -93,33 +95,54 @@ public class TRAutoBlueCorner extends LinearOpMode {
             telemetry.addData("Red", hardware.colorSensor.red());
             telemetry.addLine("Left jewel was blue. Driving forwards...");
             telemetry.update();
-            sleep(2000);
+            sleep(1500);
 
             driveInches((float)0.7, (float)3.0);
         }
         else {
+            jewelColor = JewelColor.RED;
             telemetry.addData("Blue", hardware.colorSensor.blue());
             telemetry.addData("Red", hardware.colorSensor.red());
             telemetry.addLine("Left jewel was red. Driving backwards...");
             telemetry.update();
-            sleep(2000);
+            sleep(1500);
 
             driveInches((float)0.7, (float)-3.0);
         }
 
-        sleep(3000);
         hardware.jewelServo.setPosition(hardware.ARM_UP);
 
         // JEWEL LOGIC END
         //////////////////////
 
+        // Figure out which cryptobox key you found
+        float inches = (float)0.0;
+
+        switch(vuMark) {
+            case LEFT:
+                inches = hardware.DIST_LEFT_CORNER      + (jewelColor == JewelColor.BLUE ? -4 : 4);
+                break;
+            case CENTER:
+                inches = hardware.DIST_CENTER_CORNER    + (jewelColor == JewelColor.BLUE ? -4 : 4);
+                break;
+            case RIGHT:
+                inches = hardware.DIST_RIGHT_CORNER     + (jewelColor == JewelColor.BLUE ? -4 : 4);
+                break;
+            default:
+                telemetry.addLine("Vision target not found.");
+                telemetry.update();
+                sleep(1500);
+        }
+
+
+
         while(opModeIsActive()) {
             telemetry.addLine("Visible vision target:");
             telemetry.addLine(vuMarkTelemetry(vuMark));
             telemetry.addLine();
-            telemetry.addLine("Color Sensor Values:");
-            telemetry.addData("Red", hardware.colorSensor.red());
-            telemetry.addData("Blue", hardware.colorSensor.blue());
+            telemetry.addData("Jewel Color", jewelColor.toString());
+            telemetry.addLine();
+            telemetry.addData("Distance to drive", inches);
             telemetry.update();
         }
     }
