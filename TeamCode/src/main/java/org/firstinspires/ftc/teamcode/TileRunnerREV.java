@@ -73,7 +73,7 @@ public class TileRunnerREV {
     // Sensor objects
     public ColorSensor colorSensor  = null;
 
-    public BNO055IMU imu = null;
+//    public BNO055IMU imu = null;
 
 
     public TileRunnerREV() {
@@ -103,7 +103,7 @@ public class TileRunnerREV {
         // Get the sensors
         colorSensor = hwMap.colorSensor.get("color_sensor");
 
-        imu         = hwMap.get(BNO055IMU.class, "imu");
+//        imu         = hwMap.get(BNO055IMU.class, "imu");
 
         // Set the motor directions
         leftDrive1.setDirection (DcMotorSimple.Direction.REVERSE);
