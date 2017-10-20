@@ -88,7 +88,29 @@ public class TestAutonomous extends LinearOpMode {
         hardware.linearDrive(power);
 
         // Run while op mode is active and motors are busy
-        while(opModeIsActive() && hardware.driveMotorsBusy());
+        while(opModeIsActive() && hardware.driveMotorsBusy()) {
+            telemetry.addLine(String.format("Left Drive 1: %1$s current, %2$s target, %3$s difference.",
+                    hardware.leftDrive1.getCurrentPosition(),
+                    hardware.leftDrive1.getTargetPosition(),
+                    Math.abs(hardware.leftDrive1.getCurrentPosition() - hardware.leftDrive1.getTargetPosition())));
+
+            telemetry.addLine(String.format("Left Drive 2: %1$s current, %2$s target, %3$s difference.",
+                    hardware.leftDrive2.getCurrentPosition(),
+                    hardware.leftDrive2.getTargetPosition(),
+                    Math.abs(hardware.leftDrive2.getCurrentPosition() - hardware.leftDrive2.getTargetPosition())));
+
+            telemetry.addLine(String.format("Right Drive 1: %1$s current, %2$s target, %3$s difference.",
+                    hardware.rightDrive1.getCurrentPosition(),
+                    hardware.rightDrive1.getTargetPosition(),
+                    Math.abs(hardware.rightDrive1.getCurrentPosition() - hardware.rightDrive1.getTargetPosition())));
+
+            telemetry.addLine(String.format("Right Drive 2: %1$s current, %2$s target, %3$s difference.",
+                    hardware.rightDrive2.getCurrentPosition(),
+                    hardware.rightDrive2.getTargetPosition(),
+                    Math.abs(hardware.rightDrive2.getCurrentPosition() - hardware.rightDrive2.getTargetPosition())));
+
+            telemetry.update();
+        }
 
         // Stop motors
         hardware.linearDrive((float)0.0);
