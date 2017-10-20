@@ -7,4 +7,10 @@ package org.firstinspires.ftc.teamcode;
 public enum JewelColor {
     BLUE,
     RED;
+
+    @Override
+    public String toString() {
+        if (this == BLUE) return "Blue";
+        else return "Red";
+    }
 }
