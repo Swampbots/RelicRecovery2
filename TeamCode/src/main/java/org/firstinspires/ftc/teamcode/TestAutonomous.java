@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
  * Created by kawaiiPlat on 6/10/2017.
  */
 
-@Autonomous(name = "Test Autonomous", group = "Test Autonomous")
+@Autonomous(name = "Test Autonomous", group = "Testing")
 public class TestAutonomous extends LinearOpMode {
 
     private TileRunnerREV hardware = new TileRunnerREV();

@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.Func;
@@ -17,6 +20,7 @@ import java.util.Locale;
  * Created by SwampbotsAdmin on 10/20/2017.
  */
 
+@Autonomous(name = "IMU Test", group = "Testing")
 public class IMUTest extends LinearOpMode {
 
     TileRunnerREV hardware = new TileRunnerREV();
@@ -27,13 +31,28 @@ public class IMUTest extends LinearOpMode {
 
     public void runOpMode() {
 
+        // IMU parameters
+        BNO055IMU.Parameters IMUParameters = new BNO055IMU.Parameters();
+        IMUParameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
+        IMUParameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        IMUParameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+        IMUParameters.loggingEnabled      = true;
+        IMUParameters.loggingTag          = "IMU";
+        IMUParameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+
+        hardware.imu.initialize(IMUParameters);
+
+
+
         // Set up our telemetry dashboard
         composeTelemetry();
+
+
 
         waitForStart();
 
         // Start the logging of measured acceleration
-        hardware.imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
+        //hardware.imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
 
         while(opModeIsActive()) {
             // Handle speed modifiers

@@ -80,16 +80,6 @@ public class TileRunnerREV {
     }
 
     public void init(HardwareMap ahwMap) {
-        // IMU parameters
-        BNO055IMU.Parameters IMUParameters = new BNO055IMU.Parameters();
-        IMUParameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
-        IMUParameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-        IMUParameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
-        IMUParameters.loggingEnabled      = true;
-        IMUParameters.loggingTag          = "IMU";
-        IMUParameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
-
-
         hwMap = ahwMap;
 
         // Get the motors
@@ -114,8 +104,6 @@ public class TileRunnerREV {
         colorSensor = hwMap.colorSensor.get("color_sensor");
 
         imu         = hwMap.get(BNO055IMU.class, "imu");
-        imu.initialize(IMUParameters);
-
 
         // Set the motor directions
         leftDrive1.setDirection (DcMotorSimple.Direction.REVERSE);
