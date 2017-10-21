@@ -79,7 +79,7 @@ public class TestAutonomous extends LinearOpMode {
 
     public void turnEncoderCounts(float power, int counts) {
         // Set target positions
-        hardware.setDriveTargetPosition(counts, true);
+        hardware.setDriveTargetPosition(counts);
 
         // Set run mode to RUN_TO_POSITION
         hardware.setDriveRunMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -122,7 +122,7 @@ public class TestAutonomous extends LinearOpMode {
 
     public void driveEncoderCounts(float power, int counts) {
         // Set target positions
-        hardware.setDriveTargetPosition(counts, false);
+        hardware.setDriveTargetPosition(counts);
 
         // Set run mode to RUN_TO_POSITION
         hardware.setDriveRunMode(DcMotor.RunMode.RUN_TO_POSITION);

@@ -19,7 +19,7 @@ public class TileRunnerREV {
     private final double COUNTS_PER_REV             = 1120.0;    // For a NeveRest 40 (7 cpr with a 40:1 gear ratio)
     private final double DRIVE_GEAR_REDUCTION       = 1.0;      // No gear reduction (would be < 1.0 if geared up)
     private final double WHEEL_DIAMETER_INCHES      = 4.0;      // For figuring circumference
-    private final double WHEEL_CIRCUMFERENCE_INCHES = WHEEL_DIAMETER_INCHES * 3.1415;
+    private final double WHEEL_CIRCUMFERENCE_INCHES = WHEEL_DIAMETER_INCHES * 3.1415; // 12.566
     public final double COUNTS_PER_INCH             = (COUNTS_PER_REV * DRIVE_GEAR_REDUCTION) / WHEEL_CIRCUMFERENCE_INCHES; // About 89 counts per inch
 
     private final double ROBOT_DIAMETER_INCHES      = 14.0;
@@ -215,19 +215,11 @@ public class TileRunnerREV {
         rightDrive2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
-    public void setDriveTargetPosition(int counts, boolean turning) {
-        if(!turning) {
-            leftDrive1.setTargetPosition(leftDrive1.getTargetPosition() - counts);
-            leftDrive2.setTargetPosition(leftDrive1.getTargetPosition() - counts);
-            rightDrive1.setTargetPosition(leftDrive1.getTargetPosition() - counts);
-            rightDrive2.setTargetPosition(leftDrive1.getTargetPosition() - counts);
-        } else { // Turns clockwise when given a positive value.
-            leftDrive1.setTargetPosition(leftDrive1.getTargetPosition() - counts);
-            leftDrive2.setTargetPosition(leftDrive1.getTargetPosition() - counts);
-            rightDrive1.setTargetPosition(leftDrive1.getTargetPosition() + counts);
-            rightDrive2.setTargetPosition(leftDrive1.getTargetPosition() + counts);
-        }
-
+    public void setDriveTargetPosition(int counts) {
+        leftDrive1.setTargetPosition(leftDrive1.getTargetPosition() - counts);
+        leftDrive2.setTargetPosition(leftDrive2.getTargetPosition() - counts);
+        rightDrive1.setTargetPosition(rightDrive1.getTargetPosition() - counts);
+        rightDrive2.setTargetPosition(rightDrive2.getTargetPosition() - counts);
     }
 
     public boolean driveMotorsBusy() {
