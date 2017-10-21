@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -11,6 +12,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 public class TileRunnerTeleOp extends OpMode {
     // Hardware map initialization.
     private TileRunnerREV hardware = new TileRunnerREV();
+
 
     @Override
     public void init() {
@@ -52,12 +54,12 @@ public class TileRunnerTeleOp extends OpMode {
 
 
         // Handle servos
-        if(gamepad2.x) hardware.flipper.setPower(-1.0 * hardware.utilitySpeedMod);
-        else if(gamepad2.y) hardware.flipper.setPower(1.0 * hardware.utilitySpeedMod);
+        if(gamepad2.x) hardware.flipper.setPower(-0.8);
+        else if(gamepad2.y) hardware.flipper.setPower(0.8);
         else hardware.flipper.setPower(0.0);
 
-        if(gamepad2.a) hardware.kicker.setPower(-1.0 * hardware.utilitySpeedMod);
-        else if(gamepad2.b) hardware.kicker.setPower(1.0 * hardware.utilitySpeedMod);
+        if(gamepad2.a) hardware.kicker.setPower(-0.8);
+        else if(gamepad2.b) hardware.kicker.setPower(0.8);
         else hardware.kicker.setPower(0.0);
 
 

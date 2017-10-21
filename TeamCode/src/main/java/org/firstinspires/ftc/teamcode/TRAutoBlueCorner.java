@@ -102,6 +102,8 @@ public class TRAutoBlueCorner extends LinearOpMode {
         waitForStart();
 
 
+        telemetry.addLine("Looking for vision target...");
+        telemetry.update();
         // Start looking for the vision targets
         relicTrackables.activate();
 
