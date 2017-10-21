@@ -63,6 +63,8 @@ public class TileRunnerREV {
     public DcMotor lifter1      = null;
     public DcMotor lifter2      = null;
 
+    public DcMotor stonePusher  = null;
+
 
     // Servo objects
     public CRServo flipper  = null;
@@ -91,6 +93,8 @@ public class TileRunnerREV {
 
         lifter1     = hwMap.dcMotor.get("lifter1");
         lifter2     = hwMap.dcMotor.get("lifter2");
+
+        stonePusher = hwMap.dcMotor.get("stone_pusher");
 
 
         // Get the servos
