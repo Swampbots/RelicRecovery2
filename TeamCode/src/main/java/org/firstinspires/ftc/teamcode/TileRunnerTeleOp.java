@@ -29,7 +29,9 @@ public class TileRunnerTeleOp extends OpMode {
     public void init_loop() {}
 
     @Override
-    public void start() {}
+    public void start() {
+        hardware.jewelServo.setPosition(hardware.ARM_UP);
+    }
 
 
     @Override
@@ -52,15 +54,20 @@ public class TileRunnerTeleOp extends OpMode {
         hardware.lifter1.setPower(gamepad2.left_stick_y * hardware.utilitySpeedMod);
         hardware.lifter2.setPower(gamepad2.left_stick_y * hardware.utilitySpeedMod);
 
+        hardware.stonePusher.setPower(gamepad2.right_stick_y * hardware.utilitySpeedMod);
+
 
         // Handle servos
-        if(gamepad2.x) hardware.flipper.setPower(-0.8);
+        if(gamepad2.x)      hardware.flipper.setPower(-0.8);
         else if(gamepad2.y) hardware.flipper.setPower(0.8);
-        else hardware.flipper.setPower(0.0);
+        else                hardware.flipper.setPower(0.0);
 
-        if(gamepad2.a) hardware.kicker.setPower(-0.8);
+        if(gamepad2.a)      hardware.kicker.setPower(-0.8);
         else if(gamepad2.b) hardware.kicker.setPower(0.8);
-        else hardware.kicker.setPower(0.0);
+        else                hardware.kicker.setPower(0.0);
+
+        if(gamepad2.dpad_up)        hardware.jewelServo.setPosition(hardware.ARM_UP);
+        else if(gamepad2.dpad_down) hardware.jewelServo.setPosition(hardware.ARM_DOWN);
 
 
         // Update telemetry
