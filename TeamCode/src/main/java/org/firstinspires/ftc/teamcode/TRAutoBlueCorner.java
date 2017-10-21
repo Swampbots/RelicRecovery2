@@ -35,6 +35,9 @@ public class TRAutoBlueCorner extends LinearOpMode {
     // Vuforia instance
     private VuforiaLocalizer vuforia;
 
+    // Inches required to knock a jewel off
+    private final float JEWEL_INCHES = (float)4.0;
+
     // Jewel color enum
     JewelColor jewelColor;
 
@@ -121,9 +124,6 @@ public class TRAutoBlueCorner extends LinearOpMode {
         // Decide which color the jewel is
 
         hardware.jewelServo.setPosition(hardware.ARM_DOWN);
-        telemetry.addData("Blue", hardware.colorSensor.blue());
-        telemetry.addData("Red", hardware.colorSensor.red());
-        telemetry.update();
         sleep(1000);
 
         if(hardware.colorSensor.blue() > hardware.colorSensor.red()) {
@@ -131,20 +131,25 @@ public class TRAutoBlueCorner extends LinearOpMode {
             telemetry.addData("Blue", hardware.colorSensor.blue());
             telemetry.addData("Red", hardware.colorSensor.red());
             telemetry.addLine("Left jewel was blue. Driving forwards...");
+            telemetry.addLine(String.format("(%1$s inches, %2$s encoder counts)",
+                    JEWEL_INCHES, (int)(JEWEL_INCHES * hardware.COUNTS_PER_INCH)));
             telemetry.update();
-            sleep(1500);
+            sleep(5000);
 
-            driveInches((float)0.3, (float)3.0);
+            driveInches((float)0.3, JEWEL_INCHES);
         }
         else {
             jewelColor = JewelColor.RED;
             telemetry.addData("Blue", hardware.colorSensor.blue());
             telemetry.addData("Red", hardware.colorSensor.red());
             telemetry.addLine("Left jewel was red. Driving backwards...");
+            telemetry.addLine(String.format("(%1$s inches, %2$s encoder counts)",
+                    JEWEL_INCHES, (int)(JEWEL_INCHES * hardware.COUNTS_PER_INCH)));
             telemetry.update();
-            sleep(1500);
+            sleep(5000);
 
-            driveInches((float)0.3, (float)-3.0);
+
+            driveInches((float)-0.3, JEWEL_INCHES);
         }
 
         hardware.jewelServo.setPosition(hardware.ARM_UP);
@@ -176,14 +181,8 @@ public class TRAutoBlueCorner extends LinearOpMode {
         driveInches((float)0.3, inches);
         sleep(1000);
 
-        // Turn towards the cryptobox (with a 17 degree undershoot)
-        if(angles != null) {
-            turnToHeading((float)0.4, 73);
-        } else {
-            telemetry.addLine("Angles is null");
-            telemetry.update();
-            sleep(2000);
-        }
+        // Turn towards the cryptobox
+        turnToHeading((float)0.3, 90);
 
 
         while(opModeIsActive()) {
@@ -194,10 +193,19 @@ public class TRAutoBlueCorner extends LinearOpMode {
             telemetry.addLine();
             telemetry.addLine(String.format("Distance to drive: %s inches", inches));
             telemetry.addData("Gyro Heading", angles.firstAngle);
-
             telemetry.update();
         }
     }
+
+
+
+
+
+
+
+
+
+
 
     public void turnToHeading(float power, int heading) {
         hardware.leftDrive1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -214,54 +222,69 @@ public class TRAutoBlueCorner extends LinearOpMode {
         hardware.linearDrive(power, -power);
 
         while(opModeIsActive() && angles.firstAngle < heading) {
+            angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
             telemetry.addLine(String.format("Turning to %s degrees...", heading));
             telemetry.addLine(String.format("Current angle: %s", angles.firstAngle));
             telemetry.update();
         }
         hardware.linearDrive(0);
+        sleep(50);
+
+        hardware.leftDrive1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        hardware.leftDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        hardware.rightDrive1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        hardware.rightDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
         telemetry.addLine("Finished with turn.");
         telemetry.update();
         sleep(2000);
     }
 
-//    public void turnEncoderCounts(float power, int counts) {
-//        // Set target positions
-//        hardware.setDriveTargetPosition(counts, true);
-//
-//        // Set run mode to RUN_TO_POSITION
-//        hardware.setDriveRunMode(DcMotor.RunMode.RUN_TO_POSITION);
-//
-//        // Set motor powers to the specified amount
-//        hardware.linearDrive(power);
-//
-//        // Run while op mode is active and motors are busy
-//        while(opModeIsActive() && hardware.driveMotorsBusy()) {
-//            telemetry.addData("Left motor 1", hardware.leftDrive1.getCurrentPosition());
-//            telemetry.addData("Left motor 2", hardware.leftDrive2.getCurrentPosition());
-//            telemetry.addData("Right motor 1", hardware.rightDrive1.getCurrentPosition());
-//            telemetry.addData("Right motor 2", hardware.rightDrive2.getCurrentPosition());
-//        }
-//
-//        // Stop motors
-//        hardware.linearDrive((float)0.0);
-//
-//        // Set run mode to RUN_WITHOUT_ENCODER
-//        hardware.setDriveRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//    }
-
-    public void driveEncoderCounts(double power, int counts) {
+    public void driveEncoderCounts(float power, int counts) {
         // Set target positions
-        hardware.setDriveTargetPosition(counts, false);
+        hardware.setDriveTargetPosition(counts);
+        telemetry.addData("Encoder counts", counts);
+        telemetry.addLine();
+        telemetry.addLine("Targets:");
+        telemetry.addLine();
+        telemetry.addData("Left drive 1", hardware.leftDrive1.getTargetPosition());
+        telemetry.addData("Left drive 2", hardware.leftDrive2.getTargetPosition());
+        telemetry.addData("Right drive 1", hardware.rightDrive1.getTargetPosition());
+        telemetry.addData("Right drive 2", hardware.rightDrive2.getTargetPosition());
+        telemetry.addLine();
+        telemetry.addLine("Current:");
+        telemetry.addLine();
+        telemetry.addData("Left drive 1", hardware.leftDrive1.getCurrentPosition());
+        telemetry.addData("Left drive 2", hardware.leftDrive2.getCurrentPosition());
+        telemetry.addData("Right drive 1", hardware.rightDrive1.getCurrentPosition());
+        telemetry.addData("Right drive 2", hardware.rightDrive2.getCurrentPosition());
+        telemetry.update();
+
+        sleep(5000);
+
 
         // Set run mode to RUN_TO_POSITION
         hardware.setDriveRunMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         // Set motor powers to the specified amount
-        hardware.linearDrive((float)power);
+        hardware.linearDrive(power);
 
         // Run while op mode is active and motors are busy
-        while(opModeIsActive() && hardware.driveMotorsBusy());
+        while(opModeIsActive() && hardware.driveMotorsBusy()) {
+            telemetry.addLine(String.format("Left Drive 1: target = %1$s, current = %2$s",
+                    hardware.leftDrive1.getTargetPosition(),
+                    hardware.leftDrive1.getCurrentPosition()));
+            telemetry.addLine(String.format("Left Drive 2: target = %1$s, current = %2$s",
+                    hardware.leftDrive2.getTargetPosition(),
+                    hardware.leftDrive2.getCurrentPosition()));
+            telemetry.addLine(String.format("Right Drive 1: target = %1$s, current = %2$s",
+                    hardware.rightDrive1.getTargetPosition(),
+                    hardware.rightDrive1.getCurrentPosition()));
+            telemetry.addLine(String.format("Right Drive 2: target = %1$s, current = %2$s",
+                    hardware.rightDrive2.getTargetPosition(),
+                    hardware.rightDrive2.getCurrentPosition()));
+            telemetry.update();
+        }
 
         // Stop motors
         hardware.linearDrive((float)0.0);
@@ -293,74 +316,74 @@ public class TRAutoBlueCorner extends LinearOpMode {
     // Telemetry Configuration
     //----------------------------------------------------------------------------------------------
 
-    void composeTelemetry() {
-
-        // At the beginning of each telemetry update, grab a bunch of data
-        // from the IMU that we will then display in separate lines.
-        telemetry.addAction(new Runnable() { @Override public void run()
-        {
-            // Acquiring the angles is relatively expensive; we don't want
-            // to do that in each of the three items that need that info, as that's
-            // three times the necessary expense.
-            angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-            gravity  = imu.getGravity();
-        }
-        });
-
-        telemetry.addLine()
-                .addData("status", new Func<String>() {
-                    @Override public String value() {
-                        return imu.getSystemStatus().toShortString();
-                    }
-                })
-                .addData("calib", new Func<String>() {
-                    @Override public String value() {
-                        return imu.getCalibrationStatus().toString();
-                    }
-                });
-
-        telemetry.addLine()
-                .addData("heading", new Func<String>() {
-                    @Override public String value() {
-                        return formatAngle(angles.angleUnit, angles.firstAngle);
-                    }
-                })
-                .addData("roll", new Func<String>() {
-                    @Override public String value() {
-                        return formatAngle(angles.angleUnit, angles.secondAngle);
-                    }
-                })
-                .addData("pitch", new Func<String>() {
-                    @Override public String value() {
-                        return formatAngle(angles.angleUnit, angles.thirdAngle);
-                    }
-                });
-
-        telemetry.addLine()
-                .addData("grvty", new Func<String>() {
-                    @Override public String value() {
-                        return gravity.toString();
-                    }
-                })
-                .addData("mag", new Func<String>() {
-                    @Override public String value() {
-                        return String.format(Locale.getDefault(), "%.3f",
-                                Math.sqrt(gravity.xAccel*gravity.xAccel
-                                        + gravity.yAccel*gravity.yAccel
-                                        + gravity.zAccel*gravity.zAccel));
-                    }
-                });
-    }
-
-    //----------------------------------------------------------------------------------------------
-    // Formatting
-    //----------------------------------------------------------------------------------------------
-
-    String formatAngle(AngleUnit angleUnit, double angle) {
-        return formatDegrees(AngleUnit.DEGREES.fromUnit(angleUnit, angle));
-    }
-
-    String formatDegrees(double degrees){
-        return String.format(Locale.getDefault(), "%.1f", AngleUnit.DEGREES.normalize(degrees));
-    }
+//    void composeTelemetry() {
+//
+//        // At the beginning of each telemetry update, grab a bunch of data
+//        // from the IMU that we will then display in separate lines.
+//        telemetry.addAction(new Runnable() { @Override public void run()
+//        {
+//            // Acquiring the angles is relatively expensive; we don't want
+//            // to do that in each of the three items that need that info, as that's
+//            // three times the necessary expense.
+//            angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+//            gravity  = imu.getGravity();
+//        }
+//        });
+//
+//        telemetry.addLine()
+//                .addData("status", new Func<String>() {
+//                    @Override public String value() {
+//                        return imu.getSystemStatus().toShortString();
+//                    }
+//                })
+//                .addData("calib", new Func<String>() {
+//                    @Override public String value() {
+//                        return imu.getCalibrationStatus().toString();
+//                    }
+//                });
+//
+//        telemetry.addLine()
+//                .addData("heading", new Func<String>() {
+//                    @Override public String value() {
+//                        return formatAngle(angles.angleUnit, angles.firstAngle);
+//                    }
+//                })
+//                .addData("roll", new Func<String>() {
+//                    @Override public String value() {
+//                        return formatAngle(angles.angleUnit, angles.secondAngle);
+//                    }
+//                })
+//                .addData("pitch", new Func<String>() {
+//                    @Override public String value() {
+//                        return formatAngle(angles.angleUnit, angles.thirdAngle);
+//                    }
+//                });
+//
+//        telemetry.addLine()
+//                .addData("grvty", new Func<String>() {
+//                    @Override public String value() {
+//                        return gravity.toString();
+//                    }
+//                })
+//                .addData("mag", new Func<String>() {
+//                    @Override public String value() {
+//                        return String.format(Locale.getDefault(), "%.3f",
+//                                Math.sqrt(gravity.xAccel*gravity.xAccel
+//                                        + gravity.yAccel*gravity.yAccel
+//                                        + gravity.zAccel*gravity.zAccel));
+//                    }
+//                });
+//    }
+//
+//    //----------------------------------------------------------------------------------------------
+//    // Formatting
+//    //----------------------------------------------------------------------------------------------
+//
+//    String formatAngle(AngleUnit angleUnit, double angle) {
+//        return formatDegrees(AngleUnit.DEGREES.fromUnit(angleUnit, angle));
+//    }
+//
+//    String formatDegrees(double degrees){
+//        return String.format(Locale.getDefault(), "%.1f", AngleUnit.DEGREES.normalize(degrees));
+//    }
 }
