@@ -26,7 +26,7 @@ import java.util.Locale;
  * Created by swamp on 10/17/2017.
  */
 
-@Autonomous(name = "Blue Corner", group = "Blue Autonomous")
+@Autonomous(name = "Blue Corner", group = "Autonomous")
 public class TRAutoBlueCorner extends LinearOpMode {
 
     // Hardware class instance
@@ -119,7 +119,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
         RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
 //        timeSnapshot = getRuntime();
 
-        while(vuMark == RelicRecoveryVuMark.UNKNOWN/* && (getRuntime() - timeSnapshot) < 5*/) {
+        while(opModeIsActive() && vuMark == RelicRecoveryVuMark.UNKNOWN/* && (getRuntime() - timeSnapshot) < 5*/) {
             vuMark = RelicRecoveryVuMark.from(relicTemplate);
         }
 
@@ -142,7 +142,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
             telemetry.addLine(String.format("(%1$s inches, %2$s encoder counts)",
                     JEWEL_INCHES, (int)(JEWEL_INCHES * hardware.COUNTS_PER_INCH)));
             telemetry.update();
-            sleep(5000);
+            sleep(2000);
 
             driveInches(0.3, JEWEL_INCHES);
         }
@@ -154,10 +154,10 @@ public class TRAutoBlueCorner extends LinearOpMode {
             telemetry.addLine(String.format("(%1$s inches, %2$s encoder counts)",
                     JEWEL_INCHES, (int)(JEWEL_INCHES * hardware.COUNTS_PER_INCH)));
             telemetry.update();
-            sleep(5000);
+            sleep(2000);
 
 
-            driveInches(-0.3, JEWEL_INCHES);
+            driveInches(0.3, -JEWEL_INCHES);
         }
 
         hardware.jewelServo.setPosition(hardware.ARM_UP);
