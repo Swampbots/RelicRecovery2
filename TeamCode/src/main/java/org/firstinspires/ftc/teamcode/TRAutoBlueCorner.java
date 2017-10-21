@@ -49,7 +49,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        telemetry.addLine("Initializing hardware and Vuforia... do not press play.");
+        telemetry.addLine("DO NOT PRESS PLAY! Hardware and Vuforia are being initialized.");
         telemetry.update();
 
         // Initialize hardware class
@@ -92,6 +92,9 @@ public class TRAutoBlueCorner extends LinearOpMode {
 
         // Pass in the parameters
         imu.initialize(IMUParameters);
+
+        angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+
 
 
         telemetry.addLine("Hardware Initialized.");
@@ -173,13 +176,14 @@ public class TRAutoBlueCorner extends LinearOpMode {
         driveInches((float)0.3, inches);
         sleep(1000);
 
-//        telemetry.addLine("Turning 90 degrees...");
-//        telemetry.update();
-//        turnEncoderCounts((float)1.0, 979);
-//        sleep(1000);
-
         // Turn towards the cryptobox (with a 17 degree undershoot)
-        turnToHeading((float)0.4, 73);
+        if(angles != null) {
+            turnToHeading((float)0.4, 73);
+        } else {
+            telemetry.addLine("Angles is null");
+            telemetry.update();
+            sleep(2000);
+        }
 
 
         while(opModeIsActive()) {
