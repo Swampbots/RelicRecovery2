@@ -30,9 +30,9 @@ public class TileRunnerREV {
     public final double ARM_UP      = 0.0;
 
     // Autonomous distance variables from corner stones
-    public final float DIST_LEFT_CORNER    = (float) 26.0;
-    public final float DIST_CENTER_CORNER  = (float) 34.0;
-    public final float DIST_RIGHT_CORNER   = (float) 42.0;
+    public final double DIST_LEFT_CORNER    =  26.0;
+    public final double DIST_CENTER_CORNER  =  34.0;
+    public final double DIST_RIGHT_CORNER   =  42.0;
 
     // Autonomous distance variables from center stones
 //    public final float DIST_LEFT_CENTER    = (float) -1.0; // Not yet measured
@@ -159,21 +159,21 @@ public class TileRunnerREV {
     // OpMode Methods
     /////////////////////////////////////
 
-    public void linearDrive(float power) {
+    public void linearDrive(double power) {
         linearDrive(power, power);
     }
 
-    public void linearDrive(float leftPower, float rightPower) {
+    public void linearDrive(double leftPower, double rightPower) {
         setLeftPower(leftPower);
         setRightPower(rightPower);
     }
 
-    public void setLeftPower(float leftPower) {
+    public void setLeftPower(double leftPower) {
         leftDrive1.setPower(leftPower);
         leftDrive2.setPower(leftPower);
     }
 
-    public void setRightPower(float rightPower) {
+    public void setRightPower(double rightPower) {
         rightDrive1.setPower(rightPower);
         rightDrive2.setPower(rightPower);
     }

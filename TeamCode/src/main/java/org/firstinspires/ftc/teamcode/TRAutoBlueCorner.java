@@ -36,7 +36,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
     private VuforiaLocalizer vuforia;
 
     // Inches required to knock a jewel off
-    private final float JEWEL_INCHES = (float)4.0;
+    private final double JEWEL_INCHES = 4.0;
 
     // Jewel color enum
     JewelColor jewelColor;
@@ -47,6 +47,8 @@ public class TRAutoBlueCorner extends LinearOpMode {
     // State used for updating telemetry
     Orientation angles;
     Acceleration gravity;
+
+//    private double timeSnapshot = 0.0;
 
 
     @Override
@@ -115,11 +117,17 @@ public class TRAutoBlueCorner extends LinearOpMode {
 
         // Try to find the vuMark
         RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
+//        timeSnapshot = getRuntime();
 
-        while(vuMark == RelicRecoveryVuMark.UNKNOWN) {
+        while(vuMark == RelicRecoveryVuMark.UNKNOWN/* && (getRuntime() - timeSnapshot) < 5*/) {
             vuMark = RelicRecoveryVuMark.from(relicTemplate);
         }
 
+//        if(getRuntime() - timeSnapshot >= 5) {
+//            telemetry.addLine("vuMark not found. Defaulting to center...");
+//            telemetry.update();
+//            sleep(1000);
+//        }
 
         // Decide which color the jewel is
 
@@ -136,7 +144,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
             telemetry.update();
             sleep(5000);
 
-            driveInches((float)0.3, JEWEL_INCHES);
+            driveInches(0.3, JEWEL_INCHES);
         }
         else {
             jewelColor = JewelColor.RED;
@@ -149,7 +157,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
             sleep(5000);
 
 
-            driveInches((float)-0.3, JEWEL_INCHES);
+            driveInches(-0.3, JEWEL_INCHES);
         }
 
         hardware.jewelServo.setPosition(hardware.ARM_UP);
@@ -158,7 +166,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
 
         // Figure out how far to drive depending on
         // the cryptobox key and jewel knocked off
-        float inches = (float)0.0;
+        double inches = 0.0;
 
         switch(vuMark) {
             case LEFT:
@@ -178,11 +186,11 @@ public class TRAutoBlueCorner extends LinearOpMode {
 
         telemetry.addLine(String.format("Driving to %s column...", vuMark));
         telemetry.update();
-        driveInches((float)0.3, inches);
+        driveInches(0.3, inches);
         sleep(1000);
 
         // Turn towards the cryptobox
-        turnToHeading((float)0.3, 90);
+        turnToHeading(0.3, 90);
 
 
         while(opModeIsActive()) {
@@ -207,7 +215,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
 
 
 
-    public void turnToHeading(float power, int heading) {
+    public void turnToHeading(double power, int heading) {
         hardware.leftDrive1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         hardware.leftDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         hardware.rightDrive1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -240,7 +248,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
         sleep(2000);
     }
 
-    public void driveEncoderCounts(float power, int counts) {
+    public void driveEncoderCounts(double power, int counts) {
         // Set target positions
         hardware.setDriveTargetPosition(counts);
         telemetry.addData("Encoder counts", counts);
@@ -287,13 +295,13 @@ public class TRAutoBlueCorner extends LinearOpMode {
         }
 
         // Stop motors
-        hardware.linearDrive((float)0.0);
+        hardware.linearDrive(0.0);
 
         // Set run mode to RUN_WITHOUT_ENCODER
         hardware.setDriveRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
-    public void driveInches(float power, float inches) {
+    public void driveInches(double power, double inches) {
         driveEncoderCounts(power, (int)(inches * hardware.COUNTS_PER_INCH));
     }
 
