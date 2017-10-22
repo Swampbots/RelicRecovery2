@@ -70,7 +70,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
         parameters.vuforiaLicenseKey = "AQEp+gX/////AAAAGabZ3yaKT0WLtofdjrrGznRKhqhzUCjAtaxsfr96aQv7kVlGcd6NUnv2Ic89/rJ/yPFvXrDDIWqGfpXvAhqVO94fs5EYBWUzB8qCBfTJ6U1Lmo15bBZ5/tz0iMkFc3ZX27xBTdIJ6C3zTIna1hErBvkeKpRI8nMwygPulWQej4jCaomF600Z9t9ZZZtQCH54bgqLmzMRIwZYOxCzcwh+nfP7teg9JtwI3NSUHmL2zkIiRYzwo53vv3+kv3CdzLnfiK/6ReAW6S/p9hO0ENCIcWJDUGgM4KDBW1aewp6OTpFt34D2ZIzop63/+ediGz8PJw3pcrRAuKEDQ/p1h7GAVHw8vbWgW1iTOkevHSv4bcp8\n";
         parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
 
-        // Create a VuforiaLocalizer
+        // Create a VuforiaLocalizer with the above parameters
         this.vuforia = ClassFactory.createVuforiaLocalizer(parameters);
 
         // Get all the vision targets
@@ -135,27 +135,30 @@ public class TRAutoBlueCorner extends LinearOpMode {
         sleep(1000);
 
         if(hardware.colorSensor.blue() > hardware.colorSensor.red()) {
-            jewelColor = JewelColor.BLUE;
             telemetry.addData("Blue", hardware.colorSensor.blue());
             telemetry.addData("Red", hardware.colorSensor.red());
             telemetry.addLine("Left jewel was blue. Driving forwards...");
             telemetry.addLine(String.format("(%1$s inches, %2$s encoder counts)",
                     JEWEL_INCHES, (int)(JEWEL_INCHES * hardware.COUNTS_PER_INCH)));
             telemetry.update();
+
+            jewelColor = JewelColor.BLUE;
+
             sleep(2000);
 
             driveInches(0.3, JEWEL_INCHES);
         }
         else {
-            jewelColor = JewelColor.RED;
             telemetry.addData("Blue", hardware.colorSensor.blue());
             telemetry.addData("Red", hardware.colorSensor.red());
             telemetry.addLine("Left jewel was red. Driving backwards...");
             telemetry.addLine(String.format("(%1$s inches, %2$s encoder counts)",
                     JEWEL_INCHES, (int)(JEWEL_INCHES * hardware.COUNTS_PER_INCH)));
             telemetry.update();
-            sleep(2000);
 
+            jewelColor = JewelColor.RED;
+
+            sleep(2000);
 
             driveInches(0.3, -JEWEL_INCHES);
         }
@@ -200,6 +203,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
             telemetry.addData("Jewel Color", jewelColor.toString());
             telemetry.addLine();
             telemetry.addLine(String.format("Distance to drive: %s inches", inches));
+            telemetry.addLine();
             telemetry.addData("Gyro Heading", angles.firstAngle);
             telemetry.update();
         }
