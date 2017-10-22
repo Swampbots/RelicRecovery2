@@ -193,7 +193,22 @@ public class TRAutoBlueCorner extends LinearOpMode {
         sleep(1000);
 
         // Turn towards the cryptobox
-//        turnToHeading(0.3, 90);
+        turnToHeading(0.3, 87);
+
+        telemetry.addLine("Finished with turn");
+
+        sleep(100);
+
+        driveInches(0.3, 8.0);
+
+//        hardware.lifter1.setPower(1.0);
+//        hardware.lifter2.setPower(1.0);
+//
+//        sleep(5000);
+//
+//        hardware.lifter1.setPower(0);
+//        hardware.lifter1.setPower(0);
+
 
 
         while(opModeIsActive()) {
