@@ -193,7 +193,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
         sleep(1000);
 
         // Turn towards the cryptobox
-        turnToHeading(0.3, 90);
+//        turnToHeading(0.3, 90);
 
 
         while(opModeIsActive()) {

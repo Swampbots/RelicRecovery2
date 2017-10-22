@@ -40,7 +40,6 @@ public class TRAutoRedCorner extends LinearOpMode {
 
     // State used for updating telemetry
     Orientation angles;
-    Acceleration gravity;
 
 //    private double timeSnapshot = 0.0;
 
@@ -136,6 +135,7 @@ public class TRAutoRedCorner extends LinearOpMode {
             telemetry.addLine(String.format("(%1$s inches, %2$s encoder counts)",
                     -JEWEL_INCHES, (int)(-JEWEL_INCHES * hardware.COUNTS_PER_INCH)));
             telemetry.update();
+
             sleep(2000);
 
             driveInches(0.3, -JEWEL_INCHES);
@@ -148,8 +148,8 @@ public class TRAutoRedCorner extends LinearOpMode {
             telemetry.addLine(String.format("(%1$s inches, %2$s encoder counts)",
                     JEWEL_INCHES, (int)(JEWEL_INCHES * hardware.COUNTS_PER_INCH)));
             telemetry.update();
-            sleep(2000);
 
+            sleep(2000);
 
             driveInches(0.3, JEWEL_INCHES);
         }
@@ -185,7 +185,7 @@ public class TRAutoRedCorner extends LinearOpMode {
         sleep(1000);
 
         // Turn towards the cryptobox
-        turnToHeading(0.3, -90); // -90 for red autonomous.
+//        turnToHeading(0.3, -90);
 
 
         while(opModeIsActive()) {
@@ -195,6 +195,7 @@ public class TRAutoRedCorner extends LinearOpMode {
             telemetry.addData("Jewel Color", jewelColor.toString());
             telemetry.addLine();
             telemetry.addLine(String.format("Distance to drive: %s inches", inches));
+            telemetry.addLine();
             telemetry.addData("Gyro Heading", angles.firstAngle);
             telemetry.update();
         }
