@@ -30,7 +30,7 @@ public class TileRunnerREV {
     public final double ARM_UP      = 0.0;
 
     // Autonomous distance variables from corner stones
-    public final double DIST_LEFT_CORNER    =  26.0;
+    public final double DIST_LEFT_CORNER    =  28.0;
     public final double DIST_CENTER_CORNER  =  34.0;
     public final double DIST_RIGHT_CORNER   =  42.0;
 
