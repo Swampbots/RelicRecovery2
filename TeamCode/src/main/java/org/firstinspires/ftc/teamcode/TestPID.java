@@ -60,9 +60,9 @@ public class TestPID extends LinearOpMode {
 
         SynchronousPID pid = new SynchronousPID(p, i, d);
 
-        pid.setSetpoint(target);
-        pid.setOutputRange(-maxSpeed, maxSpeed);
-        pid.setDeadband(tolerance);
+        pid.setSetpoint(target);                    // Target final heading relative to current
+        pid.setOutputRange(-maxSpeed, maxSpeed);    // Maximum motor power
+        pid.setDeadband(tolerance);                 // How far you can safely be off from your target
 
         while(opModeIsActive()) {
             double error = normalize180(target - heading());
