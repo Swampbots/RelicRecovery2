@@ -39,6 +39,16 @@ public class TileRunnerREV {
 //    public final float DIST_CENTER_CENTER  = (float) -1.0; // Not yet measured
 //    public final float DIST_RIGHT_CENTER   = (float) -1.0; // Not yet measured
 
+    // Autonomous PID variables
+    public final double MAX_SPEED = 0.4;
+    public final double P = 0.045;
+    public final double I = 0.01;
+    public final double D = 0.045;
+    public final double TOLERANCE = 2;
+
+    public final SynchronousPID pid = new SynchronousPID(P, I, D);
+
+
 
     // Speed control variables
     public final double SLOW = 0.25;
