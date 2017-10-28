@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -15,6 +16,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
  */
 
 @Autonomous(name = "PID test", group = "Testing")
+//@Disabled
 public class TestPID extends LinearOpMode {
 
     // IMU object
@@ -52,7 +54,7 @@ public class TestPID extends LinearOpMode {
         double target = 90;
         double maxSpeed = 0.4;
         double p = 0.045;
-        double i = 0;
+        double i = 0.01;
         double d = 0.045;
         double tolerance = 2;
 
