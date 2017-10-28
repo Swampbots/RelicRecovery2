@@ -234,6 +234,10 @@ public class TRAutoBlueCorner extends LinearOpMode {
 
 
 
+
+    //----------------------------------------------------------------------------------------------
+    // Driving and turning methods
+    //----------------------------------------------------------------------------------------------
     public void turnToHeading(double power, int heading) {
         hardware.leftDrive1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         hardware.leftDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -254,7 +258,9 @@ public class TRAutoBlueCorner extends LinearOpMode {
             telemetry.addLine(String.format("Current angle: %s", angles.firstAngle));
             telemetry.update();
         }
+
         hardware.linearDrive(0);
+
         sleep(50);
 
         hardware.leftDrive1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
@@ -265,6 +271,45 @@ public class TRAutoBlueCorner extends LinearOpMode {
         telemetry.addLine("Finished with turn.");
         telemetry.update();
         sleep(2000);
+    }
+
+
+
+
+    public void turnToHeadingPID(int target) throws InterruptedException {
+        hardware.pid.setSetpoint(target);                                       // Set target final heading relative to current
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);   // Set maximum motor power
+        hardware.pid.setDeadband(hardware.TOLERANCE);                           // Set how far off you can safely be from your target
+
+        while(opModeIsActive()) {
+            double error = normalize180(target - heading());
+            double power = hardware.pid.calculateGivenError(error);
+
+            hardware.setLeftPower(power);
+            hardware.setRightPower(-power);
+
+            if(Math.abs(error) < hardware.TOLERANCE) {
+                break;
+            }
+
+            Thread.sleep(1);
+        }
+
+        hardware.linearDrive(0);
+    }
+
+    public double normalize180(double angle) {
+        while(angle > 180) {
+            angle -= 360;
+        }
+        while(angle <= -180) {
+            angle += 360;
+        }
+        return angle;
+    }
+
+    public double heading() {
+        return imu.getAngularOrientation(AxesReference.EXTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
     }
 
     public void driveEncoderCounts(double power, int counts) {
