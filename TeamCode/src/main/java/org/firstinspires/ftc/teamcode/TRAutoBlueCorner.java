@@ -44,10 +44,6 @@ public class TRAutoBlueCorner extends LinearOpMode {
     // IMU object
     BNO055IMU imu;
 
-    // State used for updating telemetry
-    Orientation angles;
-    Acceleration gravity;
-
 //    private double timeSnapshot = 0.0;
 
 
@@ -88,19 +84,15 @@ public class TRAutoBlueCorner extends LinearOpMode {
 
         // IMU parameters
         BNO055IMU.Parameters IMUParameters = new BNO055IMU.Parameters();
-        IMUParameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
-        IMUParameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-        IMUParameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
-        IMUParameters.loggingEnabled      = true;
-        IMUParameters.loggingTag          = "IMU";
+        IMUParameters.angleUnit             = BNO055IMU.AngleUnit.DEGREES;
+        IMUParameters.accelUnit             = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        IMUParameters.calibrationDataFile   = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+        IMUParameters.loggingEnabled        = true;
+        IMUParameters.loggingTag            = "IMU";
         IMUParameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
 
         // Pass in the parameters
         imu.initialize(IMUParameters);
-
-        angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-
-
 
         telemetry.addLine("Hardware Initialized.");
         telemetry.addLine("Press the play button to start.");
@@ -119,7 +111,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
         RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
 //        timeSnapshot = getRuntime();
 
-        while(opModeIsActive() && vuMark == RelicRecoveryVuMark.UNKNOWN/* && (getRuntime() - timeSnapshot) < 5*/) {
+        while (opModeIsActive() && vuMark == RelicRecoveryVuMark.UNKNOWN/* && (getRuntime() - timeSnapshot) < 5*/) {
             vuMark = RelicRecoveryVuMark.from(relicTemplate);
         }
 
@@ -132,35 +124,30 @@ public class TRAutoBlueCorner extends LinearOpMode {
         // Decide which color the jewel is
 
         hardware.jewelServo.setPosition(hardware.ARM_DOWN);
-        sleep(1000);
+        sleep(1500);
 
-        if(hardware.colorSensor.blue() > hardware.colorSensor.red()) {
+        if (hardware.colorSensor.blue() > hardware.colorSensor.red()) {
             telemetry.addData("Blue", hardware.colorSensor.blue());
             telemetry.addData("Red", hardware.colorSensor.red());
             telemetry.addLine("Left jewel was blue. Driving forwards...");
-            telemetry.addLine(String.format("(%1$s inches, %2$s encoder counts)",
-                    JEWEL_INCHES, (int)(JEWEL_INCHES * hardware.COUNTS_PER_INCH)));
             telemetry.update();
 
             jewelColor = JewelColor.BLUE;
 
-            sleep(2000);
+            sleep(1000);
 
-            driveInches(0.3, JEWEL_INCHES);
-        }
-        else {
+            driveInches(0.4, JEWEL_INCHES);
+        } else {
             telemetry.addData("Blue", hardware.colorSensor.blue());
             telemetry.addData("Red", hardware.colorSensor.red());
             telemetry.addLine("Left jewel was red. Driving backwards...");
-            telemetry.addLine(String.format("(%1$s inches, %2$s encoder counts)",
-                    JEWEL_INCHES, (int)(JEWEL_INCHES * hardware.COUNTS_PER_INCH)));
             telemetry.update();
 
             jewelColor = JewelColor.RED;
 
-            sleep(2000);
+            sleep(1000);
 
-            driveInches(0.3, -JEWEL_INCHES);
+            driveInches(0.4, -JEWEL_INCHES);
         }
 
         hardware.jewelServo.setPosition(hardware.ARM_UP);
@@ -171,7 +158,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
         // the cryptobox key and jewel knocked off
         double inches = 0.0;
 
-        switch(vuMark) {
+        switch (vuMark) {
             case LEFT:
                 inches = hardware.DIST_LEFT_CORNER      + (jewelColor == JewelColor.BLUE ? -4 : 4);
                 break;
@@ -193,19 +180,19 @@ public class TRAutoBlueCorner extends LinearOpMode {
 
         telemetry.addLine("Turning towards cryptobox...");
         telemetry.update();
-        sleep(2000);
+        sleep(1000);
 
         // Turn towards the cryptobox
         turnToHeadingPID(90);
 
         telemetry.addLine("Finished with turn.");
         telemetry.update();
-        sleep(2000);
+        sleep(1000);
 
 
         telemetry.addLine("Spitting out the cube...");
         telemetry.update();
-        sleep(2000);
+        sleep(1000);
 
 
         hardware.kicker.setPower(-0.8);
@@ -222,23 +209,22 @@ public class TRAutoBlueCorner extends LinearOpMode {
 
         telemetry.addLine("Driving forward 6 inches...");
         telemetry.update();
-        sleep(2000);
+        sleep(1000);
 
-        driveInches(0.3, 6.0);
+        driveInches(0.4, 6.0);
 
         telemetry.addLine("Driving backward 6 inches...");
         telemetry.update();
-        sleep(2000);
+        sleep(1000);
 
         driveInches(0.4, -6.0);
 
         telemetry.addLine("Finished.");
         telemetry.update();
-        sleep(2000);
+        sleep(1000);
 
 
-
-        while(opModeIsActive()) {
+        while (opModeIsActive()) {
             telemetry.addLine("Visible vision target:");
             telemetry.addLine(vuMarkTelemetry(vuMark));
             telemetry.addLine();
@@ -246,12 +232,10 @@ public class TRAutoBlueCorner extends LinearOpMode {
             telemetry.addLine();
             telemetry.addLine(String.format("Distance to drive: %s inches", inches));
             telemetry.addLine();
-            telemetry.addData("Gyro Heading", angles.firstAngle);
+            telemetry.addData("Gyro Heading", heading());
             telemetry.update();
         }
     }
-
-
 
 
 
@@ -301,21 +285,19 @@ public class TRAutoBlueCorner extends LinearOpMode {
 //    }
 
 
-
-
     public void turnToHeadingPID(int target) throws InterruptedException {
         hardware.pid.setSetpoint(target);                                       // Set target final heading relative to current
         hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);   // Set maximum motor power
         hardware.pid.setDeadband(hardware.TOLERANCE);                           // Set how far off you can safely be from your target
 
-        while(opModeIsActive()) {
+        while (opModeIsActive()) {
             double error = normalize180(target - heading());
             double power = hardware.pid.calculateGivenError(error);
 
             hardware.setLeftPower(power);
             hardware.setRightPower(-power);
 
-            if(Math.abs(error) < hardware.TOLERANCE) {
+            if (Math.abs(error) < hardware.TOLERANCE) {
                 break;
             }
 
@@ -326,10 +308,10 @@ public class TRAutoBlueCorner extends LinearOpMode {
     }
 
     public double normalize180(double angle) {
-        while(angle > 180) {
+        while (angle > 180) {
             angle -= 360;
         }
-        while(angle <= -180) {
+        while (angle <= -180) {
             angle += 360;
         }
         return angle;
@@ -343,23 +325,23 @@ public class TRAutoBlueCorner extends LinearOpMode {
         // Set target positions
         hardware.setDriveTargetPosition(counts);
         telemetry.addData("Encoder counts", counts);
-        telemetry.addLine();
-        telemetry.addLine("Targets:");
-        telemetry.addLine();
-        telemetry.addData("Left drive 1", hardware.leftDrive1.getTargetPosition());
-        telemetry.addData("Left drive 2", hardware.leftDrive2.getTargetPosition());
-        telemetry.addData("Right drive 1", hardware.rightDrive1.getTargetPosition());
-        telemetry.addData("Right drive 2", hardware.rightDrive2.getTargetPosition());
-        telemetry.addLine();
-        telemetry.addLine("Current:");
-        telemetry.addLine();
-        telemetry.addData("Left drive 1", hardware.leftDrive1.getCurrentPosition());
-        telemetry.addData("Left drive 2", hardware.leftDrive2.getCurrentPosition());
-        telemetry.addData("Right drive 1", hardware.rightDrive1.getCurrentPosition());
-        telemetry.addData("Right drive 2", hardware.rightDrive2.getCurrentPosition());
+//        telemetry.addLine();
+//        telemetry.addLine("Targets:");
+//        telemetry.addLine();
+//        telemetry.addData("Left drive 1", hardware.leftDrive1.getTargetPosition());
+//        telemetry.addData("Left drive 2", hardware.leftDrive2.getTargetPosition());
+//        telemetry.addData("Right drive 1", hardware.rightDrive1.getTargetPosition());
+//        telemetry.addData("Right drive 2", hardware.rightDrive2.getTargetPosition());
+//        telemetry.addLine();
+//        telemetry.addLine("Current:");
+//        telemetry.addLine();
+//        telemetry.addData("Left drive 1", hardware.leftDrive1.getCurrentPosition());
+//        telemetry.addData("Left drive 2", hardware.leftDrive2.getCurrentPosition());
+//        telemetry.addData("Right drive 1", hardware.rightDrive1.getCurrentPosition());
+//        telemetry.addData("Right drive 2", hardware.rightDrive2.getCurrentPosition());
         telemetry.update();
-
-        sleep(5000);
+//
+        sleep(1000);
 
 
         // Set run mode to RUN_TO_POSITION
@@ -369,7 +351,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
         hardware.linearDrive(power);
 
         // Run while op mode is active and motors are busy
-        while(opModeIsActive() && hardware.driveMotorsBusy()) {
+        while (opModeIsActive() && hardware.driveMotorsBusy()) {
             telemetry.addLine(String.format("Left Drive 1: target = %1$s, current = %2$s",
                     hardware.leftDrive1.getTargetPosition(),
                     hardware.leftDrive1.getCurrentPosition()));
@@ -393,11 +375,11 @@ public class TRAutoBlueCorner extends LinearOpMode {
     }
 
     public void driveInches(double power, double inches) {
-        driveEncoderCounts(power, (int)(inches * hardware.COUNTS_PER_INCH));
+        driveEncoderCounts(power, (int) (inches * hardware.COUNTS_PER_INCH));
     }
 
     public String vuMarkTelemetry(RelicRecoveryVuMark mark) {
-        switch(mark) {
+        switch (mark) {
             case LEFT:
                 return "Left";
             case CENTER:
@@ -408,81 +390,4 @@ public class TRAutoBlueCorner extends LinearOpMode {
                 return "None";
         }
     }
-
-
-
-    //----------------------------------------------------------------------------------------------
-    // Telemetry Configuration
-    //----------------------------------------------------------------------------------------------
-
-//    void composeTelemetry() {
-//
-//        // At the beginning of each telemetry update, grab a bunch of data
-//        // from the IMU that we will then display in separate lines.
-//        telemetry.addAction(new Runnable() { @Override public void run()
-//        {
-//            // Acquiring the angles is relatively expensive; we don't want
-//            // to do that in each of the three items that need that info, as that's
-//            // three times the necessary expense.
-//            angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-//            gravity  = imu.getGravity();
-//        }
-//        });
-//
-//        telemetry.addLine()
-//                .addData("status", new Func<String>() {
-//                    @Override public String value() {
-//                        return imu.getSystemStatus().toShortString();
-//                    }
-//                })
-//                .addData("calib", new Func<String>() {
-//                    @Override public String value() {
-//                        return imu.getCalibrationStatus().toString();
-//                    }
-//                });
-//
-//        telemetry.addLine()
-//                .addData("heading", new Func<String>() {
-//                    @Override public String value() {
-//                        return formatAngle(angles.angleUnit, angles.firstAngle);
-//                    }
-//                })
-//                .addData("roll", new Func<String>() {
-//                    @Override public String value() {
-//                        return formatAngle(angles.angleUnit, angles.secondAngle);
-//                    }
-//                })
-//                .addData("pitch", new Func<String>() {
-//                    @Override public String value() {
-//                        return formatAngle(angles.angleUnit, angles.thirdAngle);
-//                    }
-//                });
-//
-//        telemetry.addLine()
-//                .addData("grvty", new Func<String>() {
-//                    @Override public String value() {
-//                        return gravity.toString();
-//                    }
-//                })
-//                .addData("mag", new Func<String>() {
-//                    @Override public String value() {
-//                        return String.format(Locale.getDefault(), "%.3f",
-//                                Math.sqrt(gravity.xAccel*gravity.xAccel
-//                                        + gravity.yAccel*gravity.yAccel
-//                                        + gravity.zAccel*gravity.zAccel));
-//                    }
-//                });
-//    }
-//
-//    //----------------------------------------------------------------------------------------------
-//    // Formatting
-//    //----------------------------------------------------------------------------------------------
-//
-//    String formatAngle(AngleUnit angleUnit, double angle) {
-//        return formatDegrees(AngleUnit.DEGREES.fromUnit(angleUnit, angle));
-//    }
-//
-//    String formatDegrees(double degrees){
-//        return String.format(Locale.getDefault(), "%.1f", AngleUnit.DEGREES.normalize(degrees));
-//    }
 }
