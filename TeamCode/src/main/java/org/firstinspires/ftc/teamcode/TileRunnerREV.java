@@ -30,7 +30,7 @@ public class TileRunnerREV {
     public final double ARM_UP      = 0.0;
 
     // Autonomous distance variables from corner stones
-    public final double DIST_LEFT_CORNER    =  28.0;
+    public final double DIST_LEFT_CORNER    =  27.0;
     public final double DIST_CENTER_CORNER  =  34.0;
     public final double DIST_RIGHT_CORNER   =  42.0;
 
@@ -230,10 +230,10 @@ public class TileRunnerREV {
     }
 
     public void setDriveTargetPosition(int counts) {
-        leftDrive1.setTargetPosition(leftDrive1.getTargetPosition() - counts);
-        leftDrive2.setTargetPosition(leftDrive2.getTargetPosition() - counts);
-        rightDrive1.setTargetPosition(rightDrive1.getTargetPosition() - counts);
-        rightDrive2.setTargetPosition(rightDrive2.getTargetPosition() - counts);
+        leftDrive1.setTargetPosition(leftDrive1.getCurrentPosition() - counts);
+        leftDrive2.setTargetPosition(leftDrive2.getCurrentPosition() - counts);
+        rightDrive1.setTargetPosition(rightDrive1.getCurrentPosition() - counts);
+        rightDrive2.setTargetPosition(rightDrive2.getCurrentPosition() - counts);
     }
 
     public boolean driveMotorsBusy() {
