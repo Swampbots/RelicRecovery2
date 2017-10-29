@@ -200,26 +200,41 @@ public class TRAutoBlueCorner extends LinearOpMode {
 
         telemetry.addLine("Finished with turn.");
         telemetry.update();
-
         sleep(2000);
 
-        hardware.resetDriveEncoders();
+
+        telemetry.addLine("Spitting out the cube...");
+        telemetry.update();
+        sleep(2000);
+
+
+        hardware.kicker.setPower(-0.8);
+        sleep(250);
+        hardware.kicker.setPower(0);
+
+
+        hardware.lifter1.setPower(1.0);
+        hardware.lifter2.setPower(1.0);
+        sleep(2000);
+        hardware.lifter1.setPower(0);
+        hardware.lifter2.setPower(0);
+
+
+        telemetry.addLine("Driving forward 3 inches...");
+        telemetry.update();
+        sleep(2000);
 
         driveInches(0.3, 3.0);
 //
-//
-//        hardware.kicker.setPower(-0.8);
+//        telemetry.addLine("Driving back 2 inches...");
+//        telemetry.update();
 //        sleep(2000);
-//        hardware.kicker.setPower(0);
-//
-//
-//        hardware.lifter1.setPower(0.4);
-//        hardware.lifter2.setPower(0.4);
-//        sleep(5000);
-//        hardware.lifter1.setPower(0);
-//        hardware.lifter1.setPower(0);
 //
 //        driveInches(0.4, -2.0);
+
+        telemetry.addLine("Finished.");
+        telemetry.update();
+        sleep(2000);
 
 
 
