@@ -215,7 +215,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
 
         hardware.lifter1.setPower(1.0);
         hardware.lifter2.setPower(1.0);
-        sleep(2000);
+        sleep(4000);
         hardware.lifter1.setPower(0);
         hardware.lifter2.setPower(0);
 
