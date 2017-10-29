@@ -81,6 +81,8 @@ public class TileRunnerREV {
     public CRServo kicker   = null;
 
     public Servo jewelServo = null;
+    public Servo squisher1  = null;
+    public Servo squisher2  = null;
 
     // Sensor objects
     public ColorSensor colorSensor  = null;
@@ -112,13 +114,13 @@ public class TileRunnerREV {
         kicker  = hwMap.crservo.get("kicker");
 
         jewelServo = hwMap.servo.get("jewel_servo");
+        squisher1  = hwMap.servo.get("squisher1");
+        squisher2  = hwMap.servo.get("squisher2");
 
 
         // Get the sensors
         colorSensor = hwMap.colorSensor.get("color_sensor");
-
-//        imu         = hwMap.get(BNO055IMU.class, "imu");
-
+        
         // Set the motor directions
         leftDrive1.setDirection (DcMotorSimple.Direction.REVERSE);
         leftDrive2.setDirection (DcMotorSimple.Direction.REVERSE);
