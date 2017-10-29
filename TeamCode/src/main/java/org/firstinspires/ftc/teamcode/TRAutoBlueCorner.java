@@ -220,17 +220,17 @@ public class TRAutoBlueCorner extends LinearOpMode {
         hardware.lifter2.setPower(0);
 
 
-        telemetry.addLine("Driving forward 3 inches...");
+        telemetry.addLine("Driving forward 6 inches...");
         telemetry.update();
         sleep(2000);
 
-        driveInches(0.3, 3.0);
-//
-//        telemetry.addLine("Driving back 2 inches...");
-//        telemetry.update();
-//        sleep(2000);
-//
-//        driveInches(0.4, -2.0);
+        driveInches(0.3, 6.0);
+
+        telemetry.addLine("Driving backward 6 inches...");
+        telemetry.update();
+        sleep(2000);
+
+        driveInches(0.4, -6.0);
 
         telemetry.addLine("Finished.");
         telemetry.update();
