@@ -175,7 +175,7 @@ public class TRAutoRedCorner extends LinearOpMode {
         sleep(1000);
 
         // Turn towards the cryptobox
-        turnToHeadingPID(90);
+        turnToHeadingPID(-90);
 
         telemetry.addLine("Finished with turn.");
         telemetry.update();
