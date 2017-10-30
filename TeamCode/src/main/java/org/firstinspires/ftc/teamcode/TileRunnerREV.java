@@ -80,9 +80,9 @@ public class TileRunnerREV {
     public CRServo flipper  = null;
     public CRServo kicker   = null;
 
-    public Servo jewelServo = null;
-    public Servo squisher1  = null;
-    public Servo squisher2  = null;
+    public Servo jewelServo     = null;
+    public Servo leftSquisher   = null;
+    public Servo rightSquisher  = null;
 
     // Sensor objects
     public ColorSensor colorSensor  = null;
@@ -113,14 +113,14 @@ public class TileRunnerREV {
         flipper = hwMap.crservo.get("flipper");
         kicker  = hwMap.crservo.get("kicker");
 
-        jewelServo = hwMap.servo.get("jewel_servo");
-        squisher1  = hwMap.servo.get("squisher1");
-        squisher2  = hwMap.servo.get("squisher2");
+        jewelServo      = hwMap.servo.get("jewel_servo");
+        leftSquisher    = hwMap.servo.get("squisher_left");
+        rightSquisher   = hwMap.servo.get("squisher_right");
 
 
         // Get the sensors
         colorSensor = hwMap.colorSensor.get("color_sensor");
-        
+
         // Set the motor directions
         leftDrive1.setDirection (DcMotorSimple.Direction.REVERSE);
         leftDrive2.setDirection (DcMotorSimple.Direction.REVERSE);
@@ -172,7 +172,7 @@ public class TileRunnerREV {
 
 
     /////////////////////////////////////
-    // OpMode Methods
+    // General Methods
     /////////////////////////////////////
 
     public void linearDrive(double power) {
@@ -192,6 +192,11 @@ public class TileRunnerREV {
     public void setRightPower(double rightPower) {
         rightDrive1.setPower(rightPower);
         rightDrive2.setPower(rightPower);
+    }
+
+    public void setLifterPower(double power) {
+        lifter1.setPower(power);
+        lifter2.setPower(power);
     }
 
 //    public void rampDrive(float leftPower, float rightPower) {
