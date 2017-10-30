@@ -160,13 +160,13 @@ public class TRAutoBlueCorner extends LinearOpMode {
 
         switch (vuMark) {
             case LEFT:
-                inches = hardware.DIST_LEFT_CORNER      + (jewelColor == JewelColor.BLUE ? -4 : 4);
+                inches = hardware.DIST_LEFT_CORNER      + (jewelColor == JewelColor.BLUE ? -4 : 6);
                 break;
             case CENTER:
-                inches = hardware.DIST_CENTER_CORNER    + (jewelColor == JewelColor.BLUE ? -4 : 4);
+                inches = hardware.DIST_CENTER_CORNER    + (jewelColor == JewelColor.BLUE ? -4 : 6);
                 break;
             case RIGHT:
-                inches = hardware.DIST_RIGHT_CORNER     + (jewelColor == JewelColor.BLUE ? -4 : 4);
+                inches = hardware.DIST_RIGHT_CORNER     + (jewelColor == JewelColor.BLUE ? -4 : 6);
                 break;
             default:
                 telemetry.addLine("Vision target not found.");
@@ -201,6 +201,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
 
 
         hardware.setLifterPower(1.0);
+        sleep(2000);
 
         telemetry.addLine("Driving forward 6 inches...");
         telemetry.update();
