@@ -152,13 +152,13 @@ public class TRAutoRedCorner extends LinearOpMode {
 
         switch (vuMark) {
             case LEFT:
-                inches = -(hardware.DIST_LEFT_CORNER      + (jewelColor == JewelColor.RED ? 4 : -4));
+                inches = -(hardware.DIST_FAR_CORNER     + (jewelColor == JewelColor.RED ? 4 : -5));
                 break;
             case CENTER:
-                inches = -(hardware.DIST_CENTER_CORNER    + (jewelColor == JewelColor.RED ? 4 : -4));
+                inches = -(hardware.DIST_CENTER_CORNER  + (jewelColor == JewelColor.RED ? 4 : -5));
                 break;
             case RIGHT:
-                inches = -(hardware.DIST_RIGHT_CORNER     + (jewelColor == JewelColor.RED ? 4 : -4));
+                inches = -(hardware.DIST_NEAR_CORNER    + (jewelColor == JewelColor.RED ? 4 : -5));
                 break;
             default:
                 telemetry.addLine("Vision target not found.");
