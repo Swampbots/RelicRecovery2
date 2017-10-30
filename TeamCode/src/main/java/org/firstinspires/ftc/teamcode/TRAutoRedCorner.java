@@ -175,7 +175,7 @@ public class TRAutoRedCorner extends LinearOpMode {
         sleep(1000);
 
         // Turn towards the cryptobox
-        turnToHeadingPID(-90);
+        turnToHeadingPID(90);
 
         telemetry.addLine("Finished with turn.");
         telemetry.update();
@@ -193,6 +193,7 @@ public class TRAutoRedCorner extends LinearOpMode {
 
 
         hardware.setLifterPower(1.0);
+        sleep(2000);
 
         telemetry.addLine("Driving forward 6 inches...");
         telemetry.update();
