@@ -69,11 +69,11 @@ public class TileRunnerTeleOp extends OpMode {
         if      (gamepad2.dpad_up)      hardware.jewelServo.setPosition(hardware.ARM_UP);
         else if (gamepad2.dpad_down)    hardware.jewelServo.setPosition(hardware.ARM_DOWN);
 
-        if (gamepad2.dpad_left)     hardware.squisher1.setPosition(1.0);
-        else                        hardware.squisher2.setPosition(1.0);
+        if (gamepad2.dpad_left)         hardware.leftSquisher.setPosition(1.0);
+        else                            hardware.rightSquisher.setPosition(1.0);
 
-        if (gamepad2.dpad_right)    hardware.squisher1.setPosition(0.0);
-        else                        hardware.squisher2.setPosition(0.0);
+        if (gamepad2.dpad_right)        hardware.leftSquisher.setPosition(0.0);
+        else                            hardware.rightSquisher.setPosition(0.0);
 
 
         // Update telemetry
