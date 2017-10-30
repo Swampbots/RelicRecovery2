@@ -176,7 +176,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
 
         telemetry.addLine(String.format("Driving to %s column...", vuMark));
         telemetry.update();
-        driveInches(0.3, inches);
+        driveInches(0.6, inches);
 
         telemetry.addLine("Turning towards cryptobox...");
         telemetry.update();
