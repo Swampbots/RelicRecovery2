@@ -200,12 +200,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
         hardware.kicker.setPower(0);
 
 
-        hardware.lifter1.setPower(1.0);
-        hardware.lifter2.setPower(1.0);
-        sleep(4000);
-        hardware.lifter1.setPower(0);
-        hardware.lifter2.setPower(0);
-
+        hardware.setLifterPower(1.0);
 
         telemetry.addLine("Driving forward 6 inches...");
         telemetry.update();
@@ -218,6 +213,9 @@ public class TRAutoBlueCorner extends LinearOpMode {
         sleep(1000);
 
         driveInches(0.4, -6.0);
+
+        hardware.setLifterPower(0);
+
 
         telemetry.addLine("Finished.");
         telemetry.update();
@@ -324,7 +322,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
     public void driveEncoderCounts(double power, int counts) {
         // Set target positions
         hardware.setDriveTargetPosition(counts);
-        telemetry.addData("Encoder counts", counts);
+//        telemetry.addData("Encoder counts", counts);
 //        telemetry.addLine();
 //        telemetry.addLine("Targets:");
 //        telemetry.addLine();
@@ -339,9 +337,9 @@ public class TRAutoBlueCorner extends LinearOpMode {
 //        telemetry.addData("Left drive 2", hardware.leftDrive2.getCurrentPosition());
 //        telemetry.addData("Right drive 1", hardware.rightDrive1.getCurrentPosition());
 //        telemetry.addData("Right drive 2", hardware.rightDrive2.getCurrentPosition());
-        telemetry.update();
+//        telemetry.update();
 //
-        sleep(1000);
+//        sleep(1000);
 
 
         // Set run mode to RUN_TO_POSITION
