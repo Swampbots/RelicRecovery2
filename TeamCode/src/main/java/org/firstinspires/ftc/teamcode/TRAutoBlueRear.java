@@ -19,7 +19,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
  * Created by SwampbotsAdmin on 10/31/2017.
  */
 
-@Autonomous(name = "Red Rear", group = "Autonomous")
+@Autonomous(name = "Blue Rear", group = "Autonomous")
 public class TRAutoBlueRear extends LinearOpMode {
 
     // Hardware class instance
