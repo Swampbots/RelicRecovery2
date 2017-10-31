@@ -16,12 +16,11 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 /**
- * Created by swamp on 10/17/2017.
+ * Created by SwampbotsAdmin on 10/21/2017.
  */
 
-@Autonomous(name = "Blue Corner", group = "Autonomous")
-public class TRAutoBlueCorner extends LinearOpMode {
-
+@Autonomous(name = "Red Corner", group = "Autonomous")
+public class TRAutoRedAudience extends LinearOpMode {
     // Hardware class instance
     private TileRunnerREV hardware = new TileRunnerREV();
 
@@ -59,7 +58,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
         parameters.vuforiaLicenseKey = "AQEp+gX/////AAAAGabZ3yaKT0WLtofdjrrGznRKhqhzUCjAtaxsfr96aQv7kVlGcd6NUnv2Ic89/rJ/yPFvXrDDIWqGfpXvAhqVO94fs5EYBWUzB8qCBfTJ6U1Lmo15bBZ5/tz0iMkFc3ZX27xBTdIJ6C3zTIna1hErBvkeKpRI8nMwygPulWQej4jCaomF600Z9t9ZZZtQCH54bgqLmzMRIwZYOxCzcwh+nfP7teg9JtwI3NSUHmL2zkIiRYzwo53vv3+kv3CdzLnfiK/6ReAW6S/p9hO0ENCIcWJDUGgM4KDBW1aewp6OTpFt34D2ZIzop63/+ediGz8PJw3pcrRAuKEDQ/p1h7GAVHw8vbWgW1iTOkevHSv4bcp8\n";
         parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
 
-        // Create a VuforiaLocalizer with the above parameters
+        // Create a VuforiaLocalizer
         this.vuforia = ClassFactory.createVuforiaLocalizer(parameters);
 
         // Get all the vision targets
@@ -101,14 +100,20 @@ public class TRAutoBlueCorner extends LinearOpMode {
         // Start looking for the vision targets
         relicTrackables.activate();
 
-        // Take a snapshot of the time
+        // Take a snapshot of the current time
         timeSnapshot = getRuntime();
 
         // Try to find the vuMark
         RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
 
-        while (opModeIsActive() && vuMark == RelicRecoveryVuMark.UNKNOWN && (getRuntime() - timeSnapshot) < hardware.VUMARK_TIMEOUT) {
+        while (opModeIsActive()
+                && vuMark == RelicRecoveryVuMark.UNKNOWN
+                && (getRuntime() - timeSnapshot) < hardware.VUMARK_TIMEOUT) {
             vuMark = RelicRecoveryVuMark.from(relicTemplate);
+
+            telemetry.addData("Search time", getRuntime() - timeSnapshot);
+            telemetry.addData("Vision Target", vuMarkTelemetry(vuMark));
+            telemetry.update();
         }
 
         // Default to center if the vision target is not found
@@ -126,27 +131,26 @@ public class TRAutoBlueCorner extends LinearOpMode {
         sleep(1500);
 
         if (hardware.colorSensor.blue() > hardware.colorSensor.red()) {
-            telemetry.addData("Blue", hardware.colorSensor.blue());
-            telemetry.addData("Red", hardware.colorSensor.red());
-            telemetry.addLine("Left jewel was blue. Driving forwards...");
-            telemetry.update();
-
             jewelColor = JewelColor.BLUE;
-
-            sleep(1000);
-
-            driveInches(0.4, JEWEL_INCHES);
-        } else {
             telemetry.addData("Blue", hardware.colorSensor.blue());
             telemetry.addData("Red", hardware.colorSensor.red());
-            telemetry.addLine("Left jewel was red. Driving backwards...");
+            telemetry.addLine("Left jewel was blue. Driving backwards..."); // Backwards for red autonomous.
             telemetry.update();
-
-            jewelColor = JewelColor.RED;
 
             sleep(1000);
 
             driveInches(0.4, -JEWEL_INCHES);
+        }
+        else {
+            jewelColor = JewelColor.RED;
+            telemetry.addData("Blue", hardware.colorSensor.blue());
+            telemetry.addData("Red", hardware.colorSensor.red());
+            telemetry.addLine("Left jewel was red. Driving forwards..."); // Forwards for red autonomous.
+            telemetry.update();
+
+            sleep(1000);
+
+            driveInches(0.4, JEWEL_INCHES);
         }
 
         hardware.jewelServo.setPosition(hardware.ARM_UP);
@@ -155,20 +159,21 @@ public class TRAutoBlueCorner extends LinearOpMode {
 
         // Figure out how far to drive depending on
         // the cryptobox key and jewel knocked off
+        // If it's red, you drove four inches away from the cryptobox and need to drive an extra four
         double inches = 0.0;
 
         switch (vuMark) {
             case LEFT:
-                inches = hardware.DIST_NEAR_CORNER      + (jewelColor == JewelColor.BLUE ? -4 : 6);
+                inches = -(hardware.DIST_FAR_CORNER     + (jewelColor == JewelColor.RED ? 5 : -4));
                 break;
             case CENTER:
-                inches = hardware.DIST_CENTER_CORNER    + (jewelColor == JewelColor.BLUE ? -4 : 6);
+                inches = -(hardware.DIST_CENTER_CORNER  + (jewelColor == JewelColor.RED ? 5 : -4));
                 break;
             case RIGHT:
-                inches = hardware.DIST_FAR_CORNER       + (jewelColor == JewelColor.BLUE ? -4 : 6);
+                inches = -(hardware.DIST_NEAR_CORNER    + (jewelColor == JewelColor.RED ? 5 : -4));
                 break;
             default:
-                telemetry.addLine("Vision target not found.");
+                telemetry.addLine("vuMark unknown.");
                 telemetry.update();
                 sleep(1500);
         }
@@ -243,10 +248,10 @@ public class TRAutoBlueCorner extends LinearOpMode {
 
 
 
-
     //----------------------------------------------------------------------------------------------
     // Driving and turning methods
     //----------------------------------------------------------------------------------------------
+
 //    public void turnToHeading(double power, int heading) {
 //        hardware.leftDrive1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 //        hardware.leftDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -267,9 +272,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
 //            telemetry.addLine(String.format("Current angle: %s", angles.firstAngle));
 //            telemetry.update();
 //        }
-//
 //        hardware.linearDrive(0);
-//
 //        sleep(50);
 //
 //        hardware.leftDrive1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
@@ -281,7 +284,6 @@ public class TRAutoBlueCorner extends LinearOpMode {
 //        telemetry.update();
 //        sleep(2000);
 //    }
-
 
     public void turnToHeadingPID(int target) throws InterruptedException {
         hardware.pid.setSetpoint(target);                                       // Set target final heading relative to current
@@ -385,7 +387,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
             case RIGHT:
                 return "Right";
             default:
-                return "None";
+                return "Unknown";
         }
     }
 }
