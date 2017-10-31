@@ -36,6 +36,7 @@ public class TRAutoRedAudience extends LinearOpMode {
     // IMU object
     BNO055IMU imu;
 
+    // Time snapshot
     private double timeSnapshot = 0.0;
 
 
@@ -250,39 +251,7 @@ public class TRAutoRedAudience extends LinearOpMode {
     //----------------------------------------------------------------------------------------------
     // Driving and turning methods
     //----------------------------------------------------------------------------------------------
-
-//    public void turnToHeading(double power, int heading) {
-//        hardware.leftDrive1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//        hardware.leftDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//        hardware.rightDrive1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//        hardware.rightDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//
-//
-//        telemetry.addLine(String.format("Turning to %s degrees...", heading));
-//        telemetry.addLine(String.format("Start angle: %s", angles.firstAngle));
-//        telemetry.update();
-//        sleep(1500);
-//
-//        hardware.linearDrive(power, -power);
-//
-//        while(opModeIsActive() && angles.firstAngle < heading) {
-//            angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-//            telemetry.addLine(String.format("Turning to %s degrees...", heading));
-//            telemetry.addLine(String.format("Current angle: %s", angles.firstAngle));
-//            telemetry.update();
-//        }
-//        hardware.linearDrive(0);
-//        sleep(50);
-//
-//        hardware.leftDrive1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-//        hardware.leftDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-//        hardware.rightDrive1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-//        hardware.rightDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-//
-//        telemetry.addLine("Finished with turn.");
-//        telemetry.update();
-//        sleep(2000);
-//    }
+    
 
     public void turnToHeadingPID(int target) throws InterruptedException {
         hardware.pid.setSetpoint(target);                                       // Set target final heading relative to current
