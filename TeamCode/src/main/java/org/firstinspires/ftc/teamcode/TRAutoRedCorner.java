@@ -36,7 +36,7 @@ public class TRAutoRedCorner extends LinearOpMode {
     // IMU object
     BNO055IMU imu;
 
-//    private double timeSnapshot = 0.0;
+    private double timeSnapshot = 0.0;
 
 
     @Override
@@ -96,22 +96,32 @@ public class TRAutoRedCorner extends LinearOpMode {
 
         telemetry.addLine("Looking for vision target...");
         telemetry.update();
+
         // Start looking for the vision targets
         relicTrackables.activate();
 
+        // Take a snapshot of the current time
+        timeSnapshot = getRuntime();
+
         // Try to find the vuMark
         RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
-//        timeSnapshot = getRuntime();
 
-        while (opModeIsActive() && vuMark == RelicRecoveryVuMark.UNKNOWN/* && (getRuntime() - timeSnapshot) < 5*/) {
+        while (opModeIsActive() && vuMark == RelicRecoveryVuMark.UNKNOWN && (getRuntime() - timeSnapshot) < 5) {
             vuMark = RelicRecoveryVuMark.from(relicTemplate);
+
+            telemetry.addData("Search time", getRuntime() - timeSnapshot);
+            telemetry.addData("Vision Target", vuMarkTelemetry(vuMark));
+            telemetry.update();
         }
 
-//        if(getRuntime() - timeSnapshot >= 5) {
-//            telemetry.addLine("vuMark not found. Defaulting to center...");
-//            telemetry.update();
-//            sleep(1000);
-//        }
+
+        if(vuMark == RelicRecoveryVuMark.UNKNOWN) {
+            telemetry.addLine("vuMark not found. Defaulting to center...");
+            telemetry.update();
+            sleep(1000);
+
+            vuMark = RelicRecoveryVuMark.CENTER;
+        }
 
         // Decide which color the jewel is
 
@@ -161,7 +171,7 @@ public class TRAutoRedCorner extends LinearOpMode {
                 inches = -(hardware.DIST_NEAR_CORNER    + (jewelColor == JewelColor.RED ? 5 : -4));
                 break;
             default:
-                telemetry.addLine("Vision target not found.");
+                telemetry.addLine("vuMark unknown.");
                 telemetry.update();
                 sleep(1500);
         }
@@ -375,7 +385,7 @@ public class TRAutoRedCorner extends LinearOpMode {
             case RIGHT:
                 return "Right";
             default:
-                return "None";
+                return "Unknown";
         }
     }
 }
