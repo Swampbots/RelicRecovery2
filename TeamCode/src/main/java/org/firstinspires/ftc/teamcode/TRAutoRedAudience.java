@@ -186,7 +186,6 @@ public class TRAutoRedAudience extends LinearOpMode {
         telemetry.update();
         sleep(1000);
 
-        // Turn towards the cryptobox
         turnToHeadingPID(90);
 
         telemetry.addLine("Finished with turn.");
