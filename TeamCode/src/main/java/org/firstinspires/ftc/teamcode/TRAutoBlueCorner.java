@@ -107,7 +107,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
         // Try to find the vuMark
         RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
 
-        while (opModeIsActive() && vuMark == RelicRecoveryVuMark.UNKNOWN && (getRuntime() - timeSnapshot) < 5) {
+        while (opModeIsActive() && vuMark == RelicRecoveryVuMark.UNKNOWN && (getRuntime() - timeSnapshot) < hardware.VUMARK_TIMEOUT) {
             vuMark = RelicRecoveryVuMark.from(relicTemplate);
         }
 

@@ -48,6 +48,9 @@ public class TileRunnerREV {
 
     public final SynchronousPID pid = new SynchronousPID(P, I, D);
 
+    // Autonomous VuMark search timeout
+    public final double VUMARK_TIMEOUT = 5.0;
+
 
 
     // Speed control variables
