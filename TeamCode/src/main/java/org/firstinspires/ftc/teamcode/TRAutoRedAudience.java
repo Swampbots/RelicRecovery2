@@ -92,8 +92,12 @@ public class TRAutoRedAudience extends LinearOpMode {
         telemetry.update();
 
 
+
+
         waitForStart();
 
+
+        
 
         telemetry.addLine("Looking for vision target...");
         telemetry.update();
@@ -251,7 +255,7 @@ public class TRAutoRedAudience extends LinearOpMode {
     //----------------------------------------------------------------------------------------------
     // Driving and turning methods
     //----------------------------------------------------------------------------------------------
-    
+
 
     public void turnToHeadingPID(int target) throws InterruptedException {
         hardware.pid.setSetpoint(target);                                       // Set target final heading relative to current

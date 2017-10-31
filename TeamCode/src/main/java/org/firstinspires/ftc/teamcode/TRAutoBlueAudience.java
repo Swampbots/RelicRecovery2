@@ -93,7 +93,11 @@ public class TRAutoBlueAudience extends LinearOpMode {
         telemetry.update();
 
 
+
+
         waitForStart();
+
+
 
 
         telemetry.addLine("Looking for vision target...");
