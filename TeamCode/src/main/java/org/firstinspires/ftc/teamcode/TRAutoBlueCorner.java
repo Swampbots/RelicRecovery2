@@ -37,7 +37,7 @@ public class TRAutoBlueCorner extends LinearOpMode {
     // IMU object
     BNO055IMU imu;
 
-//    private double timeSnapshot = 0.0;
+    private double timeSnapshot = 0.0;
 
 
     @Override
@@ -97,22 +97,28 @@ public class TRAutoBlueCorner extends LinearOpMode {
 
         telemetry.addLine("Looking for vision target...");
         telemetry.update();
+
         // Start looking for the vision targets
         relicTrackables.activate();
 
+        // Take a snapshot of the time
+        timeSnapshot = getRuntime();
+
         // Try to find the vuMark
         RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
-//        timeSnapshot = getRuntime();
 
-        while (opModeIsActive() && vuMark == RelicRecoveryVuMark.UNKNOWN/* && (getRuntime() - timeSnapshot) < 5*/) {
+        while (opModeIsActive() && vuMark == RelicRecoveryVuMark.UNKNOWN && (getRuntime() - timeSnapshot) < 5) {
             vuMark = RelicRecoveryVuMark.from(relicTemplate);
         }
 
-//        if(getRuntime() - timeSnapshot >= 5) {
-//            telemetry.addLine("vuMark not found. Defaulting to center...");
-//            telemetry.update();
-//            sleep(1000);
-//        }
+        // Default to center if the vision target is not found
+        if(vuMark == RelicRecoveryVuMark.UNKNOWN) {
+            telemetry.addLine("vuMark not found. Defaulting to center...");
+            telemetry.update();
+            sleep(1000);
+
+            vuMark = RelicRecoveryVuMark.CENTER;
+        }
 
         // Decide which color the jewel is
 

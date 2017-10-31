@@ -114,7 +114,7 @@ public class TRAutoRedCorner extends LinearOpMode {
             telemetry.update();
         }
 
-
+        // Default to center if the vision target is not found
         if(vuMark == RelicRecoveryVuMark.UNKNOWN) {
             telemetry.addLine("vuMark not found. Defaulting to center...");
             telemetry.update();
