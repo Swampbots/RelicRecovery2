@@ -230,7 +230,7 @@ public class TRAutoBlueAudience extends LinearOpMode {
 
 
         while (opModeIsActive()) {
-            telemetry.addLine("Visible vision target:");
+            telemetry.addLine("Vision target:");
             telemetry.addLine(vuMarkTelemetry(vuMark));
             telemetry.addLine();
             telemetry.addData("Jewel Color", jewelColor.toString());
