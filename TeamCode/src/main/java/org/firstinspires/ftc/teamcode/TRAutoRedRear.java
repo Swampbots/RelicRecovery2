@@ -170,10 +170,10 @@ public class TRAutoRedRear extends LinearOpMode {
             case LEFT:
                 inches = hardware.DIST_FAR_REAR;
                 break;
-            case RIGHT:
+            case CENTER:
                 inches = hardware.DIST_CENTER_REAR;
                 break;
-            case CENTER:
+            case RIGHT:
                 inches = hardware.DIST_NEAR_REAR;
                 break;
             default:
@@ -187,6 +187,8 @@ public class TRAutoRedRear extends LinearOpMode {
         while(opModeIsActive()) {
             telemetry.addLine("Vision target:");
             telemetry.addLine(vuMarkTelemetry(vuMark));
+            telemetry.addLine();
+            telemetry.addData("Drive distance", inches);
             telemetry.addLine();
             telemetry.addData("Jewel Color", jewelColor.toString());
             telemetry.addLine();
