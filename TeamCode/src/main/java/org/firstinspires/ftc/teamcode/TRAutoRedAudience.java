@@ -19,7 +19,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
  * Created by SwampbotsAdmin on 10/21/2017.
  */
 
-@Autonomous(name = "Red Corner", group = "Autonomous")
+@Autonomous(name = "Red Audience", group = "Autonomous")
 public class TRAutoRedAudience extends LinearOpMode {
     // Hardware class instance
     private TileRunnerREV hardware = new TileRunnerREV();

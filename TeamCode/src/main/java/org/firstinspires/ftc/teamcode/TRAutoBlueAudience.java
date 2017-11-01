@@ -19,7 +19,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
  * Created by swamp on 10/17/2017.
  */
 
-@Autonomous(name = "Blue Corner", group = "Autonomous")
+@Autonomous(name = "Blue Audience", group = "Autonomous")
 public class TRAutoBlueAudience extends LinearOpMode {
 
     // Hardware class instance
