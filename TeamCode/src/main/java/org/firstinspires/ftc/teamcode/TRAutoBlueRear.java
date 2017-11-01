@@ -115,6 +115,10 @@ public class TRAutoBlueRear extends LinearOpMode {
                 && vuMark == RelicRecoveryVuMark.UNKNOWN
                 && (getRuntime() - timeSnapshot) < hardware.VUMARK_TIMEOUT) {
             vuMark = RelicRecoveryVuMark.from(relicTemplate);
+
+            telemetry.addData("Search time", getRuntime() - timeSnapshot);
+            telemetry.addData("Vision Target", vuMarkTelemetry(vuMark));
+            telemetry.update();
         }
 
         // Default to center if the vision target is not found
