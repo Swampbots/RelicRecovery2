@@ -160,10 +160,15 @@ public class TRAutoBlueRear extends LinearOpMode {
 
         driveInches(0.6, 27.0 + (jewelColor == JewelColor.BLUE ? JEWEL_INCHES : -JEWEL_INCHES));
 
+
+
+
         while(opModeIsActive()) {
             telemetry.addLine("Vision target:");
             telemetry.addLine(vuMarkTelemetry(vuMark));
             telemetry.addLine();
+//            telemetry.addData("Drive distance", inches);
+//            telemetry.addLine();
             telemetry.addData("Jewel Color", jewelColor.toString());
             telemetry.addLine();
             telemetry.addData("Gyro Heading", heading());
