@@ -75,7 +75,7 @@ public class TRAutoBlueRear extends LinearOpMode {
         imu = hardwareMap.get(BNO055IMU.class, "imu");
 
         // IMU parameters
-        BNO055IMU.Parameters IMUParameters = new BNO055IMU.Parameters();
+        BNO055IMU.Parameters IMUParameters  = new BNO055IMU.Parameters();
         IMUParameters.angleUnit             = BNO055IMU.AngleUnit.DEGREES;
         IMUParameters.accelUnit             = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
         IMUParameters.calibrationDataFile   = "BNO055IMUCalibration.json"; // see the calibration sample opmode
