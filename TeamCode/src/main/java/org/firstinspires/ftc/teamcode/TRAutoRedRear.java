@@ -160,8 +160,10 @@ public class TRAutoRedRear extends LinearOpMode {
         hardware.jewelServo.setPosition(hardware.ARM_UP);
         sleep(500);
 
-        driveInches(0.6, -(27.0 + (jewelColor == JewelColor.RED ? JEWEL_INCHES : -JEWEL_INCHES)));
+        driveInches(0.6, -(25.0 + (jewelColor == JewelColor.RED ? (JEWEL_INCHES + 2) : -JEWEL_INCHES)));
 
+        telemetry.addLine("Turning parallel to cryptobox...");
+        telemetry.update();
         turnToHeadingPID(-90);
 
         double inches = 0.0;
@@ -183,6 +185,18 @@ public class TRAutoRedRear extends LinearOpMode {
         }
 
         driveInches(0.6, inches);
+
+        telemetry.addLine(String.format("Aligned with %s column.", vuMarkTelemetry(vuMark)));
+        telemetry.addLine("Turning towards cryptobox...");
+        telemetry.update();
+        turnToHeadingPID(180);
+
+//        telemetry.addLine("Spitting out the glyph...");
+//        telemetry.update();
+//        hardware.setLifterPower(1.0);
+//        sleep(1000);
+//
+//        driveInches(0.4, 18.0);
 
         while(opModeIsActive()) {
             telemetry.addLine("Vision target:");
