@@ -164,6 +164,35 @@ public class TRAutoBlueRear extends LinearOpMode {
 
         driveInches(0.6, 25.0 + (jewelColor == JewelColor.BLUE ? -JEWEL_INCHES : (JEWEL_INCHES + 2)));
 
+        telemetry.addLine("Turning parallel to cryptobox...");
+        telemetry.update();
+        turnToHeadingPID(-90);
+
+        double inches = 0.0;
+
+        switch(vuMark) {
+            case LEFT:
+                inches = hardware.DIST_NEAR_REAR;
+                break;
+            case CENTER:
+                inches = hardware.DIST_CENTER_REAR;
+                break;
+            case RIGHT:
+                inches = hardware.DIST_FAR_REAR;
+                break;
+            default:
+                telemetry.addLine("Vision target not found.");
+                telemetry.update();
+                inches = hardware.DIST_CENTER_REAR;
+                sleep(2000);
+        }
+
+        driveInches(0.6, inches);
+
+        telemetry.addLine(String.format("Aligned with %s column.", vuMarkTelemetry(vuMark)));
+        telemetry.addLine("Turning towards cryptobox...");
+        telemetry.update();
+        turnToHeadingPID(0);
 
 
 
@@ -171,8 +200,8 @@ public class TRAutoBlueRear extends LinearOpMode {
             telemetry.addLine("Vision target:");
             telemetry.addLine(vuMarkTelemetry(vuMark));
             telemetry.addLine();
-//            telemetry.addData("Drive distance", inches);
-//            telemetry.addLine();
+            telemetry.addData("Drive distance", inches);
+            telemetry.addLine();
             telemetry.addData("Jewel Color", jewelColor.toString());
             telemetry.addLine();
             telemetry.addData("Gyro Heading", heading());
