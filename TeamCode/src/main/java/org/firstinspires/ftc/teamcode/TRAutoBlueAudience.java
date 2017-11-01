@@ -167,13 +167,13 @@ public class TRAutoBlueAudience extends LinearOpMode {
 
         switch (vuMark) {
             case LEFT:
-                inches = hardware.DIST_NEAR_CORNER      + (jewelColor == JewelColor.BLUE ? -4 : 6);
+                inches = hardware.DIST_NEAR_AUDIENCE    + (jewelColor == JewelColor.BLUE ? -4 : 6);
                 break;
             case CENTER:
-                inches = hardware.DIST_CENTER_CORNER    + (jewelColor == JewelColor.BLUE ? -4 : 6);
+                inches = hardware.DIST_CENTER_AUDIENCE  + (jewelColor == JewelColor.BLUE ? -4 : 6);
                 break;
             case RIGHT:
-                inches = hardware.DIST_FAR_CORNER       + (jewelColor == JewelColor.BLUE ? -4 : 6);
+                inches = hardware.DIST_FAR_AUDIENCE     + (jewelColor == JewelColor.BLUE ? -4 : 6);
                 break;
             default:
                 telemetry.addLine("Vision target not found.");
