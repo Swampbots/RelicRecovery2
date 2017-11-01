@@ -203,7 +203,7 @@ public class TRAutoBlueRear extends LinearOpMode {
 
         driveInches(0.3, -8.0);
 
-        
+        hardware.setLifterPower(0);
 
         while(opModeIsActive()) {
             telemetry.addLine("Vision target:");
