@@ -30,14 +30,14 @@ public class TileRunnerREV {
     public final double ARM_UP      = 0.0;
 
     // Autonomous distance variables from audience stones
-    public final double DIST_NEAR_CORNER    =  27.0;
-    public final double DIST_CENTER_CORNER  =  34.0;
-    public final double DIST_FAR_CORNER     =  42.0;
+    public final double DIST_NEAR_AUDIENCE    =  27.0;
+    public final double DIST_CENTER_AUDIENCE  =  34.0;
+    public final double DIST_FAR_AUDIENCE     =  42.0;
 
     // Autonomous distance variables from rear stones
-    public final double DIST_LEFT_CENTER    =  -1.0; // Not yet measured
-    public final double DIST_CENTER_CENTER  =  -1.0; // Not yet measured
-    public final double DIST_RIGHT_CENTER   =  -1.0; // Not yet measured
+    public final double DIST_LEFT_REAR      =  -1.0; // Not yet measured
+    public final double DIST_CENTER_REAR    =  -1.0; // Not yet measured
+    public final double DIST_RIGHT_REAR     =  -1.0; // Not yet measured
 
     // Autonomous heading variables for each column from rear stones
 //    public final int HEADING_LEFT_COL   = -1;

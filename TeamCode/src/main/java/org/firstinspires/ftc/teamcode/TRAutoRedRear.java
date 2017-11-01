@@ -162,6 +162,15 @@ public class TRAutoRedRear extends LinearOpMode {
 
         driveInches(0.6, -(27.0 + (jewelColor == JewelColor.RED ? JEWEL_INCHES : -JEWEL_INCHES)));
 
+        turnToHeadingPID(-90);
+
+        double inches = 0.0;
+
+        switch(vuMark) {
+            case LEFT:
+                inches = hardware.DIST
+        }
+
         while(opModeIsActive()) {
             telemetry.addLine("Vision target:");
             telemetry.addLine(vuMarkTelemetry(vuMark));
