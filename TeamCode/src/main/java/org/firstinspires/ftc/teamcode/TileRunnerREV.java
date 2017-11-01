@@ -35,14 +35,14 @@ public class TileRunnerREV {
     public final double DIST_FAR_CORNER     =  42.0;
 
     // Autonomous distance variables from rear stones
-//    public final double DIST_LEFT_CENTER    =  -1.0; // Not yet measured
-//    public final double DIST_CENTER_CENTER  =  -1.0; // Not yet measured
-//    public final double DIST_RIGHT_CENTER   =  -1.0; // Not yet measured
+    public final double DIST_LEFT_CENTER    =  -1.0; // Not yet measured
+    public final double DIST_CENTER_CENTER  =  -1.0; // Not yet measured
+    public final double DIST_RIGHT_CENTER   =  -1.0; // Not yet measured
 
     // Autonomous heading variables for each column from rear stones
-    public final int HEADING_LEFT_COL   = -1;
-    public final int HEADING_CENTER_COL = -1;
-    public final int HEADING_RIGHT_COL  = -1;
+//    public final int HEADING_LEFT_COL   = -1;
+//    public final int HEADING_CENTER_COL = -1;
+//    public final int HEADING_RIGHT_COL  = -1;
 
     // Autonomous PID variables
     public final double MAX_SPEED = 0.4;
