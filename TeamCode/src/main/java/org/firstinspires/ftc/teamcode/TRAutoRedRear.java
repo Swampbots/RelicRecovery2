@@ -191,12 +191,15 @@ public class TRAutoRedRear extends LinearOpMode {
         telemetry.update();
         turnToHeadingPID(180);
 
-//        telemetry.addLine("Spitting out the glyph...");
-//        telemetry.update();
-//        hardware.setLifterPower(1.0);
-//        sleep(1000);
-//
-//        driveInches(0.4, 18.0);
+        telemetry.addLine("Spitting out the glyph...");
+        telemetry.update();
+        hardware.setLifterPower(1.0);
+
+        driveInches(0.3, 8.0);
+
+        driveInches(0.3, -8.0);
+
+        hardware.setLifterPower(0);
 
         while(opModeIsActive()) {
             telemetry.addLine("Vision target:");
