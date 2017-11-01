@@ -194,6 +194,7 @@ public class TRAutoRedRear extends LinearOpMode {
         telemetry.addLine("Spitting out the glyph...");
         telemetry.update();
         hardware.setLifterPower(1.0);
+        sleep(1000);
 
         driveInches(0.3, 8.0);
 
