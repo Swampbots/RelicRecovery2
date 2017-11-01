@@ -160,14 +160,16 @@ public class TRAutoRedRear extends LinearOpMode {
         hardware.jewelServo.setPosition(hardware.ARM_UP);
         sleep(500);
 
+        driveInches(0.6, -(20.0 + (jewelColor == JewelColor.RED ? JEWEL_INCHES : -JEWEL_INCHES)));
+
         while(opModeIsActive()) {
-                telemetry.addLine("Vision target:");
-                telemetry.addLine(vuMarkTelemetry(vuMark));
-                telemetry.addLine();
-                telemetry.addData("Jewel Color", jewelColor.toString());
-                telemetry.addLine();
-                telemetry.addData("Gyro Heading", heading());
-                telemetry.update();
+            telemetry.addLine("Vision target:");
+            telemetry.addLine(vuMarkTelemetry(vuMark));
+            telemetry.addLine();
+            telemetry.addData("Jewel Color", jewelColor.toString());
+            telemetry.addLine();
+            telemetry.addData("Gyro Heading", heading());
+            telemetry.update();
         }
     }
 

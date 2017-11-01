@@ -158,6 +158,8 @@ public class TRAutoBlueRear extends LinearOpMode {
         hardware.jewelServo.setPosition(hardware.ARM_UP);
         sleep(500);
 
+        driveInches(0.6, 20.0 + (jewelColor == JewelColor.BLUE ? JEWEL_INCHES : -JEWEL_INCHES));
+
         while(opModeIsActive()) {
             telemetry.addLine("Vision target:");
             telemetry.addLine(vuMarkTelemetry(vuMark));
