@@ -168,8 +168,21 @@ public class TRAutoRedRear extends LinearOpMode {
 
         switch(vuMark) {
             case LEFT:
-                inches = hardware.DIST
+                inches = hardware.DIST_FAR_REAR;
+                break;
+            case RIGHT:
+                inches = hardware.DIST_CENTER_REAR;
+                break;
+            case CENTER:
+                inches = hardware.DIST_NEAR_REAR;
+                break;
+            default:
+                telemetry.addLine("Vision target not found.");
+                telemetry.update();
+                inches = hardware.DIST_CENTER_REAR;
         }
+
+        driveInches(0.6, inches);
 
         while(opModeIsActive()) {
             telemetry.addLine("Vision target:");
