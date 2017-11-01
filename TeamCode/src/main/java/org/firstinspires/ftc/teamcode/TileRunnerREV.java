@@ -37,7 +37,7 @@ public class TileRunnerREV {
     // Autonomous distance variables from rear stones
     public final double DIST_NEAR_REAR      =  5.0;
     public final double DIST_CENTER_REAR    =  12.0;
-    public final double DIST_FAR_REAR       =  20.0;
+    public final double DIST_FAR_REAR       =  22.0;
 
     // Autonomous heading variables for each column from rear stones
 //    public final int HEADING_LEFT_COL   = -1;
