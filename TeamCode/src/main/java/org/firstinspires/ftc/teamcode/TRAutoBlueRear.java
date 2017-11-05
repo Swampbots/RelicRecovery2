@@ -199,9 +199,9 @@ public class TRAutoBlueRear extends LinearOpMode {
         hardware.setLifterPower(1.0);
         sleep(1000);
 
-        driveInches(0.3, 8.0);
+        driveInches(0.3, 10.0);
 
-        driveInches(0.3, -8.0);
+        driveInches(0.3, -10.0);
 
         hardware.setLifterPower(0);
 
