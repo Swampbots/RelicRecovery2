@@ -24,7 +24,7 @@ import java.util.Locale;
 
 @Disabled
 @Autonomous(name = "IMU Test", group = "Testing")
-public class IMUTest extends LinearOpMode {
+public class TestIMU extends LinearOpMode {
 
     TileRunnerREV hardware = new TileRunnerREV();
 
