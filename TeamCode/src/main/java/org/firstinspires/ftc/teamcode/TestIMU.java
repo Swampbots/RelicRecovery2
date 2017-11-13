@@ -57,22 +57,6 @@ public class TestIMU extends LinearOpMode {
         // Set up our telemetry dashboard
         composeTelemetry();
 
-//
-//        // Start the logging of measured acceleration
-//        //hardware.imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
-//
-//        while(opModeIsActive()) {
-//            // Handle speed modifiers
-//            if(gamepad1.left_bumper)        hardware.driverSpeedMod = hardware.FAST;
-//            else if(gamepad1.right_bumper)  hardware.driverSpeedMod = hardware.SLOW;
-//            else                            hardware.driverSpeedMod = hardware.NORMAL;
-//
-//            hardware.linearDrive(
-//                    (float)(gamepad1.left_stick_y * hardware.driverSpeedMod),
-//                    (float)(gamepad2.right_stick_y * hardware.driverSpeedMod));
-//
-//            telemetry.update();
-
         waitForStart();
         while(opModeIsActive()) {
             if(gamepad1.left_bumper)        hardware.driverSpeedMod = hardware.FAST;
