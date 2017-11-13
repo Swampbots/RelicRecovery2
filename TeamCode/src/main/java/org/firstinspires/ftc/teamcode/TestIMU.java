@@ -22,7 +22,6 @@ import java.util.Locale;
  * Created by SwampbotsAdmin on 10/20/2017.
  */
 
-@Disabled
 @Autonomous(name = "IMU Test", group = "Testing")
 public class TestIMU extends LinearOpMode {
 
@@ -84,7 +83,7 @@ public class TestIMU extends LinearOpMode {
                     (float)(gamepad1.left_stick_y * hardware.driverSpeedMod),
                     (float)(gamepad1.right_stick_y * hardware.driverSpeedMod));
 
-            
+
             telemetry.update();
         }
     }
