@@ -80,8 +80,8 @@ public class TestIMU extends LinearOpMode {
             else                            hardware.driverSpeedMod = hardware.NORMAL;
 
             hardware.linearDrive(
-                    (float)(gamepad1.left_stick_y * hardware.driverSpeedMod),
-                    (float)(gamepad1.right_stick_y * hardware.driverSpeedMod));
+                    (gamepad1.left_stick_y * hardware.driverSpeedMod),
+                    (gamepad1.right_stick_y * hardware.driverSpeedMod));
 
 
             telemetry.update();
