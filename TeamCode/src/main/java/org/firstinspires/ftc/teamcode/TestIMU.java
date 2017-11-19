@@ -32,11 +32,16 @@ public class TestIMU extends LinearOpMode {
     // State used for updating telemetry
     Orientation angles;
     Acceleration gravity;
+    Acceleration acceleration;
 
     final int DEGREES = 73;
     int targetAngle;
 
     public void runOpMode() {
+
+        telemetry.addLine("DO NOT PRESS PLAY!!! Initializing hardware.");
+        telemetry.update();
+
         // IMU parameters
         BNO055IMU.Parameters IMUParameters = new BNO055IMU.Parameters();
         IMUParameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
@@ -53,11 +58,17 @@ public class TestIMU extends LinearOpMode {
         hardware.init(hardwareMap);
 
 
+        telemetry.addLine("Hardware initialized.");
+        telemetry.addLine("Press the play button to start.");
+        telemetry.addLine();
 
         // Set up our telemetry dashboard
         composeTelemetry();
 
+
+        telemetry.update();
         waitForStart();
+
         while(opModeIsActive()) {
             if(gamepad1.left_bumper)        hardware.driverSpeedMod = hardware.FAST;
             else if(gamepad1.right_bumper)  hardware.driverSpeedMod = hardware.SLOW;
@@ -88,6 +99,7 @@ public class TestIMU extends LinearOpMode {
             // three times the necessary expense.
             angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
             gravity  = imu.getGravity();
+            acceleration = imu.getAcceleration();
         }
         });
 
@@ -134,6 +146,17 @@ public class TestIMU extends LinearOpMode {
                                         + gravity.zAccel*gravity.zAccel));
                     }
                 });
+
+        if(acceleration != null) {
+            telemetry.addLine()
+                    .addData("xAccel", acceleration.xAccel)
+                    .addData("yAccel", acceleration.yAccel)
+                    .addData("yAccel", acceleration.yAccel);
+        } else {
+            telemetry.addLine("acceleration is null");
+        }
+
+
     }
 
     //----------------------------------------------------------------------------------------------
