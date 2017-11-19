@@ -139,6 +139,8 @@ public class TileRunnerREV {
         lifter1.setDirection    (DcMotorSimple.Direction.FORWARD);
         lifter2.setDirection    (DcMotorSimple.Direction.REVERSE);
 
+        stonePusher.setDirection(DcMotorSimple.Direction.REVERSE);
+
 
         // Set the motor powers to zero
         leftDrive1  .setPower(0);
@@ -149,6 +151,8 @@ public class TileRunnerREV {
 
         lifter1     .setPower(0);
         lifter2     .setPower(0);
+
+        stonePusher .setPower(0);
 
 
         // Set the behavior of the motors when the power is set to zero
