@@ -23,8 +23,9 @@ public class TileRunnerREV {
     public final double COUNTS_PER_INCH             = (COUNTS_PER_REV * DRIVE_GEAR_REDUCTION) / WHEEL_CIRCUMFERENCE_INCHES; // About 89 counts per inch
 
 
+    // Jewel arm position variables
     public final double ARM_DOWN    = 0.75;
-    public final double ARM_UP      = 0.0;
+    public final double ARM_UP      = 0.10;
 
     // Autonomous distance variables from audience stones
     public final double DIST_NEAR_AUDIENCE      =  27.0;
