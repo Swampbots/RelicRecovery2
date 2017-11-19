@@ -32,7 +32,8 @@ public class TestIMU extends LinearOpMode {
     // State used for updating telemetry
     Orientation angles;
     Acceleration gravity;
-    Acceleration acceleration;
+//    Acceleration acceleration;
+    Velocity velocity;
 
     final int DEGREES = 73;
     int targetAngle;
@@ -99,7 +100,8 @@ public class TestIMU extends LinearOpMode {
             // three times the necessary expense.
             angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
             gravity  = imu.getGravity();
-            acceleration = imu.getAcceleration();
+//            acceleration = imu.getAcceleration();
+            velocity = imu.getVelocity();
         }
         });
 
@@ -147,14 +149,18 @@ public class TestIMU extends LinearOpMode {
                     }
                 });
 
-        if(acceleration != null) {
-            telemetry.addLine()
-                    .addData("xAccel", acceleration.xAccel)
-                    .addData("yAccel", acceleration.yAccel)
-                    .addData("yAccel", acceleration.yAccel);
-        } else {
-            telemetry.addLine("acceleration is null");
-        }
+//        if(acceleration != null) {
+//            telemetry.addLine()
+//                    .addData("xAccel", acceleration.xAccel)
+//                    .addData("yAccel", acceleration.yAccel)
+//                    .addData("yAccel", acceleration.yAccel);
+//        } else {
+//            telemetry.addLine("acceleration is null");
+//        }
+
+        if(velocity != null) {
+            telemetry.addLine(velocity.toString());
+        } else telemetry.addLine("velocity is null");
 
 
     }
