@@ -161,6 +161,8 @@ public class TileRunnerREV {
         lifter1.setZeroPowerBehavior    (DcMotor.ZeroPowerBehavior.FLOAT);
         lifter2.setZeroPowerBehavior    (DcMotor.ZeroPowerBehavior.FLOAT);
 
+        stonePusher.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
 
         // Set the motors' run mode
         leftDrive1.setMode  (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
