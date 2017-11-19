@@ -22,9 +22,6 @@ public class TileRunnerREV {
     private final double WHEEL_CIRCUMFERENCE_INCHES = WHEEL_DIAMETER_INCHES * 3.1415; // 12.566
     public final double COUNTS_PER_INCH             = (COUNTS_PER_REV * DRIVE_GEAR_REDUCTION) / WHEEL_CIRCUMFERENCE_INCHES; // About 89 counts per inch
 
-//    private final double ROBOT_DIAMETER_INCHES      = 14.0;
-//    private final double ROBOT_CIRCUMFERENCE_INCHES = ROBOT_DIAMETER_INCHES * 3.1415;
-//    private final double INCHES_PER_DEGREE          = ROBOT_CIRCUMFERENCE_INCHES / 360;
 
     public final double ARM_DOWN    = 0.75;
     public final double ARM_UP      = 0.0;
@@ -38,11 +35,6 @@ public class TileRunnerREV {
     public final double DIST_NEAR_REAR      =  5.0;
     public final double DIST_CENTER_REAR    =  12.0;
     public final double DIST_FAR_REAR       =  22.0;
-
-    // Autonomous heading variables for each column from rear stones
-//    public final int HEADING_LEFT_COL   = -1;
-//    public final int HEADING_CENTER_COL = -1;
-//    public final int HEADING_RIGHT_COL  = -1;
 
     // Autonomous PID variables
     public final double MAX_SPEED = 0.4;
