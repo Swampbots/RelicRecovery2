@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -81,7 +79,8 @@ public class TileRunnerREV {
     public CRServo flipper  = null;
     public CRServo kicker   = null;
 
-    public Servo jewelServo     = null;
+    public Servo jewelServo         = null;
+    public Servo failedExperiment   = null;
 
 
     // Sensor objects
@@ -113,7 +112,8 @@ public class TileRunnerREV {
         flipper = hwMap.crservo.get("flipper");
         kicker  = hwMap.crservo.get("kicker");
 
-        jewelServo      = hwMap.servo.get("jewel_servo");
+        jewelServo          = hwMap.servo.get("jewel_servo");
+        failedExperiment    = hwMap.servo.get("failed_experiment");
 
 
         // Get the sensors
