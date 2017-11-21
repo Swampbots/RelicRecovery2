@@ -82,8 +82,7 @@ public class TileRunnerREV {
     public CRServo kicker   = null;
 
     public Servo jewelServo     = null;
-    public Servo leftSquisher   = null;
-    public Servo rightSquisher  = null;
+
 
     // Sensor objects
     public ColorSensor colorSensor  = null;
@@ -115,8 +114,6 @@ public class TileRunnerREV {
         kicker  = hwMap.crservo.get("kicker");
 
         jewelServo      = hwMap.servo.get("jewel_servo");
-        leftSquisher    = hwMap.servo.get("squisher_left");
-        rightSquisher   = hwMap.servo.get("squisher_right");
 
 
         // Get the sensors

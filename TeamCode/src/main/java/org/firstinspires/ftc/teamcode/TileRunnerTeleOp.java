@@ -73,12 +73,6 @@ public class TileRunnerTeleOp extends OpMode {
         if      (gamepad2.dpad_up)      hardware.jewelServo.setPosition(hardware.ARM_UP);
         else if (gamepad2.dpad_down)    hardware.jewelServo.setPosition(hardware.ARM_DOWN);
 
-        if (gamepad2.dpad_left)         hardware.leftSquisher.setPosition(1.0);
-        else                            hardware.rightSquisher.setPosition(1.0);
-
-        if (gamepad2.dpad_right)        hardware.leftSquisher.setPosition(0.0);
-        else                            hardware.rightSquisher.setPosition(0.0);
-
 
         // Update telemetry
         telemetry.addData("Driver Speed Mod",  hardware.driverSpeedMod);
