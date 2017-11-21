@@ -76,8 +76,9 @@ public class TileRunnerREV {
 
 
     // Servo objects
-    public CRServo flipper  = null;
-    public CRServo kicker   = null;
+    public CRServo flipper      = null;
+    public CRServo kicker       = null;
+    public CRServo rightAligner = null;
 
     public Servo jewelServo         = null;
     public Servo failedExperiment   = null;
@@ -109,8 +110,9 @@ public class TileRunnerREV {
 
 
         // Get the servos
-        flipper = hwMap.crservo.get("flipper");
-        kicker  = hwMap.crservo.get("kicker");
+        flipper         = hwMap.crservo.get("flipper");
+        kicker          = hwMap.crservo.get("kicker");
+        rightAligner    = hwMap.crservo.get("right_aligner");
 
         jewelServo          = hwMap.servo.get("jewel_servo");
         failedExperiment    = hwMap.servo.get("failed_experiment");
@@ -126,8 +128,8 @@ public class TileRunnerREV {
         rightDrive1.setDirection(DcMotorSimple.Direction.FORWARD);
         rightDrive2.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        lifter1.setDirection    (DcMotorSimple.Direction.FORWARD);
-        lifter2.setDirection    (DcMotorSimple.Direction.REVERSE);
+        lifter1.setDirection    (DcMotorSimple.Direction.REVERSE);
+        lifter2.setDirection    (DcMotorSimple.Direction.FORWARD);
 
         stonePusher.setDirection(DcMotorSimple.Direction.REVERSE);
 
