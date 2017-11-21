@@ -70,7 +70,7 @@ public class TestIMU extends LinearOpMode {
         telemetry.update();
         waitForStart();
 
-        
+
         // Start logging acceleration
         imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
 
