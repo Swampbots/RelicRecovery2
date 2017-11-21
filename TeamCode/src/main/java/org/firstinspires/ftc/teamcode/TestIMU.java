@@ -64,21 +64,33 @@ public class TestIMU extends LinearOpMode {
         telemetry.addLine();
 
         // Set up our telemetry dashboard
-        composeTelemetry();
+//        composeTelemetry();
 
 
         telemetry.update();
         waitForStart();
 
+        
+        // Start logging acceleration
+        imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
+
+
         while(opModeIsActive()) {
+
+            // Speed modifier
             if(gamepad1.left_bumper)        hardware.driverSpeedMod = hardware.FAST;
             else if(gamepad1.right_bumper)  hardware.driverSpeedMod = hardware.SLOW;
             else                            hardware.driverSpeedMod = hardware.NORMAL;
 
+            // Driver control
             hardware.linearDrive(
                     (gamepad1.left_stick_y * hardware.driverSpeedMod),
                     (gamepad1.right_stick_y * hardware.driverSpeedMod));
 
+
+            // Telemetry
+            if(imu.getVelocity() != null) telemetry.addLine(imu.getVelocity().toString());
+            else telemetry.addLine("Velocity not acquired.");
 
             telemetry.update();
         }
