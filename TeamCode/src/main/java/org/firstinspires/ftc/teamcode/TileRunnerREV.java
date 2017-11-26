@@ -82,6 +82,7 @@ public class TileRunnerREV {
 
     public Servo jewelServo         = null;
     public Servo failedExperiment   = null;
+    public Servo sweeper            = null;
 
 
     // Sensor objects
@@ -116,6 +117,7 @@ public class TileRunnerREV {
 
         jewelServo          = hwMap.servo.get("jewel_servo");
         failedExperiment    = hwMap.servo.get("failed_experiment");
+        sweeper             = hwMap.servo.get("sweeper");
 
 
         // Get the sensors
