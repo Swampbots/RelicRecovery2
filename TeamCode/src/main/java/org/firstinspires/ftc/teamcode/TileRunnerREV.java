@@ -78,11 +78,12 @@ public class TileRunnerREV {
     // Servo objects
     public CRServo flipper      = null;
     public CRServo kicker       = null;
-    public CRServo rightAligner = null;
 
     public Servo jewelServo         = null;
     public Servo failedExperiment   = null;
-    public Servo sweeper            = null;
+    public Servo leftSweeper        = null;
+    public Servo rightSweeper       = null;
+
 
 
     // Sensor objects
@@ -113,11 +114,12 @@ public class TileRunnerREV {
         // Get the servos
         flipper         = hwMap.crservo.get("flipper");
         kicker          = hwMap.crservo.get("kicker");
-        rightAligner    = hwMap.crservo.get("right_aligner");
 
         jewelServo          = hwMap.servo.get("jewel_servo");
         failedExperiment    = hwMap.servo.get("failed_experiment");
-        sweeper             = hwMap.servo.get("sweeper");
+        leftSweeper         = hwMap.servo.get("sweeper");
+        rightSweeper        = hwMap.servo.get("right_aligner");
+
 
 
         // Get the sensors
