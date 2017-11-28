@@ -68,7 +68,6 @@ public class TileRunnerTeleOp extends OpMode {
         else if (gamepad2.y)    hardware.flipper.setPower(-0.8);
         else                    hardware.flipper.setPower(0.0);
 
-
         if      (gamepad2.dpad_up)      hardware.jewelServo.setPosition(hardware.ARM_UP);
         else if (gamepad2.dpad_down)    hardware.jewelServo.setPosition(hardware.ARM_DOWN);
 
@@ -78,8 +77,8 @@ public class TileRunnerTeleOp extends OpMode {
         if      (gamepad1.a)            hardware.leftSweeper.setPosition(1.0);
         else if (gamepad1.b)            hardware.leftSweeper.setPosition(0.0);
 
-        if      (gamepad1.x)    hardware.rightSweeper.setPosition(1.0);
-        else if (gamepad1.y)    hardware.rightSweeper.setPosition(0.0);
+        if      (gamepad1.x)            hardware.rightSweeper.setPosition(1.0);
+        else if (gamepad1.y)            hardware.rightSweeper.setPosition(0.0);
 
 
         // Update telemetry
