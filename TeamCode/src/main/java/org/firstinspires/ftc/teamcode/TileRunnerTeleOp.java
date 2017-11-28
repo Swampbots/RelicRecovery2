@@ -53,8 +53,7 @@ public class TileRunnerTeleOp extends OpMode {
         hardware.lifter1.setPower(gamepad2.left_stick_y * hardware.utilitySpeedMod);
         hardware.lifter2.setPower(gamepad2.left_stick_y * hardware.utilitySpeedMod);
 
-//        hardware.stonePusher.setPower(gamepad2.right_stick_y * hardware.utilitySpeedMod * 0.75);
-
+        
         if      (gamepad1.dpad_down)    hardware.stonePusher.setPower(hardware.driverSpeedMod * 0.75);
         else if (gamepad1.dpad_up)      hardware.stonePusher.setPower(-hardware.driverSpeedMod * 0.75);
         else                            hardware.stonePusher.setPower(0);
@@ -69,9 +68,6 @@ public class TileRunnerTeleOp extends OpMode {
         else if (gamepad2.b)    hardware.kicker.setPower(0.8);
         else                    hardware.kicker.setPower(0.0);
 
-        if      (gamepad1.x)    hardware.rightSweeper.setPosition(1.0);
-        else if (gamepad1.y)    hardware.rightSweeper.setPosition(0.0);
-
         if      (gamepad2.dpad_up)      hardware.jewelServo.setPosition(hardware.ARM_UP);
         else if (gamepad2.dpad_down)    hardware.jewelServo.setPosition(hardware.ARM_DOWN);
 
@@ -80,6 +76,9 @@ public class TileRunnerTeleOp extends OpMode {
 
         if      (gamepad1.a)            hardware.leftSweeper.setPosition(1.0);
         else if (gamepad1.b)            hardware.leftSweeper.setPosition(0.0);
+
+        if      (gamepad1.x)    hardware.rightSweeper.setPosition(1.0);
+        else if (gamepad1.y)    hardware.rightSweeper.setPosition(0.0);
 
 
         // Update telemetry
