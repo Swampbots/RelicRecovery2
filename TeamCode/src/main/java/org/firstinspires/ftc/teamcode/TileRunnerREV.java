@@ -117,8 +117,8 @@ public class TileRunnerREV {
 
         jewelServo          = hwMap.servo.get("jewel_servo");
         failedExperiment    = hwMap.servo.get("failed_experiment");
-        leftSweeper         = hwMap.servo.get("sweeper");
-        rightSweeper        = hwMap.servo.get("right_aligner");
+        leftSweeper         = hwMap.servo.get("left_sweeper");
+        rightSweeper        = hwMap.servo.get("right_sweeper");
 
 
 
