@@ -54,9 +54,8 @@ public class TileRunnerTeleOp extends OpMode {
         hardware.lifter2.setPower(gamepad2.left_stick_y * hardware.utilitySpeedMod);
 
 
-        if      (gamepad1.dpad_down)    hardware.stonePusher.setPower(hardware.driverSpeedMod * 0.75);
-        else if (gamepad1.dpad_up)      hardware.stonePusher.setPower(-hardware.driverSpeedMod * 0.75);
-        else                            hardware.stonePusher.setPower(0);
+        hardware.stonePusher.setPower(hardware.driverSpeedMod * gamepad1.right_trigger);
+        hardware.stonePusher.setPower(hardware.driverSpeedMod * -gamepad1.left_trigger);
 
 
         // Handle servos
@@ -74,12 +73,9 @@ public class TileRunnerTeleOp extends OpMode {
         if      (gamepad2.dpad_left)    hardware.failedExperiment.setPosition(1.0);
         else if (gamepad2.dpad_right)   hardware.failedExperiment.setPosition(0.0);
 
-        if      (gamepad1.a)            hardware.leftSweeper.setPosition(1.0);
-        else if (gamepad1.b)            hardware.leftSweeper.setPosition(0.0);
+        if      (gamepad1.a)            hardware.leftSweeper.setPosition(Math.abs(hardware.leftSweeper.getPosition() - 1.0));
 
-        if      (gamepad1.x)            hardware.rightSweeper.setPosition(1.0);
-        else if (gamepad1.y)            hardware.rightSweeper.setPosition(0.0);
-
+        if      (gamepad1.x)            hardware.rightSweeper.setPosition(Math.abs(hardware.rightSweeper.getPosition() - 1.0));
 
         // Update telemetry
         telemetry.addData("Driver Speed Mod",  hardware.driverSpeedMod);
