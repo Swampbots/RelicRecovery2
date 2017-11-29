@@ -12,6 +12,9 @@ public class TileRunnerTeleOp extends OpMode {
     // Hardware map initialization.
     private TileRunnerREV hardware = new TileRunnerREV();
 
+    public final double TIMEOUT = 0.500; // 500 milliseconds
+
+    double lastChange = 0.0;
 
     @Override
     public void init() {
@@ -73,9 +76,15 @@ public class TileRunnerTeleOp extends OpMode {
         if      (gamepad2.dpad_left)    hardware.failedExperiment.setPosition(1.0);
         else if (gamepad2.dpad_right)   hardware.failedExperiment.setPosition(0.0);
 
-        if      (gamepad1.a)            hardware.leftSweeper.setPosition(Math.abs(hardware.leftSweeper.getPosition() - 1.0));
+        if      (gamepad1.x && getRuntime() - lastChange > TIMEOUT) {
+            lastChange = getRuntime();
+            hardware.leftSweeper.setPosition(Math.abs(hardware.leftSweeper.getPosition() - 1.0));
+        }
 
-        if      (gamepad1.x)            hardware.rightSweeper.setPosition(Math.abs(hardware.rightSweeper.getPosition() - 1.0));
+        if      (gamepad1.b && getRuntime() - lastChange > TIMEOUT) {
+            lastChange = getRuntime();
+            hardware.rightSweeper.setPosition(Math.abs(hardware.rightSweeper.getPosition() - 1.0));
+        }
 
         // Update telemetry
         telemetry.addData("Driver Speed Mod",  hardware.driverSpeedMod);
