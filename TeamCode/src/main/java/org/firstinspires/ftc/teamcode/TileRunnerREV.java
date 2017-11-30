@@ -74,6 +74,8 @@ public class TileRunnerREV {
 
     public DcMotor stonePusher  = null;
 
+    public DcMotor winch        = null;
+
 
     // Servo objects
     public CRServo flipper      = null;
@@ -110,6 +112,8 @@ public class TileRunnerREV {
 
         stonePusher = hwMap.dcMotor.get("stone_pusher");
 
+        winch       = hwMap.dcMotor.get("winch");
+
 
         // Get the servos
         flipper         = hwMap.crservo.get("flipper");
@@ -137,6 +141,8 @@ public class TileRunnerREV {
 
         stonePusher.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        winch.setDirection      (DcMotorSimple.Direction.FORWARD);
+
 
         // Set the motor powers to zero
         leftDrive1  .setPower(0);
@@ -149,6 +155,8 @@ public class TileRunnerREV {
         lifter2     .setPower(0);
 
         stonePusher .setPower(0);
+
+        winch       .setPower(0);
 
 
         // Set the behavior of the motors when the power is set to zero
@@ -163,6 +171,8 @@ public class TileRunnerREV {
 
         stonePusher.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        winch.setZeroPowerBehavior      (DcMotor.ZeroPowerBehavior.BRAKE);
+
 
         // Set the motors' run mode
         leftDrive1.setMode  (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -173,6 +183,10 @@ public class TileRunnerREV {
 
         lifter1.setMode     (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         lifter2.setMode     (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        stonePusher.setMode (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        winch.setMode       (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
         colorSensor.enableLed(false); // ???
