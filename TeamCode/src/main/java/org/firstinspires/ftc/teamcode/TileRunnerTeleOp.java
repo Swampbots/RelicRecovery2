@@ -74,8 +74,11 @@ public class TileRunnerTeleOp extends OpMode {
         if      (gamepad2.dpad_right)   hardware.jewelServo.setPosition(hardware.ARM_UP);
         else if (gamepad2.dpad_left)    hardware.jewelServo.setPosition(hardware.ARM_DOWN);
 
-        if      (gamepad2.dpad_up)    hardware.failedExperiment.setPosition(0.0);
-        else if (gamepad2.dpad_down)   hardware.failedExperiment.setPosition(1.0);
+        if      (gamepad2.dpad_up)      hardware.failedExperiment.setPosition(0.0);
+        else if (gamepad2.dpad_down)    hardware.failedExperiment.setPosition(1.0);
+
+        if      (gamepad2.right_stick_button)   hardware.catcher.setPosition(1.0);
+        if      (gamepad2.left_stick_button)    hardware.catcher.setPosition(0.4);
 
         if      (gamepad1.x && getRuntime() - lastChange > TIMEOUT) {
             lastChange = getRuntime();
@@ -91,6 +94,7 @@ public class TileRunnerTeleOp extends OpMode {
         telemetry.addData("Driver Speed Mod",  hardware.driverSpeedMod);
         telemetry.addData("Utility Speed Mod",  hardware.utilitySpeedMod);
         telemetry.addLine();
+        telemetry.addData("Catcher position", hardware.catcher.getPosition());
         telemetry.update();
     }
 }

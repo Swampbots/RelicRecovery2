@@ -21,7 +21,7 @@ public class TileRunnerREV {
     public final double COUNTS_PER_INCH             = (COUNTS_PER_REV * DRIVE_GEAR_REDUCTION) / WHEEL_CIRCUMFERENCE_INCHES; // About 89 counts per inch
 
 
-    // Jewel arm position variables
+    // Servo position variables
     public final double ARM_DOWN    = 0.75;
     public final double ARM_UP      = 0.10;
 
@@ -85,6 +85,8 @@ public class TileRunnerREV {
     public Servo failedExperiment   = null;
     public Servo leftSweeper        = null;
     public Servo rightSweeper       = null;
+    public Servo catcher            = null;
+
 
 
 
@@ -123,6 +125,7 @@ public class TileRunnerREV {
         failedExperiment    = hwMap.servo.get("failed_experiment");
         leftSweeper         = hwMap.servo.get("left_sweeper");
         rightSweeper        = hwMap.servo.get("right_sweeper");
+        catcher             = hwMap.servo.get("catcher");
 
 
 
