@@ -94,7 +94,6 @@ public class TileRunnerTeleOp extends OpMode {
         telemetry.addData("Driver Speed Mod",  hardware.driverSpeedMod);
         telemetry.addData("Utility Speed Mod",  hardware.utilitySpeedMod);
         telemetry.addLine();
-        telemetry.addData("Catcher position", hardware.catcher.getPosition());
         telemetry.update();
     }
 }
