@@ -316,17 +316,4 @@ public class TRAutoRedRear extends LinearOpMode {
     public void driveInches(double power, double inches) {
         driveEncoderCounts(power, (int) (inches * hardware.COUNTS_PER_INCH));
     }
-
-    public String vuMarkTelemetry(RelicRecoveryVuMark mark) {
-        switch (mark) {
-            case LEFT:
-                return "Left";
-            case CENTER:
-                return "Center";
-            case RIGHT:
-                return "Right";
-            default:
-                return "None";
-        }
-    }
 }

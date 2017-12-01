@@ -7,6 +7,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
+
 /**
  * Created by kawaiiPlat on 9/30/2017.
  */
@@ -289,9 +291,20 @@ public class TileRunnerREV {
     //----------------------------------------------------------------------------------------------
 
 
+    //----------------------------------------------------------------------------------------------
+    // Telemetry Methods
+    //----------------------------------------------------------------------------------------------
 
-
-
-
-
+    public String vuMarkTelemetry(RelicRecoveryVuMark mark) {
+        switch (mark) {
+            case LEFT:
+                return "Left";
+            case CENTER:
+                return "Center";
+            case RIGHT:
+                return "Right";
+            default:
+                return "None";
+        }
+    }
 }
