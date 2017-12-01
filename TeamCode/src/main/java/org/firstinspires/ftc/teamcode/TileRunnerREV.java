@@ -38,6 +38,9 @@ public class TileRunnerREV {
     public final double DIST_CENTER_REAR    =  12.0;
     public final double DIST_FAR_REAR       =  22.0;
 
+    // Autonomous distance variable for glyph deployment
+    public final double DIST_GLYPH_DEPLOY   = 10.0;
+
     // Autonomous PID variables
     public final double MAX_SPEED = 0.4;
     public final double P = 0.045;
