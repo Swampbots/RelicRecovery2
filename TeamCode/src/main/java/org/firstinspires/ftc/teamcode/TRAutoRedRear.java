@@ -196,9 +196,9 @@ public class TRAutoRedRear extends LinearOpMode {
         hardware.setLifterPower(1.0);
         sleep(1000);
 
-        driveInches(0.3, 10.0);
+        driveInches(0.3, hardware.DIST_GLYPH_PLACE);
 
-        driveInches(0.3, -10.0);
+        driveInches(0.3, hardware.DIST_GLYPH_RETURN);
 
         hardware.setLifterPower(0);
 
