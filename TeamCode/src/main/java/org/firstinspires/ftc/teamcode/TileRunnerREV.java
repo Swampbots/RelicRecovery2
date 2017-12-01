@@ -25,6 +25,9 @@ public class TileRunnerREV {
     public final double ARM_DOWN    = 0.75;
     public final double ARM_UP      = 0.10;
 
+    public final double CATCHER_HOLDING     = 0.95;
+    public final double CATCHER_RELEASED    = 0.4;
+
     // Autonomous distance variables from audience stones
     public final double DIST_NEAR_AUDIENCE      =  27.0;
     public final double DIST_CENTER_AUDIENCE    =  34.0;
