@@ -217,10 +217,6 @@ public class TRAutoRedAudience extends LinearOpMode {
 
         driveInches(0.4, hardware.DIST_GLYPH_PLACE);
 
-        telemetry.addLine("Driving backward 6 inches...");
-        telemetry.update();
-        sleep(1000);
-
         driveInches(0.4, hardware.DIST_GLYPH_RETURN);
 
         hardware.setLifterPower(0);
