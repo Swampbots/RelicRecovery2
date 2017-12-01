@@ -141,7 +141,7 @@ public class TileRunnerREV {
 
         stonePusher.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        winch.setDirection      (DcMotorSimple.Direction.FORWARD);
+        winch.setDirection      (DcMotorSimple.Direction.REVERSE);
 
 
         // Set the motor powers to zero
