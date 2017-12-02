@@ -56,8 +56,9 @@ public class TileRunnerTeleOp extends OpMode {
         hardware.lifter1.setPower(gamepad2.left_stick_y * hardware.utilitySpeedMod);
         hardware.lifter2.setPower(gamepad2.left_stick_y * hardware.utilitySpeedMod);
 
-        if      (gamepad1.right_trigger > gamepad1.left_trigger)  hardware.stonePusher.setPower(hardware.utilitySpeedMod * gamepad1.right_trigger);
-        else if (gamepad1.left_trigger > gamepad1.right_trigger)  hardware.stonePusher.setPower(hardware.utilitySpeedMod * -gamepad1.left_trigger);
+        if      (gamepad1.right_trigger > gamepad1.left_trigger)    hardware.stonePusher.setPower(hardware.utilitySpeedMod * gamepad1.right_trigger);
+        else if (gamepad1.right_trigger < gamepad1.left_trigger)    hardware.stonePusher.setPower(hardware.utilitySpeedMod * -gamepad1.left_trigger);
+        else                                                        hardware.stonePusher.setPower(0);
 
         hardware.winch.setPower(gamepad2.right_stick_y * hardware.utilitySpeedMod);
 
