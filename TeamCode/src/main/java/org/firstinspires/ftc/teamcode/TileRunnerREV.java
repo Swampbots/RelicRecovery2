@@ -96,6 +96,7 @@ public class TileRunnerREV {
     public Servo leftSweeper        = null;
     public Servo rightSweeper       = null;
     public Servo catcher            = null;
+    public Servo tightener          = null;
 
 
 
@@ -136,6 +137,7 @@ public class TileRunnerREV {
         leftSweeper         = hwMap.servo.get("left_sweeper");
         rightSweeper        = hwMap.servo.get("right_sweeper");
         catcher             = hwMap.servo.get("catcher");
+        tightener           = hwMap.servo.get("tightener");
 
 
 
