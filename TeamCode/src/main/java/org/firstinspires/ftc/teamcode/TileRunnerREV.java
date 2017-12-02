@@ -199,9 +199,6 @@ public class TileRunnerREV {
         stonePusher.setMode (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         winch.setMode       (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-
-        colorSensor.enableLed(false); // ???
     }
 
 
