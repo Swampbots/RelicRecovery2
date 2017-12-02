@@ -54,9 +54,10 @@ public class TileRunnerREV {
     public final SynchronousPID pid = new SynchronousPID(P, I, D);
 
     // Autonomous VuMark search timeout
-    public final double VUMARK_TIMEOUT = 5.0;
+    public final double VUMARK_TIMEOUT      = 5.0;
 
-
+    // Autonomous lifter speeds for glyph placement
+    public final double SPEED_GLYPH_PLACE   = 0.4;
 
     // Speed control variables
     public final double SLOW = 0.25;

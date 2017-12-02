@@ -206,7 +206,7 @@ public class TRAutoBlueAudience extends LinearOpMode {
         hardware.kicker.setPower(0);
 
 
-        hardware.setLifterPower(1.0);
+        hardware.setLifterPower(hardware.SPEED_GLYPH_PLACE);
         sleep(2000);
 
         telemetry.addLine("Driving forward 6 inches...");
