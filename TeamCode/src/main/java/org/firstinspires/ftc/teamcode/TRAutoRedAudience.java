@@ -292,6 +292,7 @@ public class TRAutoRedAudience extends LinearOpMode {
     public void driveEncoderCounts(double power, int counts) {
         // Set target positions
         hardware.setDriveTargetPosition(counts);
+
 //        telemetry.addData("Encoder counts", counts);
 //        telemetry.addLine();
 //        telemetry.addLine("Targets:");
