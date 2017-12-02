@@ -12,7 +12,8 @@ public class TileRunnerTeleOp extends OpMode {
     // Hardware map initialization.
     private TileRunnerREV hardware = new TileRunnerREV();
 
-    public final double TIMEOUT = 0.500; // 500 milliseconds
+    public final double SERVO_TIMEOUT       = 0.500; // 500 milliseconds
+    public final double TRIGGER_THRESHOLD   = 0.05;
 
     double lastChange = 0.0;
 
@@ -56,8 +57,9 @@ public class TileRunnerTeleOp extends OpMode {
         hardware.lifter1.setPower(gamepad2.left_stick_y * hardware.utilitySpeedMod);
         hardware.lifter2.setPower(gamepad2.left_stick_y * hardware.utilitySpeedMod);
 
-        hardware.stonePusher.setPower(hardware.driverSpeedMod * gamepad1.right_trigger);
-        hardware.stonePusher.setPower(hardware.driverSpeedMod * -gamepad1.left_trigger);
+        if(gamepad1.left_trigger < TRIGGER_THRESHOLD)    hardware.stonePusher.setPower(hardware.driverSpeedMod * gamepad1.right_trigger);
+
+        if(gamepad1.right_trigger < TRIGGER_THRESHOLD)   hardware.stonePusher.setPower(hardware.driverSpeedMod * -gamepad1.left_trigger);
 
         hardware.winch.setPower(gamepad2.right_stick_y * hardware.utilitySpeedMod);
 
@@ -80,12 +82,12 @@ public class TileRunnerTeleOp extends OpMode {
         if      (gamepad2.right_stick_button)   hardware.catcher.setPosition(hardware.CATCHER_HOLDING);
         if      (gamepad2.left_stick_button)    hardware.catcher.setPosition(hardware.CATCHER_RELEASED);
 
-        if      (gamepad1.x && getRuntime() - lastChange > TIMEOUT) {
+        if      (gamepad1.x && getRuntime() - lastChange > SERVO_TIMEOUT) {
             lastChange = getRuntime();
             hardware.leftSweeper.setPosition(Math.abs(hardware.leftSweeper.getPosition() - 1.0));
         }
 
-        if      (gamepad1.b && getRuntime() - lastChange > TIMEOUT) {
+        if      (gamepad1.b && getRuntime() - lastChange > SERVO_TIMEOUT) {
             lastChange = getRuntime();
             hardware.rightSweeper.setPosition(Math.abs(hardware.rightSweeper.getPosition() - 1.0));
         }
