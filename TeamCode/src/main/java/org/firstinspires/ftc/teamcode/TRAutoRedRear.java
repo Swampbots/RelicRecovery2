@@ -116,7 +116,7 @@ public class TRAutoRedRear extends LinearOpMode {
             vuMark = RelicRecoveryVuMark.from(relicTemplate);
 
             telemetry.addData("Search time", getRuntime() - timeSnapshot);
-            telemetry.addData("Vision Target", vuMarkTelemetry(vuMark));
+            telemetry.addData("Vision Target", hardware.vuMarkTelemetry(vuMark));
             telemetry.update();
         }
 
@@ -186,7 +186,7 @@ public class TRAutoRedRear extends LinearOpMode {
 
         driveInches(0.6, inches);
 
-        telemetry.addLine(String.format("Aligned with %s column.", vuMarkTelemetry(vuMark)));
+        telemetry.addLine(String.format("Aligned with %s column.", hardware.vuMarkTelemetry(vuMark)));
         telemetry.addLine("Turning towards cryptobox...");
         telemetry.update();
         turnToHeadingPID(180);
@@ -204,7 +204,7 @@ public class TRAutoRedRear extends LinearOpMode {
 
         while(opModeIsActive()) {
             telemetry.addLine("Vision target:");
-            telemetry.addLine(vuMarkTelemetry(vuMark));
+            telemetry.addLine(hardware.vuMarkTelemetry(vuMark));
             telemetry.addLine();
             telemetry.addData("Drive distance", inches);
             telemetry.addLine();

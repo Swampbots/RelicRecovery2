@@ -117,7 +117,7 @@ public class TRAutoRedAudience extends LinearOpMode {
             vuMark = RelicRecoveryVuMark.from(relicTemplate);
 
             telemetry.addData("Search time", getRuntime() - timeSnapshot);
-            telemetry.addData("Vision Target", vuMarkTelemetry(vuMark));
+            telemetry.addData("Vision Target", hardware.vuMarkTelemetry(vuMark));
             telemetry.update();
         }
 
@@ -229,7 +229,7 @@ public class TRAutoRedAudience extends LinearOpMode {
 
         while (opModeIsActive()) {
             telemetry.addLine("Vision target:");
-            telemetry.addLine(vuMarkTelemetry(vuMark));
+            telemetry.addLine(hardware.vuMarkTelemetry(vuMark));
             telemetry.addLine();
             telemetry.addData("Jewel Color", jewelColor.toString());
             telemetry.addLine();
@@ -344,18 +344,5 @@ public class TRAutoRedAudience extends LinearOpMode {
 
     public void driveInches(double power, double inches) {
         driveEncoderCounts(power, (int) (inches * hardware.COUNTS_PER_INCH));
-    }
-
-    public String vuMarkTelemetry(RelicRecoveryVuMark mark) {
-        switch (mark) {
-            case LEFT:
-                return "Left";
-            case CENTER:
-                return "Center";
-            case RIGHT:
-                return "Right";
-            default:
-                return "Unknown";
-        }
     }
 }
