@@ -38,7 +38,10 @@ public class TileRunnerTeleOp extends OpMode {
 
     @Override
     public void loop() {
-        // Handle speed modifiers
+        //------------------------------------------------------------------------------------------
+        // Speed modifiers
+        //------------------------------------------------------------------------------------------
+
         if(gamepad1.left_bumper)        hardware.driverSpeedMod = hardware.FAST;
         else if(gamepad1.right_bumper)  hardware.driverSpeedMod = hardware.SLOW;
         else                            hardware.driverSpeedMod = hardware.NORMAL;
@@ -48,7 +51,11 @@ public class TileRunnerTeleOp extends OpMode {
         else                            hardware.utilitySpeedMod = hardware.NORMAL;
 
 
-        // Handle motors
+
+        //------------------------------------------------------------------------------------------
+        // Motor Controls
+        //------------------------------------------------------------------------------------------
+
         hardware.linearDrive(
                 (gamepad1.left_stick_y * hardware.driverSpeedMod),
                 (gamepad1.right_stick_y * hardware.driverSpeedMod));
@@ -63,7 +70,11 @@ public class TileRunnerTeleOp extends OpMode {
         hardware.winch.setPower(gamepad2.right_stick_y * hardware.utilitySpeedMod);
 
 
-        // Handle servos
+        
+        //------------------------------------------------------------------------------------------
+        // Servo controls
+        //------------------------------------------------------------------------------------------
+
         if      (gamepad2.a)    hardware.kicker.setPower(0.8);
         else if (gamepad2.b)    hardware.kicker.setPower(-0.8);
         else                    hardware.kicker.setPower(0.0);
