@@ -282,6 +282,13 @@ public class TileRunnerREV {
         rightDrive2.setMode(runMode);
     }
 
+    public void setDriveZeroPowerBehavior(DcMotor.ZeroPowerBehavior behavior) {
+        leftDrive1.setZeroPowerBehavior(behavior);
+        leftDrive2.setZeroPowerBehavior(behavior);
+        leftDrive1.setZeroPowerBehavior(behavior);
+        rightDrive2.setZeroPowerBehavior(behavior);
+    }
+
 
 
     //----------------------------------------------------------------------------------------------
