@@ -229,7 +229,7 @@ public class TileRunnerREV {
 
 
     //----------------------------------------------------------------------------------------------
-    // General Methods
+    // Motor Control Methods
     //----------------------------------------------------------------------------------------------
 
     public void linearDrive(double power) {
@@ -261,11 +261,18 @@ public class TileRunnerREV {
 //        setRightPower((float) (rightPower * rightPower * rightPower * driverSpeedMod));
 //    }
 
+    //----------------------------------------------------------------------------------------------
+    // Servo Control Methods
+    //----------------------------------------------------------------------------------------------
+
+    public void toggleServo(Servo servo) {
+        servo.setPosition(Math.abs(servo.getPosition() - 1.0));
+    }
 
 
 
     //----------------------------------------------------------------------------------------------
-    // Drive Motor Atrribute Modification Methods
+    // Drive Motor Attribute Modification Methods
     //----------------------------------------------------------------------------------------------
 
     public void setDriveRunMode(DcMotor.RunMode runMode) {
