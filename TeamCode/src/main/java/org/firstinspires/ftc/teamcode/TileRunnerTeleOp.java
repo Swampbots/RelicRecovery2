@@ -12,7 +12,9 @@ public class TileRunnerTeleOp extends OpMode {
     // Hardware map initialization.
     private TileRunnerREV hardware = new TileRunnerREV();
 
-    public final double SERVO_TIMEOUT       = 0.500; // 500 milliseconds
+    public final double SERVO_TIMEOUT   = 0.500; // 500 milliseconds
+
+    public boolean waveServo = false;
 
     double lastChange = 0.0;
 
@@ -102,10 +104,20 @@ public class TileRunnerTeleOp extends OpMode {
             hardware.rightSweeper.setPosition(Math.abs(hardware.rightSweeper.getPosition() - 1.0));
         }
 
+        if(gamepad1.a)  hardware.tightener.setPosition(hardware.TIGHTENER_HOLDING);
+        if(gamepad1.y)  hardware.tightener.setPosition(hardware.TIGHTENER_RELEASED);
+
+        if(gamepad1.left_stick_button) waveServo = !waveServo;
+
+        if(waveServo) {
+            if(hardware.waver.getPosition() == 0.4) hardware.waver.setPosition(hardware.waver.getPosition() + 0.01);
+            if(hardware.waver.getPosition() == 0.6) hardware.waver.setPosition(hardware.waver.getPosition() - 0.01);
+        }
+
+
         // Update telemetry
         telemetry.addData("Driver Speed Mod",  hardware.driverSpeedMod);
         telemetry.addData("Utility Speed Mod",  hardware.utilitySpeedMod);
-        telemetry.addLine();
         telemetry.update();
     }
 }
