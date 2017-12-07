@@ -30,6 +30,10 @@ public class TileRunnerREV {
     public final double CATCHER_HOLDING     = 0.95;
     public final double CATCHER_RELEASED    = 0.4;
 
+    public final double TIGHTENER_HOLDING   = 1.0;
+    public final double TIGHTENER_RELEASED  = 0.3;
+
+
     // Autonomous distance variables from audience stones
     public final double DIST_NEAR_AUDIENCE      =  27.0;
     public final double DIST_CENTER_AUDIENCE    =  34.0;
@@ -97,6 +101,7 @@ public class TileRunnerREV {
     public Servo rightSweeper       = null;
     public Servo catcher            = null;
     public Servo tightener          = null;
+    public Servo waver              = null;
 
 
 
@@ -138,6 +143,7 @@ public class TileRunnerREV {
         rightSweeper        = hwMap.servo.get("right_sweeper");
         catcher             = hwMap.servo.get("catcher");
         tightener           = hwMap.servo.get("tightener");
+        waver               = hwMap.servo.get("waver");
 
 
 
@@ -202,6 +208,10 @@ public class TileRunnerREV {
         stonePusher.setMode (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         winch.setMode       (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+
+        // Set the servo positions
+        catcher.setPosition(CATCHER_HOLDING);
     }
 
 
