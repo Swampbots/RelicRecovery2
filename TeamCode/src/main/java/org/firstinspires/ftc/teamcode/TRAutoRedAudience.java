@@ -49,6 +49,9 @@ public class TRAutoRedAudience extends LinearOpMode {
         // Initialize hardware class
         hardware.init(hardwareMap);
 
+        // Set the drive motors to brake
+        hardware.setDriveZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
 
         // Set up the Vuforia parameters
         // (Comment out first line and cameraMonitorViewId parameter on second line to remove screen display)
