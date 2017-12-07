@@ -103,7 +103,6 @@ public class TileRunnerREV {
     public Servo rightSweeper       = null;
 
     public Servo catcher            = null;
-
     public Servo tightener          = null;
 
     public Servo waver              = null;
