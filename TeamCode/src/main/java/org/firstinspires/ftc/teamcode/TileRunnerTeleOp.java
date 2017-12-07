@@ -77,13 +77,9 @@ public class TileRunnerTeleOp extends OpMode {
         // Servo controls
         //------------------------------------------------------------------------------------------
 
-        if      (gamepad2.a)    hardware.kicker.setPower(0.8);
-        else if (gamepad2.b)    hardware.kicker.setPower(-0.8);
-        else                    hardware.kicker.setPower(0.0);
+        if(gamepad2.x) hardware.toggleServo(hardware.flipper);
 
-        if      (gamepad2.x)    hardware.flipper.setPower(0.8);
-        else if (gamepad2.y)    hardware.flipper.setPower(-0.8);
-        else                    hardware.flipper.setPower(0.0);
+        if(gamepad2.b) hardware.toggleServo(hardware.kicker);
 
         if      (gamepad2.dpad_right)   hardware.jewelServo.setPosition(hardware.ARM_UP);
         else if (gamepad2.dpad_left)    hardware.jewelServo.setPosition(hardware.ARM_DOWN);
@@ -96,12 +92,12 @@ public class TileRunnerTeleOp extends OpMode {
 
         if      (gamepad1.x && getRuntime() - lastChange > SERVO_TIMEOUT) {
             lastChange = getRuntime();
-            hardware.leftSweeper.setPosition(Math.abs(hardware.leftSweeper.getPosition() - 1.0));
+            hardware.toggleServo(hardware.leftSweeper);
         }
 
         if      (gamepad1.b && getRuntime() - lastChange > SERVO_TIMEOUT) {
             lastChange = getRuntime();
-            hardware.rightSweeper.setPosition(Math.abs(hardware.rightSweeper.getPosition() - 1.0));
+            hardware.toggleServo(hardware.rightSweeper);
         }
 
         if(gamepad1.a)  hardware.tightener.setPosition(hardware.TIGHTENER_HOLDING);
