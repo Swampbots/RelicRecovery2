@@ -77,9 +77,18 @@ public class TileRunnerTeleOp extends OpMode {
         // Servo controls
         //------------------------------------------------------------------------------------------
 
-        if(gamepad2.x) hardware.toggleServo(hardware.flipper);
+        if(gamepad2.x && getRuntime() - lastChange > SERVO_TIMEOUT) {
+            lastChange = getRuntime();
+            hardware.toggleServo(hardware.flipper);
+        }
 
-        if(gamepad2.b) hardware.toggleServo(hardware.kicker);
+        if(gamepad2.b && getRuntime() - lastChange > SERVO_TIMEOUT) {
+            lastChange = getRuntime();
+            hardware.toggleServo(hardware.kicker);
+        }
+
+        if(gamepad2.y) hardware.flipper.setPosition(0.2);
+        
 
         if      (gamepad2.dpad_right)   hardware.jewelServo.setPosition(hardware.ARM_UP);
         else if (gamepad2.dpad_left)    hardware.jewelServo.setPosition(hardware.ARM_DOWN);
