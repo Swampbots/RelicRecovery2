@@ -92,17 +92,21 @@ public class TileRunnerREV {
 
 
     // Servo objects
-    public CRServo flipper      = null;
-    public CRServo kicker       = null;
+    public Servo flipper            = null;
+    public Servo kicker             = null;
 
     public Servo jewelServo         = null;
+
     public Servo failedExperiment   = null;
+
     public Servo leftSweeper        = null;
     public Servo rightSweeper       = null;
-    public Servo catcher            = null;
-    public Servo tightener          = null;
-    public Servo waver              = null;
 
+    public Servo catcher            = null;
+
+    public Servo tightener          = null;
+
+    public Servo waver              = null;
 
 
 
@@ -134,21 +138,28 @@ public class TileRunnerREV {
 
 
         // Get the servos
-        flipper         = hwMap.crservo.get("flipper");
-        kicker          = hwMap.crservo.get("kicker");
+        flipper             = hwMap.servo.get("flipper");
+        kicker              = hwMap.servo.get("kicker");
 
         jewelServo          = hwMap.servo.get("jewel_servo");
+
         failedExperiment    = hwMap.servo.get("failed_experiment");
+
         leftSweeper         = hwMap.servo.get("left_sweeper");
         rightSweeper        = hwMap.servo.get("right_sweeper");
+
         catcher             = hwMap.servo.get("catcher");
+
         tightener           = hwMap.servo.get("tightener");
+
         waver               = hwMap.servo.get("waver");
 
 
 
         // Get the sensors
         colorSensor = hwMap.colorSensor.get("color_sensor");
+
+
 
         // Set the motor directions
         leftDrive1.setDirection (DcMotorSimple.Direction.REVERSE);
