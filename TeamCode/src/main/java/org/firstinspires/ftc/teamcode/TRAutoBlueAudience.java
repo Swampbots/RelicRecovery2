@@ -201,9 +201,7 @@ public class TRAutoBlueAudience extends LinearOpMode {
         sleep(1000);
 
 
-        hardware.kicker.setPower(-0.8);
-        sleep(250);
-        hardware.kicker.setPower(0);
+        hardware.kicker.setPosition(1.0);
 
 
         hardware.setLifterPower(hardware.SPEED_GLYPH_PLACE);
