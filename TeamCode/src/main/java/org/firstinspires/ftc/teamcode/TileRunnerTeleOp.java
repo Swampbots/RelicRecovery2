@@ -16,7 +16,11 @@ public class TileRunnerTeleOp extends OpMode {
 
     public boolean waveServo = false;
 
-    double lastChange = 0.0;
+    double lastChangeFlipper = 0.0;
+    double lastChangeKicker = 0.0;
+    double lastChangeLeftSweeper = 0.0;
+    double lastChangeRightSweeper = 0.0;
+
 
     @Override
     public void init() {
@@ -77,18 +81,19 @@ public class TileRunnerTeleOp extends OpMode {
         // Servo controls
         //------------------------------------------------------------------------------------------
 
-        if(gamepad2.x && getRuntime() - lastChange > SERVO_TIMEOUT) {
-            lastChange = getRuntime();
+
+        if(gamepad2.x && getRuntime() - lastChangeFlipper > SERVO_TIMEOUT) {
+            lastChangeFlipper = getRuntime();
             hardware.toggleServo(hardware.flipper);
         }
 
-        if(gamepad2.b && getRuntime() - lastChange > SERVO_TIMEOUT) {
-            lastChange = getRuntime();
+        if(gamepad2.b && getRuntime() - lastChangeKicker > SERVO_TIMEOUT) {
+            lastChangeKicker = getRuntime();
             hardware.toggleServo(hardware.kicker);
         }
 
         if(gamepad2.y) hardware.flipper.setPosition(0.2);
-        
+
 
         if      (gamepad2.dpad_right)   hardware.jewelServo.setPosition(hardware.ARM_UP);
         else if (gamepad2.dpad_left)    hardware.jewelServo.setPosition(hardware.ARM_DOWN);
@@ -99,13 +104,13 @@ public class TileRunnerTeleOp extends OpMode {
         if      (gamepad2.right_stick_button)   hardware.catcher.setPosition(hardware.CATCHER_HOLDING);
         if      (gamepad2.left_stick_button)    hardware.catcher.setPosition(hardware.CATCHER_RELEASED);
 
-        if      (gamepad1.x && getRuntime() - lastChange > SERVO_TIMEOUT) {
-            lastChange = getRuntime();
+        if      (gamepad1.x && getRuntime() - lastChangeLeftSweeper > SERVO_TIMEOUT) {
+            lastChangeLeftSweeper = getRuntime();
             hardware.toggleServo(hardware.leftSweeper);
         }
 
-        if      (gamepad1.b && getRuntime() - lastChange > SERVO_TIMEOUT) {
-            lastChange = getRuntime();
+        if      (gamepad1.b && getRuntime() - lastChangeRightSweeper > SERVO_TIMEOUT) {
+            lastChangeRightSweeper = getRuntime();
             hardware.toggleServo(hardware.rightSweeper);
         }
 
