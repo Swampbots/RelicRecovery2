@@ -69,11 +69,6 @@ public class TileRunnerTeleOp extends OpMode {
         hardware.lifter1.setPower(gamepad2.left_stick_y * hardware.utilitySpeedMod);
         hardware.lifter2.setPower(gamepad2.left_stick_y * hardware.utilitySpeedMod);
 
-        if      (gamepad1.right_trigger > gamepad1.left_trigger)    hardware.stonePusher.setPower(hardware.driverSpeedMod * gamepad1.right_trigger);
-        else if (gamepad1.right_trigger < gamepad1.left_trigger
-                && hardware.stonePusher.getCurrentPosition() > 20)   hardware.stonePusher.setPower(hardware.driverSpeedMod * -gamepad1.left_trigger);
-        else                                                        hardware.stonePusher.setPower(0);
-
         hardware.winch.setPower(gamepad2.right_stick_y * hardware.utilitySpeedMod);
 
 
@@ -124,12 +119,14 @@ public class TileRunnerTeleOp extends OpMode {
             if(hardware.waver.getPosition() == 0.6) hardware.waver.setPosition(hardware.waver.getPosition() - 0.01);
         }
 
+        hardware.stonePusher.setPosition(gamepad1.right_trigger);
+
 
         // Update telemetry
         telemetry.addData("Driver Speed Mod",  hardware.driverSpeedMod);
         telemetry.addData("Utility Speed Mod",  hardware.utilitySpeedMod);
         telemetry.addLine();
-        telemetry.addData("Tail Encoder", hardware.stonePusher.getCurrentPosition());
+        telemetry.addData("Tail Encoder", hardware.stonePusher.getPosition());
         telemetry.addData("Glyph Red", hardware.glyphSensor.red());
         telemetry.addData("Glyph Blue", hardware.glyphSensor.blue());
         telemetry.update();
