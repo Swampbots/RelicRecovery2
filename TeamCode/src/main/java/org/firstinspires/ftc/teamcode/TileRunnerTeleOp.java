@@ -62,12 +62,15 @@ public class TileRunnerTeleOp extends OpMode {
         // Motor Controls
         //------------------------------------------------------------------------------------------
 
+        // Drive Wheels
         hardware.linearDrive(
                 (gamepad1.left_stick_y * hardware.driverSpeedMod),
                 (gamepad1.right_stick_y * hardware.driverSpeedMod));
 
+        // Lifter
         hardware.setLifterPower(gamepad2.left_stick_y * hardware.utilitySpeedMod);
 
+        // Winch
         hardware.winch.setPower(gamepad2.right_stick_y * hardware.utilitySpeedMod);
 
 
@@ -77,41 +80,42 @@ public class TileRunnerTeleOp extends OpMode {
         //------------------------------------------------------------------------------------------
 
 
+        // Flipper
         if(gamepad2.x && getRuntime() - lastChangeFlipper > SERVO_TIMEOUT) {
             lastChangeFlipper = getRuntime();
             hardware.toggleServo(hardware.flipper);
         }
 
+        // Kicker
         if(gamepad2.b && getRuntime() - lastChangeKicker > SERVO_TIMEOUT) {
             lastChangeKicker = getRuntime();
             hardware.toggleServo(hardware.kicker);
         }
 
 
-
+        // Jewel Servo
         if      (gamepad2.dpad_right)   hardware.jewelServo.setPosition(hardware.ARM_UP);
         else if (gamepad2.dpad_left)    hardware.jewelServo.setPosition(hardware.ARM_DOWN);
 
 
+        // Gripper
         if      (gamepad2.dpad_up)      hardware.gripper.setPosition(0.0);
         else if (gamepad2.dpad_down)    hardware.gripper.setPosition(1.0);
 
-        if      (gamepad2.right_stick_button)   hardware.catcher.setPosition(hardware.CATCHER_HOLDING);
-        if      (gamepad2.left_stick_button)    hardware.catcher.setPosition(hardware.CATCHER_RELEASED);
 
+        // Left Sweeper
         if      (gamepad1.x && getRuntime() - lastChangeLeftSweeper > SERVO_TIMEOUT) {
             lastChangeLeftSweeper = getRuntime();
             hardware.toggleServo(hardware.leftSweeper);
         }
 
+        // Right Sweeper
         if      (gamepad1.b && getRuntime() - lastChangeRightSweeper > SERVO_TIMEOUT) {
             lastChangeRightSweeper = getRuntime();
             hardware.toggleServo(hardware.rightSweeper);
         }
 
-        if(gamepad1.a)  hardware.tightener.setPosition(hardware.TIGHTENER_HOLDING);
-        if(gamepad1.y)  hardware.tightener.setPosition(hardware.TIGHTENER_RELEASED);
-
+        // Waver
         if(gamepad1.left_stick_button) waveServo = !waveServo;
 
         if(waveServo) {
@@ -119,6 +123,7 @@ public class TileRunnerTeleOp extends OpMode {
             if(hardware.waver.getPosition() == 0.6) hardware.waver.setPosition(hardware.waver.getPosition() - 0.01);
         }
 
+        // Stone Pusher
         hardware.stonePusher.setPosition(gamepad1.right_trigger);
 
 
