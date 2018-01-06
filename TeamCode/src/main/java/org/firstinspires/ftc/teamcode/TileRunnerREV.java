@@ -111,6 +111,7 @@ public class TileRunnerREV {
 
     // Sensor objects
     public ColorSensor colorSensor  = null;
+    public ColorSensor glyphSensor  = null;
 
 //    public BNO055IMU imu = null;
 
@@ -157,6 +158,7 @@ public class TileRunnerREV {
 
         // Get the sensors
         colorSensor = hwMap.colorSensor.get("color_sensor");
+        glyphSensor = hwMap.colorSensor.get("glyph_color");
 
 
 
