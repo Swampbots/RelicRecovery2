@@ -32,6 +32,9 @@ public class TileRunnerREV {
     public final double TIGHTENER_HOLDING   = 1.0;
     public final double TIGHTENER_RELEASED  = 0.3;
 
+    public final double GRIPPER_ENGAGED     = 1.0;
+    public final double GRIPPER_RELEASED    = 0.0;
+
 
     // Autonomous distance variables from audience stones
     public final double DIST_NEAR_AUDIENCE      =  27.0;
