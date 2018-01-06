@@ -93,7 +93,6 @@ public class TileRunnerTeleOp extends OpMode {
             hardware.toggleServo(hardware.kicker);
         }
 
-        if(gamepad2.y) hardware.flipper.setPosition(0.2);
 
 
         if      (gamepad2.dpad_right)   hardware.jewelServo.setPosition(hardware.ARM_UP);
@@ -130,7 +129,9 @@ public class TileRunnerTeleOp extends OpMode {
         telemetry.addData("Driver Speed Mod",  hardware.driverSpeedMod);
         telemetry.addData("Utility Speed Mod",  hardware.utilitySpeedMod);
         telemetry.addLine();
-        telemetry.addData("Tail encoder", hardware.stonePusher.getCurrentPosition());
+        telemetry.addData("Tail Encoder", hardware.stonePusher.getCurrentPosition());
+        telemetry.addData("Glyph Red", hardware.glyphSensor.red());
+        telemetry.addData("Glyph Blue", hardware.glyphSensor.blue());
         telemetry.update();
     }
 }
