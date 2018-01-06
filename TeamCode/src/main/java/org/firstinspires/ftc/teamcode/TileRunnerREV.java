@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -95,7 +94,7 @@ public class TileRunnerREV {
 
     public Servo jewelServo         = null;
 
-    public Servo failedExperiment   = null;
+    public Servo gripper            = null;
 
     public Servo leftSweeper        = null;
     public Servo rightSweeper       = null;
@@ -140,7 +139,7 @@ public class TileRunnerREV {
 
         jewelServo          = hwMap.servo.get("jewel_servo");
 
-        failedExperiment    = hwMap.servo.get("failed_experiment");
+        gripper             = hwMap.servo.get("gripper");
 
         leftSweeper         = hwMap.servo.get("left_sweeper");
         rightSweeper        = hwMap.servo.get("right_sweeper");
