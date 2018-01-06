@@ -14,7 +14,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 
 public class TileRunnerREV {
 
-    // Encoder variables
+    // Drive Encoder variables
     private final double COUNTS_PER_REV             = 1120.0;   // For a NeveRest 40 (7 cpr with 4 pulses per count and a 40:1 gear ratio)
     private final double DRIVE_GEAR_REDUCTION       = 1.0;      // No gear reduction (would be < 1.0 if geared up)
     private final double WHEEL_DIAMETER_INCHES      = 4.0;      // For figuring circumference
@@ -25,12 +25,6 @@ public class TileRunnerREV {
     // Servo position variables
     public final double ARM_DOWN    = 0.75;
     public final double ARM_UP      = 0.10;
-
-    public final double CATCHER_HOLDING     = 0.95;
-    public final double CATCHER_RELEASED    = 0.4;
-
-    public final double TIGHTENER_HOLDING   = 1.0;
-    public final double TIGHTENER_RELEASED  = 0.3;
 
     public final double GRIPPER_ENGAGED     = 1.0;
     public final double GRIPPER_RELEASED    = 0.0;
@@ -102,9 +96,6 @@ public class TileRunnerREV {
     public Servo leftSweeper        = null;
     public Servo rightSweeper       = null;
 
-    public Servo catcher            = null;
-    public Servo tightener          = null;
-
     public Servo waver              = null;
 
     public Servo stonePusher        = null;
@@ -146,10 +137,6 @@ public class TileRunnerREV {
 
         leftSweeper         = hwMap.servo.get("left_sweeper");
         rightSweeper        = hwMap.servo.get("right_sweeper");
-
-        catcher             = hwMap.servo.get("catcher");
-
-        tightener           = hwMap.servo.get("tightener");
 
         waver               = hwMap.servo.get("waver");
 
@@ -213,9 +200,6 @@ public class TileRunnerREV {
 
         winch.setMode       (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-
-        // Set the servo positions
-        catcher.setPosition(CATCHER_HOLDING);
     }
 
 
