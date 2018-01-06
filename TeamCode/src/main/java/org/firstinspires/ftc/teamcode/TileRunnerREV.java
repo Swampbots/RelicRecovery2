@@ -86,8 +86,6 @@ public class TileRunnerREV {
     public DcMotor lifter1      = null;
     public DcMotor lifter2      = null;
 
-    public DcMotor stonePusher  = null;
-
     public DcMotor winch        = null;
 
 
@@ -107,6 +105,7 @@ public class TileRunnerREV {
 
     public Servo waver              = null;
 
+    public Servo stonePusher        = null;
 
 
     // Sensor objects
@@ -132,8 +131,6 @@ public class TileRunnerREV {
         lifter1     = hwMap.dcMotor.get("lifter1");
         lifter2     = hwMap.dcMotor.get("lifter2");
 
-        stonePusher = hwMap.dcMotor.get("stone_pusher");
-
         winch       = hwMap.dcMotor.get("winch");
 
 
@@ -154,6 +151,7 @@ public class TileRunnerREV {
 
         waver               = hwMap.servo.get("waver");
 
+        stonePusher         = hwMap.servo.get("stone_pusher");
 
 
         // Get the sensors
@@ -172,8 +170,6 @@ public class TileRunnerREV {
         lifter1.setDirection    (DcMotorSimple.Direction.REVERSE);
         lifter2.setDirection    (DcMotorSimple.Direction.FORWARD);
 
-        stonePusher.setDirection(DcMotorSimple.Direction.REVERSE);
-
         winch.setDirection      (DcMotorSimple.Direction.REVERSE);
 
 
@@ -186,8 +182,6 @@ public class TileRunnerREV {
 
         lifter1     .setPower(0);
         lifter2     .setPower(0);
-
-        stonePusher .setPower(0);
 
         winch       .setPower(0);
 
@@ -202,8 +196,6 @@ public class TileRunnerREV {
         lifter1.setZeroPowerBehavior    (DcMotor.ZeroPowerBehavior.FLOAT);
         lifter2.setZeroPowerBehavior    (DcMotor.ZeroPowerBehavior.FLOAT);
 
-        stonePusher.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
         winch.setZeroPowerBehavior      (DcMotor.ZeroPowerBehavior.BRAKE);
 
 
@@ -216,8 +208,6 @@ public class TileRunnerREV {
 
         lifter1.setMode     (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         lifter2.setMode     (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        stonePusher.setMode (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         winch.setMode       (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
