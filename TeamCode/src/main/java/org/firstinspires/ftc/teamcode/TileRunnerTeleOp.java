@@ -92,13 +92,15 @@ public class TileRunnerTeleOp extends OpMode {
 
 
         // Jewel Servo
-        if      (gamepad2.dpad_right)   hardware.jewelServo.setPosition(hardware.ARM_UP);
-        else if (gamepad2.dpad_left)    hardware.jewelServo.setPosition(hardware.ARM_DOWN);
+        hardware.jewelServo.setPosition(
+                gamepad2.dpad_left ? hardware.ARM_DOWN : hardware.ARM_UP
+        );
 
 
         // Gripper
-        if      (gamepad2.dpad_up)      hardware.gripper.setPosition(0.0);
-        else if (gamepad2.dpad_down)    hardware.gripper.setPosition(1.0);
+        hardware.gripper.setPosition(
+                gamepad2.dpad_down ? hardware.GRIPPER_RELEASED : hardware.GRIPPER_ENGAGED
+        );
 
 
         // Left Sweeper
