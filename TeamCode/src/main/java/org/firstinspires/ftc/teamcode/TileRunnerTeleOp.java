@@ -71,6 +71,10 @@ public class TileRunnerTeleOp extends OpMode {
         // Winch
         hardware.winch.setPower(gamepad2.right_stick_y * hardware.utilitySpeedMod);
 
+        // Pivot
+        if      (gamepad2.left_trigger < 0.6)   hardware.pivot.setPower(gamepad2.right_trigger);
+        else if (gamepad2.right_trigger < 0.6)  hardware.pivot.setPower(gamepad2.left_trigger);
+
 
 
         //------------------------------------------------------------------------------------------

@@ -83,6 +83,7 @@ public class TileRunnerREV {
     public DcMotor lifter2      = null;
 
     public DcMotor winch        = null;
+    public DcMotor pivot        = null;
 
 
     // Servo objects
@@ -125,6 +126,7 @@ public class TileRunnerREV {
         lifter2     = hwMap.dcMotor.get("lifter2");
 
         winch       = hwMap.dcMotor.get("winch");
+        pivot       = hwMap.dcMotor.get("pivot");
 
 
         // Get the servos
@@ -160,6 +162,7 @@ public class TileRunnerREV {
         lifter2.setDirection    (DcMotorSimple.Direction.REVERSE);
 
         winch.setDirection      (DcMotorSimple.Direction.REVERSE);
+        pivot.setDirection      (DcMotorSimple.Direction.FORWARD);
 
 
         // Set the motor powers to zero
@@ -173,6 +176,7 @@ public class TileRunnerREV {
         lifter2     .setPower(0);
 
         winch       .setPower(0);
+        pivot       .setPower(0);
 
 
         // Set the behavior of the motors when the power is set to zero
@@ -186,6 +190,7 @@ public class TileRunnerREV {
         lifter2.setZeroPowerBehavior    (DcMotor.ZeroPowerBehavior.FLOAT);
 
         winch.setZeroPowerBehavior      (DcMotor.ZeroPowerBehavior.BRAKE);
+        pivot.setZeroPowerBehavior      (DcMotor.ZeroPowerBehavior.BRAKE);
 
 
         // Set the motors' run mode
@@ -199,6 +204,7 @@ public class TileRunnerREV {
         lifter2.setMode     (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         winch.setMode       (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        pivot.setMode       (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
         // Set the servo positions
