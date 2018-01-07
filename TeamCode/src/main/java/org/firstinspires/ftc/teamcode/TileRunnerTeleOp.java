@@ -37,9 +37,7 @@ public class TileRunnerTeleOp extends OpMode {
     public void init_loop() {}
 
     @Override
-    public void start() {
-        hardware.jewelServo.setPosition(hardware.ARM_UP);
-    }
+    public void start() {}
 
 
     @Override
@@ -56,7 +54,7 @@ public class TileRunnerTeleOp extends OpMode {
         else if(gamepad2.right_bumper)  hardware.utilitySpeedMod = hardware.SLOW;
         else                            hardware.utilitySpeedMod = hardware.NORMAL;
 
-        
+
 
         //------------------------------------------------------------------------------------------
         // Motor Controls
@@ -115,6 +113,7 @@ public class TileRunnerTeleOp extends OpMode {
             hardware.toggleServo(hardware.rightSweeper);
         }
 
+
         // Waver
         if(gamepad1.left_stick_button) waveServo = !waveServo;
 
@@ -123,11 +122,14 @@ public class TileRunnerTeleOp extends OpMode {
             if(hardware.waver.getPosition() == 0.6) hardware.waver.setPosition(hardware.waver.getPosition() - 0.01);
         }
 
+
         // Stone Pusher
         hardware.stonePusher.setPosition(gamepad1.right_trigger);
 
 
-        // Update telemetry
+        //------------------------------------------------------------------------------------------
+        // Telemetry
+        //------------------------------------------------------------------------------------------
         telemetry.addData("Driver Speed Mod",  hardware.driverSpeedMod);
         telemetry.addData("Utility Speed Mod",  hardware.utilitySpeedMod);
         telemetry.addLine();

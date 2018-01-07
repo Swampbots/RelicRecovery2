@@ -200,6 +200,9 @@ public class TileRunnerREV {
 
         winch.setMode       (DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
+
+        // Set the servo positions
+        jewelServo.setPosition(ARM_UP);
     }
 
 
