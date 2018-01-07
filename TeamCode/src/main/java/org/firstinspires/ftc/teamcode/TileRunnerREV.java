@@ -27,7 +27,7 @@ public class TileRunnerREV {
     public final double ARM_UP      = 0.10;
 
     public final double GRIPPER_ENGAGED     = 1.0;
-    public final double GRIPPER_RELEASED    = 0.0;
+    public final double GRIPPER_RELEASED    = 0.5;
 
 
     // Autonomous distance variables from audience stones
@@ -156,8 +156,8 @@ public class TileRunnerREV {
         rightDrive1.setDirection(DcMotorSimple.Direction.FORWARD);
         rightDrive2.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        lifter1.setDirection    (DcMotorSimple.Direction.REVERSE);
-        lifter2.setDirection    (DcMotorSimple.Direction.FORWARD);
+        lifter1.setDirection    (DcMotorSimple.Direction.FORWARD);
+        lifter2.setDirection    (DcMotorSimple.Direction.REVERSE);
 
         winch.setDirection      (DcMotorSimple.Direction.REVERSE);
 
