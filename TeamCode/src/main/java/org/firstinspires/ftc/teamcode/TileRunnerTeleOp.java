@@ -45,7 +45,7 @@ public class TileRunnerTeleOp extends OpMode {
     @Override
     public void loop() {
         //------------------------------------------------------------------------------------------
-        // Speed modifiers
+        // Speed modifiers and State Variables
         //------------------------------------------------------------------------------------------
 
         if(gamepad1.left_bumper)        hardware.driverSpeedMod = hardware.FAST;
@@ -56,7 +56,7 @@ public class TileRunnerTeleOp extends OpMode {
         else if(gamepad2.right_bumper)  hardware.utilitySpeedMod = hardware.SLOW;
         else                            hardware.utilitySpeedMod = hardware.NORMAL;
 
-
+        
 
         //------------------------------------------------------------------------------------------
         // Motor Controls
