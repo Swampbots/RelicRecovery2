@@ -162,7 +162,7 @@ public class TileRunnerREV {
         lifter2.setDirection    (DcMotorSimple.Direction.REVERSE);
 
         winch.setDirection      (DcMotorSimple.Direction.REVERSE);
-        pivot.setDirection      (DcMotorSimple.Direction.FORWARD);
+        pivot.setDirection      (DcMotorSimple.Direction.REVERSE);
 
 
         // Set the motor powers to zero
