@@ -55,9 +55,23 @@ public class TestPID extends LinearOpMode {
 
         telemetry.addLine("Ready");
         telemetry.update();
+
         waitForStart();
 
-        turnToHeadingPID(90);
+        telemetry.addLine("Turning to heading of -90...");
+        telemetry.update();
+
+        turnToHeadingPID(-90);
+
+        telemetry.addLine("Successful.");
+        telemetry.addData("Heading", heading());
+        telemetry.update();
+        sleep(2000);
+
+        telemetry.addLine("Turning to heading of 180...");
+        telemetry.update();
+
+        turnToHeadingPID(180);
 
         while(opModeIsActive()) {
             telemetry.addLine("Finished");
