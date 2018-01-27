@@ -15,7 +15,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
  * Created by SwampbotsAdmin on 10/22/2017.
  */
 
-@Disabled
+//@Disabled
 @Autonomous(name = "PID test", group = "Testing")
 //@Disabled
 public class TestPID extends LinearOpMode {
@@ -30,6 +30,9 @@ public class TestPID extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
+
+        telemetry.addLine("DO NOT PRESS PLAY! Initializing hardware.");
+        telemetry.update();
 
         hardware.init(hardwareMap);
 
@@ -50,29 +53,37 @@ public class TestPID extends LinearOpMode {
 
         angles   = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
 
+        telemetry.addLine("Ready");
+        telemetry.update();
         waitForStart();
 
-        double target = 90;
-        double maxSpeed = 0.4;
-        double p = 0.045;
-        double i = 0.01;
-        double d = 0.045;
-        double tolerance = 2;
-
-        SynchronousPID pid = new SynchronousPID(p, i, d);
-
-        pid.setSetpoint(target);                    // Target final heading relative to current
-        pid.setOutputRange(-maxSpeed, maxSpeed);    // Maximum motor power
-        pid.setDeadband(tolerance);                 // How far you can safely be off from your target
+        turnToHeadingPID(90);
 
         while(opModeIsActive()) {
+            telemetry.addLine("Finished");
+            telemetry.addData("Heading", heading());
+            telemetry.update();
+        }
+
+    }
+
+
+
+
+
+    public void turnToHeadingPID(int target) throws InterruptedException {
+        hardware.pid.setSetpoint(target);                                       // Set target final heading relative to current
+        hardware.pid.setOutputRange(-hardware.MAX_SPEED, hardware.MAX_SPEED);   // Set maximum motor power
+        hardware.pid.setDeadband(hardware.TOLERANCE);                           // Set how far off you can safely be from your target
+
+        while (opModeIsActive()) {
             double error = normalize180(target - heading());
-            double power = pid.calculateGivenError(error);
+            double power = hardware.pid.calculateGivenError(error);
 
             hardware.setLeftPower(power);
             hardware.setRightPower(-power);
 
-            if(Math.abs(error) < tolerance) {
+            if (Math.abs(error) < hardware.TOLERANCE) {
                 break;
             }
 
@@ -80,12 +91,6 @@ public class TestPID extends LinearOpMode {
         }
 
         hardware.linearDrive(0);
-
-        while(opModeIsActive()) {
-            telemetry.addLine("Finished");
-            telemetry.update();
-        }
-
     }
 
     public double normalize180(double angle) {
