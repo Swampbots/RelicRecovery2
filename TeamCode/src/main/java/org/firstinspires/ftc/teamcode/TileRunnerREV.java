@@ -37,7 +37,7 @@ public class TileRunnerREV {
 
     // Autonomous distance variables from rear stones
     public final double DIST_NEAR_REAR      =  5.0;
-    public final double DIST_CENTER_REAR    =  12.0;
+    public final double DIST_CENTER_REAR    =  13.0;
     public final double DIST_FAR_REAR       =  22.0;
 
     // Autonomous distance variables for glyph deployment
@@ -58,6 +58,9 @@ public class TileRunnerREV {
 
     // Autonomous lifter speeds for glyph placement
     public final double SPEED_GLYPH_PLACE   = 0.4;
+
+    // Autonomous time for jewel arm to settle (ms)
+    public final long ARM_TIME_SETTLE = 2000;
 
     // Speed control variables
     public final double SLOW = 0.25;
