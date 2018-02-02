@@ -213,14 +213,16 @@ public class TRAutoBlueRear extends LinearOpMode {
 
         hardware.linearDrive(-0.3);
         sleep(1000);
+        hardware.linearDrive(0);
 
         hardware.setLifterPower(0.8);
+        sleep(1000);
 
         hardware.linearDrive(0.3);
         sleep(500);
+        hardware.linearDrive(0);
 
         hardware.setLifterPower(0);
-        hardware.linearDrive(0);
 
         while(opModeIsActive()) {
             telemetry.addLine("Vision target:");
