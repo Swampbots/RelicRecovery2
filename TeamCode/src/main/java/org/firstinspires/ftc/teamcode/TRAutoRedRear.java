@@ -89,12 +89,14 @@ public class TRAutoRedRear extends LinearOpMode {
         // Pass in the parameters
         imu.initialize(IMUParameters);
 
-        telemetry.addLine("Hardware Initialized.");
-        telemetry.addLine("Press the play button to start.");
-        telemetry.update();
 
 
-
+        while(!isStarted()) {
+            telemetry.addLine("Hardware Initialized.");
+            telemetry.addLine("Press the play button to start.");
+            telemetry.addData("Heading", heading());
+            telemetry.update();
+        }
 
         waitForStart();
 
@@ -135,7 +137,7 @@ public class TRAutoRedRear extends LinearOpMode {
         // Decide which color the jewel is
 
         hardware.jewelServo.setPosition(hardware.ARM_DOWN);
-        sleep(1500);
+        sleep(hardware.ARM_TIME_SETTLE);
 
         if (hardware.colorSensor.blue() > hardware.colorSensor.red()) {
             jewelColor = JewelColor.BLUE;
@@ -168,6 +170,7 @@ public class TRAutoRedRear extends LinearOpMode {
         telemetry.addLine("Turning parallel to cryptobox...");
         telemetry.update();
         turnToHeadingPID(-90);
+        turnToHeadingPID(-90);
 
         double inches = 0.0;
 
@@ -193,17 +196,29 @@ public class TRAutoRedRear extends LinearOpMode {
         telemetry.addLine("Turning towards cryptobox...");
         telemetry.update();
         turnToHeadingPID(180);
+        turnToHeadingPID(180);
 
         telemetry.addLine("Spitting out the glyph...");
         telemetry.update();
         hardware.setLifterPower(hardware.SPEED_GLYPH_PLACE);
         sleep(1000);
 
-        driveInches(0.3, hardware.DIST_GLYPH_PLACE);
+//        driveInches(0.3, hardware.DIST_GLYPH_PLACE);
+//
+//        hardware.setLifterPower(1.0);
+//
+//        driveInches(0.3, hardware.DIST_GLYPH_RETURN);
 
-        driveInches(0.3, hardware.DIST_GLYPH_RETURN);
+        hardware.linearDrive(-0.3);
+        sleep(1000);
+
+        hardware.setLifterPower(0.8);
+
+        hardware.linearDrive(0.3);
+        sleep(500);
 
         hardware.setLifterPower(0);
+        hardware.linearDrive(0);
 
         while(opModeIsActive()) {
             telemetry.addLine("Vision target:");
