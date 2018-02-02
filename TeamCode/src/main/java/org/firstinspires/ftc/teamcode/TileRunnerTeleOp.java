@@ -142,6 +142,10 @@ public class TileRunnerTeleOp extends OpMode {
         telemetry.addData("Tail Encoder", hardware.stonePusher.getPosition());
         telemetry.addData("Glyph Red", hardware.glyphSensor.red());
         telemetry.addData("Glyph Blue", hardware.glyphSensor.blue());
+        telemetry.addLine();
+        telemetry.addData("Jewel Red", hardware.colorSensor.red());
+        telemetry.addData("Jewel Blue", hardware.colorSensor.blue());
+        telemetry.update();
         telemetry.update();
     }
 }
