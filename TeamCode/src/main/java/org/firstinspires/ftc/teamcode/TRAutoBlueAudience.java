@@ -91,9 +91,13 @@ public class TRAutoBlueAudience extends LinearOpMode {
         // Pass in the parameters
         imu.initialize(IMUParameters);
 
-        telemetry.addLine("Hardware Initialized.");
-        telemetry.addLine("Press the play button to start.");
-        telemetry.update();
+
+        while(!isStarted()) {
+            telemetry.addLine("Hardware Initialized.");
+            telemetry.addLine("Press the play button to start.");
+            telemetry.addData("Heading", heading());
+            telemetry.update();
+        }
 
 
 
@@ -134,7 +138,7 @@ public class TRAutoBlueAudience extends LinearOpMode {
         // Decide which color the jewel is
 
         hardware.jewelServo.setPosition(hardware.ARM_DOWN);
-        sleep(1500);
+        sleep(hardware.ARM_TIME_SETTLE);
 
         if (hardware.colorSensor.blue() > hardware.colorSensor.red()) {
             telemetry.addData("Blue", hardware.colorSensor.blue());
@@ -193,6 +197,7 @@ public class TRAutoBlueAudience extends LinearOpMode {
         sleep(1000);
 
         turnToHeadingPID(90);
+        turnToHeadingPID(90);
 
         telemetry.addLine("Finished with turn.");
         telemetry.update();
@@ -214,9 +219,20 @@ public class TRAutoBlueAudience extends LinearOpMode {
         telemetry.update();
         sleep(1000);
 
-        driveInches(0.4, hardware.DIST_GLYPH_PLACE);
+//        driveInches(0.4, hardware.DIST_GLYPH_PLACE);
+//        hardware.setLifterPower(1.0);
+//        driveInches(0.4, hardware.DIST_GLYPH_RETURN);
 
-        driveInches(0.4, hardware.DIST_GLYPH_RETURN);
+        hardware.linearDrive(-0.3);
+        sleep(1000);
+        hardware.linearDrive(0);
+
+        hardware.setLifterPower(0.8);
+        sleep(1000);
+
+        hardware.linearDrive(0.3);
+        sleep(500);
+        hardware.linearDrive(0);
 
         hardware.setLifterPower(0);
 
