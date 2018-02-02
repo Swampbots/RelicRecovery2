@@ -24,7 +24,7 @@ public class TileRunnerREV {
 
     // Servo position variables
     public final double ARM_DOWN    = 0.75;
-    public final double ARM_UP      = 0.10;
+    public final double ARM_UP      = 0.05;
 
     public final double GRIPPER_ENGAGED     = 1.0;
     public final double GRIPPER_RELEASED    = 0.5;
