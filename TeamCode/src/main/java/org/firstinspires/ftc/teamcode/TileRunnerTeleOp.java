@@ -103,7 +103,7 @@ public class TileRunnerTeleOp extends OpMode {
 
         // Gripper
         hardware.gripper.setPosition(
-                gamepad2.dpad_down ? hardware.GRIPPER_RELEASED : hardware.GRIPPER_ENGAGED
+                (gamepad2.dpad_down || gamepad1.y) ? hardware.GRIPPER_RELEASED : hardware.GRIPPER_ENGAGED
         );
 
 
